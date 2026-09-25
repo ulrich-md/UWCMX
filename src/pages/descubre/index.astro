@@ -1,0 +1,108 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PortadaPagina from '../../components/PortadaPagina.astro';
+import TarjetasSeccion from '../../components/TarjetasSeccion.astro';
+import CarruselColegios from '../../components/CarruselColegios.astro';
+import Icono from '../../components/Icono.astro';
+import { foto } from '../../lib/fotos';
+
+const valores = [
+  { titulo: 'Un movimiento global', texto: '18 colegios en cuatro continentes, cada uno con su carácter, dedicados a convertir la energía de los jóvenes en empatía y acción.' },
+  { titulo: 'Intencionalmente diversos', texto: 'Comités nacionales en más de 150 países reúnen a jóvenes de todos los orígenes, culturas y realidades.' },
+  { titulo: 'Selectivos, no exclusivos', texto: 'Más del 80% de los estudiantes seleccionados por comités nacionales recibe apoyo financiero total o parcial.' },
+  { titulo: 'Servicio y conocimiento', texto: 'El Bachillerato Internacional se combina con servicio comunitario, liderazgo, creatividad y actividad física.' },
+];
+---
+
+<Base titulo="Descubre UWC" portada descripcion="Qué son los Colegios del Mundo Unido (UWC): misión, valores, modelo educativo, los 18 colegios y la vida en ellos.">
+  <PortadaPagina
+    titulo="Una escuela donde tus compañeros vienen de todo el mundo"
+    entrada="Imagina estudiar con jóvenes que hablan otros idiomas, practican otras religiones y vienen de realidades muy distintas a la tuya. Eso es un Colegio del Mundo Unido."
+    imagen={foto('hero-adriatico.jpg')}
+    migas={[{ texto: 'Descubre UWC', href: '/descubre/' }]}
+    alta
+  />
+
+  <section class="seccion mision">
+    <div class="contenedor--estrecho">
+      <p class="mision__cita revelar">
+        “Hacer de la educación una fuerza para unir a las personas, las naciones y las culturas por la paz y un futuro sostenible.”
+      </p>
+      <p class="mision__autor">Misión de UWC</p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--gris">
+    <div class="contenedor valores">
+      <div>
+        <h2>Lo que hace distinto a UWC</h2>
+        <p class="texto-grande">UWC es la única organización educativa global que selecciona a sus estudiantes en su propio país, por su mérito, sin importar su situación económica.</p>
+        <a href="/descubre/mision-y-valores/" class="boton boton--azul">Misión y valores <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <ul>
+        {
+          valores.map((v, i) => (
+            <li class="revelar" style={`--retraso:${i * 90}ms`}>
+              <h3>{v.titulo}</h3>
+              <p>{v.texto}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Los 18 colegios</h2>
+        <p class="texto-grande">Desde Gales hasta Tanzania, pasando por Costa Rica, Armenia y Japón.</p>
+      </div>
+      <CarruselColegios />
+      <a href="/descubre/colegios/" class="enlace">Conoce cada colegio <Icono nombre="flecha" tam={18} /></a>
+    </div>
+  </section>
+
+  <section class="franja fondo-foto parallax">
+    <div class="fondo-foto__img"><Image src={foto('galeria-mahindra-valle.jpg')} alt="" widths={[800, 1400, 2000]} sizes="100vw" /></div>
+    <div class="contenedor franja__interior">
+      <h2>¿Te imaginas ahí?</h2>
+      <div class="botones">
+        <a href="/aplica/" class="boton boton--blanco">Conoce cómo aplicar <Icono nombre="flecha" tam={18} /></a>
+        <a href="/descubre/vida-uwc/" class="boton boton--contorno-blanco">Cómo es la vida UWC</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--gris">
+    <div class="contenedor">
+      <div class="encabezado"><h2>Conoce más</h2></div>
+      <TarjetasSeccion seccion="descubre" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { max-width: 760px; margin-bottom: 2.5rem; }
+  .mision { text-align: center; }
+  .mision__cita {
+    font-family: var(--font-cita);
+    font-style: italic;
+    font-size: clamp(1.6rem, 1.2rem + 1.8vw, 2.6rem);
+    line-height: 1.3;
+    color: var(--azul);
+    margin-bottom: 1rem;
+  }
+  .mision__autor { font-weight: 700; color: var(--verde-texto); letter-spacing: 0.04em; }
+  .valores { display: grid; gap: 3rem; }
+  @media (min-width: 960px) { .valores { grid-template-columns: 0.9fr 1.1fr; gap: 5rem; } }
+  .valores ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2rem; }
+  @media (min-width: 640px) { .valores ul { grid-template-columns: 1fr 1fr; } }
+  .valores li { padding-top: 1.1rem; border-top: 3px solid var(--verde); }
+  .valores h3 { color: var(--azul); }
+  .valores p { color: var(--texto-suave); margin: 0; }
+  .franja { padding-block: clamp(5rem, 4rem + 5vw, 9rem); text-align: center; }
+  .franja__interior { display: grid; justify-items: center; }
+  .franja h2 { font-size: clamp(2.2rem, 1.5rem + 3vw, 4rem); }
+</style>

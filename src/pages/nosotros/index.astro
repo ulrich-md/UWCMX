@@ -1,0 +1,116 @@
+---
+import Base from '../../layouts/Base.astro';
+import PortadaPagina from '../../components/PortadaPagina.astro';
+import TarjetasSeccion from '../../components/TarjetasSeccion.astro';
+import Icono from '../../components/Icono.astro';
+import sitio from '../../data/sitio.json';
+import { foto } from '../../lib/fotos';
+
+const hitos = [
+  { anio: '1962', texto: 'Abre UWC Atlantic, en Gales, el primer Colegio del Mundo Unido.' },
+  { anio: '1977', texto: 'Se funda UWC México el 12 de julio, bajo la guía de Leonardo Mayer.' },
+  { anio: '1981', texto: 'La Asociación es reconocida como donataria autorizada, sin interrupción hasta hoy.' },
+  { anio: 'Hoy', texto: 'Una convocatoria anual con más de 400 aspirantes de todo el país, organizada por voluntarios.' },
+];
+
+const contactos = [
+  { titulo: 'Información general', correo: sitio.contacto.correo },
+  { titulo: 'Quejas y sugerencias', correo: sitio.contacto.quejas },
+  { titulo: 'Presidencia', correo: sitio.contacto.presidencia },
+  { titulo: 'Tesorería y facturas', correo: sitio.contacto.tesoreria },
+];
+---
+
+<Base titulo="Nosotros" portada descripcion="UWC México es la Asociación Mexicana pro Colegios del Mundo Unido, A.C.: historia, organización, políticas, transparencia y contacto.">
+  <PortadaPagina
+    titulo="Graduados que abren la puerta a la siguiente generación"
+    entrada="Somos la Asociación Mexicana pro Colegios del Mundo Unido, A.C. Representamos en México al movimiento UWC: promovemos sus valores, seleccionamos a jóvenes mexicanos y reunimos fondos para becarlos."
+    imagen={foto('galeria-bandera-uwc-mar.jpg')}
+    migas={[{ texto: 'Nosotros', href: '/nosotros/' }]}
+    alta
+  />
+
+  <section class="seccion">
+    <div class="contenedor historia">
+      <div>
+        <h2>Casi 50 años de historia</h2>
+        <p class="texto-grande">
+          La Asociación la forman, en su mayoría, graduados de los colegios que trabajan como voluntarios: seleccionan, recaudan
+          fondos y acompañan a cada generación.
+        </p>
+        <div class="botones">
+          <a href="/nosotros/historia-uwc-mexico/" class="boton boton--azul">Nuestra historia <Icono nombre="flecha" tam={18} /></a>
+          <a href="/nosotros/organizacion/" class="boton boton--contorno">Cómo nos organizamos</a>
+        </div>
+      </div>
+      <ol class="hitos">
+        {
+          hitos.map((h, i) => (
+            <li class="revelar" style={`--retraso:${i * 90}ms`}>
+              <strong>{h.anio}</strong>
+              <p>{h.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="seccion seccion--azul">
+    <div class="contenedor transparencia">
+      <div>
+        <h2>Transparencia</h2>
+        <p class="texto-grande">Publicamos nuestros estados financieros, informes anuales y las políticas que protegen a participantes, familias y donantes.</p>
+      </div>
+      <div class="botones">
+        <a href="/apoya/estados-financieros/" class="boton boton--blanco">Estados financieros e informes</a>
+        <a href="/nosotros/politicas/" class="boton boton--contorno-blanco">Políticas</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--gris">
+    <div class="contenedor">
+      <div class="encabezado"><h2>Conoce más</h2></div>
+      <TarjetasSeccion seccion="nosotros" />
+    </div>
+  </section>
+
+  <section id="contacto" class="seccion">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Contacto</h2>
+        <p class="texto-grande">{sitio.contacto.horario} · {sitio.contacto.direccion}</p>
+      </div>
+      <ul class="contactos">
+        {
+          contactos.map((c) => (
+            <li>
+              <span>{c.titulo}</span>
+              <a href={`mailto:${c.correo}`}>{c.correo}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { max-width: 760px; margin-bottom: 2.5rem; }
+  .historia { display: grid; gap: 3rem; }
+  @media (min-width: 960px) { .historia { grid-template-columns: 1fr 1fr; gap: 5rem; } }
+  .hitos { list-style: none; margin: 0; padding: 0; border-left: 3px solid var(--gris-linea); }
+  .hitos li { position: relative; padding: 0 0 2rem 2rem; }
+  .hitos li::before { content: ''; position: absolute; left: -10px; top: 0.35rem; width: 17px; height: 17px; border-radius: 50%; background: var(--blanco); border: 4px solid var(--verde); }
+  .hitos strong { font-size: 1.6rem; color: var(--azul); }
+  .hitos p { margin: 0.2rem 0 0; color: var(--texto-suave); }
+  .transparencia { display: grid; gap: 2rem; align-items: center; }
+  @media (min-width: 960px) { .transparencia { grid-template-columns: 1.2fr 0.8fr; } }
+  .transparencia .texto-grande { color: rgb(255 255 255 / 0.9); }
+  .contactos { list-style: none; margin: 0; padding: 0; display: grid; gap: 1.5rem; }
+  @media (min-width: 800px) { .contactos { grid-template-columns: repeat(4, 1fr); } }
+  .contactos li { display: grid; gap: 0.3rem; padding-top: 1rem; border-top: 3px solid var(--azul); }
+  .contactos span { font-weight: 700; }
+  .contactos a { overflow-wrap: anywhere; }
+</style>

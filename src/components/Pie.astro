@@ -1,194 +1,144 @@
 ---
-import Logo from './Logo.astro';
 import Icono from './Icono.astro';
 import sitio from '../data/sitio.json';
+import { menuCompleto } from '../lib/secciones';
 
-const columnas = [
-  {
-    titulo: 'Aplica',
-    enlaces: [
-      { texto: 'Cómo aplicar', href: '/aplica/' },
-      { texto: 'Requisitos', href: '/aplica/#requisitos' },
-      { texto: 'Proceso de selección', href: '/aplica/#proceso' },
-      { texto: 'Becas y aportaciones', href: '/aplica/#costos' },
-      { texto: 'Avisos del proceso', href: '/avisos/' },
-    ],
-  },
-  {
-    titulo: 'Apoya',
-    enlaces: [
-      { texto: 'Dona', href: '/apoya/#donar' },
-      { texto: 'Afíliate', href: '/apoya/#afiliate' },
-      { texto: 'Dona desde EE. UU.', href: '/apoya/#extranjero' },
-      { texto: 'Transparencia', href: '/nosotros/#transparencia' },
-    ],
-  },
-  {
-    titulo: 'UWC México',
-    enlaces: [
-      { texto: 'Descubre UWC', href: '/descubre/' },
-      { texto: 'Nosotros', href: '/nosotros/' },
-      { texto: 'Comunidad', href: '/comunidad/' },
-      { texto: 'Contacto', href: '/nosotros/#contacto' },
-    ],
-  },
-];
+const menu = await menuCompleto();
 ---
 
 <footer class="pie">
-  <div class="contenedor">
-    <div class="pie__arriba">
-      <div class="pie__marca">
-        <a href="/" class="pie__logo"><Logo claro /></a>
-        <p>
-          Asociación Mexicana pro Colegios del Mundo Unido, A.C. Desde 1977 seleccionamos a jóvenes mexicanos por su mérito
-          y potencial para estudiar en un Colegio del Mundo Unido.
-        </p>
-        <ul class="pie__redes" aria-label="Redes sociales">
-          <li><a href={sitio.redes.instagram} aria-label="Instagram"><Icono nombre="instagram" tam={22} /></a></li>
-          <li><a href={sitio.redes.facebook} aria-label="Facebook"><Icono nombre="facebook" tam={22} /></a></li>
-          <li><a href={sitio.redes.youtube} aria-label="YouTube"><Icono nombre="youtube" tam={22} /></a></li>
-        </ul>
-      </div>
-
-      {
-        columnas.map((col) => (
-          <nav class="pie__columna" aria-label={col.titulo}>
-            <h2>{col.titulo}</h2>
-            <ul>
-              {col.enlaces.map((e) => (
-                <li>
-                  <a href={e.href}>{e.texto}</a>
-                </li>
-              ))}
-            </ul>
-          </nav>
-        ))
-      }
-
-      <div class="pie__columna">
-        <h2>Contacto</h2>
-        <ul class="pie__contacto">
-          <li><Icono nombre="correo" tam={18} /><a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a></li>
-          <li><Icono nombre="reloj" tam={18} /><span>{sitio.contacto.horario}</span></li>
-          <li><Icono nombre="ubicacion" tam={18} /><span>{sitio.contacto.direccion}</span></li>
-        </ul>
+  <div class="pie__cta">
+    <div class="contenedor pie__cta-interior">
+      <p>¿Tienes dudas sobre el proceso de selección o quieres apoyar?</p>
+      <div class="botones">
+        <a href={`mailto:${sitio.contacto.correo}`} class="boton boton--contorno-blanco"><Icono nombre="correo" tam={18} />Escríbenos</a>
+        <a href="/apoya/como-donar/" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona</a>
       </div>
     </div>
+  </div>
 
-    <div class="pie__abajo">
-      <p>© {new Date().getFullYear()} UWC México · Donataria autorizada</p>
-      <ul>
-        <li><a href="/nosotros/#transparencia">Aviso de privacidad</a></li>
-        <li><a href="/nosotros/#transparencia">Protección de participantes</a></li>
-        <li><a href="https://www.uwc.org/" rel="noopener">UWC International</a></li>
+  <div class="contenedor pie__columnas">
+    <div class="pie__marca">
+      <p class="pie__logo">
+        <img src="/uwc.svg" alt="" width="150" height="34" />
+        <span>México</span>
+      </p>
+      <p>
+        <strong>Nuestra misión:</strong> hacer de la educación una fuerza para unir a las personas, las naciones y las culturas por
+        la paz y un futuro sostenible.
+      </p>
+      <p class="pie__datos">
+        Asociación Mexicana pro Colegios del Mundo Unido, A.C.<br />
+        {sitio.contacto.direccion}<br />
+        {sitio.contacto.horario}<br />
+        <a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a>
+      </p>
+      <ul class="pie__redes" aria-label="Redes sociales">
+        <li><a href={sitio.redes.instagram} aria-label="Instagram de UWC México"><Icono nombre="instagram" tam={20} /></a></li>
+        <li><a href={sitio.redes.facebook} aria-label="Facebook de UWC México"><Icono nombre="facebook" tam={20} /></a></li>
+        <li><a href={sitio.redes.youtube} aria-label="YouTube de UWC México"><Icono nombre="youtube" tam={20} /></a></li>
       </ul>
     </div>
+
+    {
+      menu.map((s) => (
+        <nav aria-label={s.titulo} class="pie__nav">
+          <h2>
+            <a href={s.href}>{s.titulo}</a>
+          </h2>
+          <ul>
+            {s.enlaces.slice(0, 8).map((e) => (
+              <li>
+                <a href={e.href}>{e.texto}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      ))
+    }
+  </div>
+
+  <div class="contenedor pie__legal">
+    <p>© {new Date().getFullYear()} UWC México · Donataria autorizada</p>
+    <ul>
+      <li><a href="/nosotros/aviso-de-privacidad/">Aviso de privacidad</a></li>
+      <li><a href="/nosotros/proteccion-participantes/">Protección de participantes</a></li>
+      <li><a href="https://www.uwc.org/" rel="noopener">UWC International</a></li>
+    </ul>
   </div>
 </footer>
 
 <style>
   .pie {
-    position: relative;
-    overflow: hidden;
-    background: var(--azul-profundo);
-    color: rgb(255 255 255 / 0.78);
-    padding-block: var(--space-6) var(--space-3);
-    font-size: var(--text-sm);
+    background: var(--azul-noche);
+    color: rgb(255 255 255 / 0.75);
+    font-size: 0.95rem;
   }
-  .pie::before {
-    content: '';
-    position: absolute;
-    width: 560px;
-    height: 560px;
-    right: -180px;
-    top: -260px;
-    border-radius: 50%;
-    border: 70px solid rgb(0 148 130 / 0.12);
-    pointer-events: none;
+  .pie a { color: rgb(255 255 255 / 0.85); text-decoration: none; }
+  .pie a:hover { color: var(--blanco); text-decoration: underline; }
+
+  .pie__cta { background: var(--degradado); color: var(--blanco); }
+  .pie__cta-interior {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1.25rem 2rem;
+    padding-block: 2.25rem;
   }
-  .pie a {
-    color: var(--blanco);
-    text-decoration: none;
-  }
-  .pie a:hover {
-    color: var(--sol);
-    text-decoration: underline;
-  }
-  .pie__arriba {
-    position: relative;
+  .pie__cta p { margin: 0; font-size: clamp(1.25rem, 1.1rem + 0.6vw, 1.6rem); font-weight: 700; }
+  .pie__cta .boton--contorno-blanco { color: var(--blanco); }
+  .pie__cta .boton--contorno-blanco:hover { color: var(--azul); text-decoration: none; }
+  .pie__cta .boton--donar:hover { text-decoration: none; }
+
+  .pie__columnas {
     display: grid;
-    gap: var(--space-5) var(--space-4);
-    grid-template-columns: 1fr;
+    gap: 2.5rem 2rem;
+    padding-block: 4rem 3rem;
+    grid-template-columns: repeat(2, 1fr);
   }
-  @media (min-width: 720px) {
-    .pie__arriba { grid-template-columns: repeat(2, 1fr); }
-    .pie__marca { grid-column: 1 / -1; }
-  }
-  @media (min-width: 1100px) {
-    .pie__arriba { grid-template-columns: 1.6fr repeat(4, 1fr); }
+  .pie__marca { grid-column: 1 / -1; }
+  @media (min-width: 1000px) {
+    .pie__columnas { grid-template-columns: 1.7fr repeat(5, 1fr); }
     .pie__marca { grid-column: auto; }
   }
-  .pie__logo { display: inline-flex; margin-bottom: var(--space-3); }
-  .pie__marca p { max-width: 38ch; }
-  .pie h2 {
-    font-family: var(--font-sans);
-    font-size: 0.8125rem;
+  .pie__logo { display: flex; align-items: center; gap: 0.6rem; margin-bottom: 1.2rem; }
+  .pie__logo img { width: 140px; filter: brightness(0) invert(1); }
+  .pie__logo span {
+    padding-left: 0.6rem;
+    border-left: 2px solid rgb(255 255 255 / 0.3);
+    font-weight: 700;
     letter-spacing: 0.14em;
     text-transform: uppercase;
     color: #7fd6c9;
-    margin-bottom: var(--space-2);
   }
-  .pie ul {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: 0.6rem;
-  }
-  .pie__redes {
-    display: flex !important;
-    gap: 0.6rem !important;
-    margin-top: var(--space-3) !important;
-  }
+  .pie__marca > p { max-width: 36ch; }
+  .pie__datos { line-height: 1.8; }
+  .pie__redes { display: flex; gap: 0.6rem; list-style: none; margin: 1.2rem 0 0; padding: 0; }
   .pie__redes a {
     display: grid;
     place-items: center;
     width: 44px;
     height: 44px;
     border-radius: 50%;
-    border: 1px solid rgb(255 255 255 / 0.25);
-    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+    background: rgb(255 255 255 / 0.08);
+    transition: background-color 0.2s;
   }
-  .pie__redes a:hover {
-    background: var(--verde);
-    border-color: var(--verde);
-    color: var(--blanco);
-  }
-  .pie__contacto li {
-    display: flex;
-    align-items: flex-start;
-    gap: 0.6rem;
-  }
-  .pie__contacto svg {
-    flex-shrink: 0;
-    margin-top: 3px;
-    color: #7fd6c9;
-  }
-  .pie__abajo {
-    position: relative;
+  .pie__redes a:hover { background: var(--verde); }
+
+  .pie__nav h2 { font-size: 1rem; margin-bottom: 0.9rem; letter-spacing: 0; }
+  .pie__nav h2 a { color: var(--blanco); }
+  .pie__nav ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+
+  .pie__legal {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between;
-    gap: var(--space-2);
-    margin-top: var(--space-6);
-    padding-top: var(--space-3);
-    border-top: 1px solid rgb(255 255 255 / 0.14);
+    gap: 1rem;
+    padding-block: 1.5rem 2rem;
+    border-top: 1px solid rgb(255 255 255 / 0.12);
+    font-size: 0.875rem;
   }
-  .pie__abajo p { margin: 0; }
-  .pie__abajo ul {
-    display: flex;
-    flex-wrap: wrap;
-    gap: var(--space-3);
-  }
+  .pie__legal p { margin: 0; }
+  .pie__legal ul { display: flex; flex-wrap: wrap; gap: 1.5rem; list-style: none; margin: 0; padding: 0; }
 </style>

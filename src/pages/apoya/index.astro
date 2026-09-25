@@ -1,0 +1,117 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../../layouts/Base.astro';
+import PortadaPagina from '../../components/PortadaPagina.astro';
+import TarjetasSeccion from '../../components/TarjetasSeccion.astro';
+import Icono from '../../components/Icono.astro';
+import sitio from '../../data/sitio.json';
+import { foto } from '../../lib/fotos';
+
+const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
+
+const formas = [
+  { titulo: 'En línea con PayPal', texto: 'Con tarjeta de crédito o débito, desde cualquier país, aunque no tengas cuenta PayPal.', href: sitio.donar.paypal, boton: 'Donar con PayPal' },
+  { titulo: 'Transferencia bancaria', texto: 'Cuentas en pesos y en dólares a nombre de la Asociación. Recibes recibo deducible.', href: '/apoya/como-donar/#transferencia', boton: 'Ver datos bancarios' },
+  { titulo: 'Desde Estados Unidos', texto: 'Donativo deducible en EE. UU. a través de UWC International, asignado a UWC México.', href: '/apoya/como-donar/', boton: 'Cómo hacerlo' },
+];
+---
+
+<Base titulo="Apoya" portada descripcion="Dona a UWC México o afíliate: tu aportación es deducible de impuestos y se convierte en becas para jóvenes mexicanos en los Colegios del Mundo Unido.">
+  <PortadaPagina
+    titulo="Tu donativo se convierte en una beca"
+    entrada="Lo que recaudamos entre graduados, familias, empresas y amigos va al Fondo General de Becas, para que ningún joven seleccionado se quede fuera por dinero."
+    imagen={foto('hero-graduacion-robert-bosch.jpg')}
+    alt="Graduados latinoamericanos celebran con sus diplomas en UWC Robert Bosch College"
+    migas={[{ texto: 'Apoya', href: '/apoya/' }]}
+    alta
+  >
+    <div class="botones">
+      <a href="/apoya/como-donar/" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona ahora</a>
+      <a href="/apoya/afiliate/" class="boton boton--contorno-blanco">Afíliate</a>
+    </div>
+  </PortadaPagina>
+
+  <section class="cifras">
+    <div class="contenedor cifras__lista">
+      <div><strong>40,000 USD</strong><span>cuesta en promedio un año en un colegio UWC</span></div>
+      <div><strong>Desde 1981</strong><span>somos donataria autorizada: tu recibo es deducible</span></div>
+      <div><strong>{afiliados}</strong><span>afiliados en {anioAnterior}; queremos llegar a {meta} en {anioMeta}</span></div>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Elige cómo quieres donar</h2>
+        <p class="texto-grande">Todas las opciones emiten recibo deducible. ¿Necesitas factura (CFDI)? Escribe a <a href={`mailto:${sitio.contacto.tesoreria}`}>{sitio.contacto.tesoreria}</a>.</p>
+      </div>
+      <ol class="formas">
+        {
+          formas.map((f, i) => (
+            <li class="revelar" style={`--retraso:${i * 90}ms`}>
+              <span class="formas__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{f.titulo}</h3>
+              <p>{f.texto}</p>
+              <a href={f.href} class="enlace">{f.boton} <Icono nombre="flecha" tam={18} /></a>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
+  </section>
+
+  <section class="afiliate fondo-foto parallax">
+    <div class="fondo-foto__img"><Image src={foto('seccion-banderas-latinoamerica.jpg')} alt="" widths={[800, 1400]} sizes="100vw" /></div>
+    <div class="contenedor afiliate__interior">
+      <div>
+        <h2>¿Eres graduado UWC? Afíliate</h2>
+        <p>
+          Con tu cuota anual eres miembro activo de la Asociación, votas en la Asamblea y haces posible que más jóvenes vivan lo que tú
+          viviste. Las cuotas van desde 400 pesos para las generaciones más recientes.
+        </p>
+        <a href="/apoya/afiliate/" class="boton boton--blanco">Cuotas y cómo afiliarte <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <div class="afiliate__meta">
+        <p class="afiliate__numero"><strong>{afiliados}</strong> / {meta}</p>
+        <p>Campaña de afiliación {anioMeta}</p>
+        <div class="barra" role="progressbar" aria-valuemin="0" aria-valuemax={meta} aria-valuenow={afiliados} aria-label="Avance de la campaña de afiliación">
+          <span style={`width:${Math.round((afiliados / meta) * 100)}%`}></span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="seccion seccion--gris">
+    <div class="contenedor">
+      <div class="encabezado"><h2>Más sobre cómo apoyar</h2></div>
+      <TarjetasSeccion seccion="apoya" />
+    </div>
+  </section>
+</Base>
+
+<style>
+  .encabezado { max-width: 760px; margin-bottom: 2.5rem; }
+  .cifras { background: var(--gris-fondo); padding-block: 3.5rem; }
+  .cifras__lista { display: grid; gap: 2rem; text-align: center; }
+  @media (min-width: 800px) { .cifras__lista { grid-template-columns: repeat(3, 1fr); } }
+  .cifras strong { display: block; font-size: clamp(2rem, 1.6rem + 1.6vw, 3rem); color: var(--azul); line-height: 1.1; margin-bottom: 0.4rem; }
+  .cifras span { color: var(--texto-suave); }
+
+  .formas { list-style: none; margin: 0; padding: 0; display: grid; gap: 2.5rem; }
+  @media (min-width: 900px) { .formas { grid-template-columns: repeat(3, 1fr); } }
+  .formas li { padding-top: 1.25rem; border-top: 3px solid var(--azul); display: flex; flex-direction: column; }
+  .formas__num { font-size: 2.6rem; font-weight: 700; color: var(--naranja); line-height: 1; margin-bottom: 0.75rem; }
+  .formas h3 { color: var(--azul); }
+  .formas p { color: var(--texto-suave); }
+  .formas .enlace { margin-top: auto; }
+
+  .afiliate { padding-block: clamp(4.5rem, 3rem + 5vw, 8rem); }
+  .afiliate::before { background: linear-gradient(100deg, rgb(0 74 151 / 0.94), rgb(0 74 151 / 0.7) 60%, rgb(0 148 130 / 0.5)); }
+  .afiliate__interior { display: grid; gap: 3rem; align-items: center; }
+  @media (min-width: 900px) { .afiliate__interior { grid-template-columns: 1.3fr 0.7fr; gap: 5rem; } }
+  .afiliate p { font-size: 1.15rem; color: rgb(255 255 255 / 0.9); max-width: 56ch; }
+  .afiliate__numero { font-size: 1.5rem !important; margin-bottom: 0.2rem; }
+  .afiliate__numero strong { font-size: 4.5rem; line-height: 1; }
+  .barra { height: 12px; background: rgb(255 255 255 / 0.25); border-radius: 6px; overflow: hidden; margin-top: 1rem; }
+  .barra span { display: block; height: 100%; background: #ffb400; }
+</style>

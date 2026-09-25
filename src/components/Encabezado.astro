@@ -1,260 +1,276 @@
 ---
 import Logo from './Logo.astro';
 import Icono from './Icono.astro';
-import sitio from '../data/sitio.json';
+import { menuCompleto } from '../lib/secciones';
 
-const menu = [
-  { texto: 'Descubre UWC', href: '/descubre/' },
-  { texto: 'Aplica', href: '/aplica/' },
-  { texto: 'Avisos', href: '/avisos/' },
-  { texto: 'Comunidad', href: '/comunidad/' },
-  { texto: 'Apoya', href: '/apoya/' },
-  { texto: 'Nosotros', href: '/nosotros/' },
-];
+interface Props {
+  /** Encabezado transparente sobre una portada con foto (se vuelve blanco al bajar). */
+  transparente?: boolean;
+}
+const { transparente = false } = Astro.props;
 
+const menu = await menuCompleto();
 const ruta = Astro.url.pathname;
-const activo = (href: string) => ruta === href || (href !== '/' && ruta.startsWith(href));
-
-const { estado } = sitio.convocatoria;
-const mensaje =
-  estado === 'abierta'
-    ? sitio.convocatoria.mensajeAbierta
-    : estado === 'en-proceso'
-      ? sitio.convocatoria.mensajeEnProceso
-      : sitio.convocatoria.mensajeCerrada;
-const destinoAviso = estado === 'abierta' ? '/aplica/' : '/avisos/';
+const activo = (href: string) => ruta.startsWith(href) || (href === '/aplica/' && ruta.startsWith('/avisos/'));
 ---
 
-<div class="aviso-barra">
-  <div class="contenedor aviso-barra__interior">
-    <span class="punto" aria-hidden="true"></span>
-    <span>{mensaje}</span>
-    <a href={destinoAviso} class="aviso-barra__enlace">
-      {estado === 'cerrada' ? 'Avísame' : 'Ver avisos'}
-      <Icono nombre="flecha" tam={16} />
-    </a>
-  </div>
-</div>
+<header class:list={['header', { 'header--transparente': transparente }]} data-header>
+  <div class="contenedor header__barra">
+    <a href="/" class="header__logo"><Logo /></a>
 
-<header class="encabezado" data-encabezado>
-  <div class="contenedor encabezado__interior">
-    <a href="/" class="encabezado__logo"><Logo /></a>
-
-    <nav class="nav" aria-label="Principal">
-      <ul class="nav__lista" id="menu-principal" data-menu>
+    <nav class="nav" aria-label="Principal" id="nav-principal">
+      <ul class="nav__lista">
         {
           menu.map((item) => (
-            <li>
-              <a href={item.href} aria-current={activo(item.href) ? 'page' : undefined}>
-                {item.texto}
+            <li class="nav__item">
+              <a href={item.href} class="nav__enlace" aria-current={activo(item.href) ? 'true' : undefined}>
+                {item.titulo}
+                <Icono nombre="abajo" tam={16} />
               </a>
+              {item.enlaces.length > 0 && (
+                <div class="nav__panel">
+                  <ul>
+                    <li>
+                      <a href={item.href} class="nav__panel-principal">
+                        Inicio de {item.titulo}
+                      </a>
+                    </li>
+                    {item.enlaces.map((e) => (
+                      <li>
+                        <a href={e.href}>{e.texto}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              )}
             </li>
           ))
         }
-        <li class="nav__acciones-movil">
-          <a href="/aplica/" class="boton boton--primario">Aplica</a>
-          <a href="/apoya/#donar" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona</a>
-        </li>
       </ul>
+
+      <!-- Menú en celular: acordeones -->
+      <div class="nav__movil">
+        {
+          menu.map((item) => (
+            <details>
+              <summary>
+                {item.titulo}
+                <Icono nombre="abajo" tam={20} />
+              </summary>
+              <ul>
+                <li>
+                  <a href={item.href}>Inicio de {item.titulo}</a>
+                </li>
+                {item.enlaces.map((e) => (
+                  <li>
+                    <a href={e.href}>{e.texto}</a>
+                  </li>
+                ))}
+              </ul>
+            </details>
+          ))
+        }
+        <div class="nav__movil-acciones">
+          <a href="/avisos/" class="boton boton--contorno">Avisos del proceso</a>
+          <a href="/apoya/como-donar/" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona</a>
+        </div>
+      </div>
     </nav>
 
-    <div class="encabezado__acciones">
-      <a href="/aplica/" class="boton boton--contorno">Aplica</a>
-      <a href="/apoya/#donar" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona</a>
+    <div class="header__acciones">
+      <a href="/aplica/" class="boton boton--azul">Aplica</a>
+      <a href="/apoya/como-donar/" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona</a>
     </div>
 
-    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="menu-principal" data-menu-boton>
-      <span class="menu-boton__abrir"><Icono nombre="menu" tam={24} /></span>
-      <span class="menu-boton__cerrar"><Icono nombre="cerrar" tam={24} /></span>
+    <button class="menu-boton" type="button" aria-expanded="false" aria-controls="nav-principal" data-menu-boton>
+      <span class="menu-boton__abrir"><Icono nombre="menu" tam={26} /></span>
+      <span class="menu-boton__cerrar"><Icono nombre="cerrar" tam={26} /></span>
       <span class="solo-lectores">Menú</span>
     </button>
   </div>
 </header>
 
 <script>
+  const header = document.querySelector<HTMLElement>('[data-header]');
   const boton = document.querySelector<HTMLButtonElement>('[data-menu-boton]');
-  const encabezado = document.querySelector<HTMLElement>('[data-encabezado]');
+
+  const alScroll = () => header?.classList.toggle('header--solido', window.scrollY > 40);
+  window.addEventListener('scroll', alScroll, { passive: true });
+  alScroll();
+
   boton?.addEventListener('click', () => {
     const abierto = boton.getAttribute('aria-expanded') === 'true';
-    if (!abierto && encabezado) {
-      encabezado.style.setProperty('--alto-encabezado', `${encabezado.getBoundingClientRect().bottom}px`);
-    }
     boton.setAttribute('aria-expanded', String(!abierto));
-    encabezado?.classList.toggle('abierto', !abierto);
-    document.body.style.overflow = abierto ? '' : 'hidden';
+    header?.classList.toggle('header--abierto', !abierto);
+    document.documentElement.style.overflow = abierto ? '' : 'hidden';
   });
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && boton?.getAttribute('aria-expanded') === 'true') boton.click();
   });
-  const alScroll = () => encabezado?.classList.toggle('con-sombra', window.scrollY > 8);
-  window.addEventListener('scroll', alScroll, { passive: true });
-  alScroll();
 </script>
 
 <style>
-  .aviso-barra {
-    background: var(--azul-profundo);
-    color: var(--blanco);
-    font-size: 0.9375rem;
-  }
-  .aviso-barra__interior {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    gap: 0.4rem 0.75rem;
-    padding-block: 0.6rem;
-    text-align: center;
-  }
-  .punto {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--sol);
-    box-shadow: 0 0 0 0 rgb(244 201 93 / 0.7);
-    animation: latido 2.2s infinite;
-  }
-  @keyframes latido {
-    70% { box-shadow: 0 0 0 8px rgb(244 201 93 / 0); }
-    100% { box-shadow: 0 0 0 0 rgb(244 201 93 / 0); }
-  }
-  .aviso-barra__enlace {
-    display: inline-flex;
-    align-items: center;
-    gap: 0.3rem;
-    color: var(--sol);
-    font-weight: 700;
-    text-decoration: none;
-  }
-  .aviso-barra__enlace:hover { color: var(--blanco); }
-
-  .encabezado {
+  .header {
     position: sticky;
     top: 0;
-    z-index: 50;
-    background: rgb(250 247 242 / 0.92);
-    backdrop-filter: saturate(1.4) blur(12px);
-    -webkit-backdrop-filter: saturate(1.4) blur(12px);
-    border-bottom: 1px solid transparent;
-    transition: border-color 0.3s var(--ease), box-shadow 0.3s var(--ease);
+    z-index: 100;
+    background: var(--blanco);
+    border-bottom: 1px solid var(--gris-linea);
+    transition: background-color 0.3s var(--ease), box-shadow 0.3s var(--ease), border-color 0.3s var(--ease);
   }
-  .encabezado.con-sombra {
-    border-color: var(--linea);
-    box-shadow: 0 6px 24px rgb(20 33 61 / 0.06);
+  .header--transparente {
+    position: fixed;
+    left: 0;
+    right: 0;
+    background: transparent;
+    border-color: transparent;
   }
-  .encabezado__interior {
+  .header--transparente:not(.header--solido):not(.header--abierto) {
+    --color-nav: var(--blanco);
+  }
+  .header--transparente:not(.header--solido):not(.header--abierto) :global(.logo img) { filter: brightness(0) invert(1); }
+  .header--transparente:not(.header--solido):not(.header--abierto) :global(.logo__pais) { color: var(--blanco); border-color: rgb(255 255 255 / 0.4); }
+  .header--transparente:not(.header--solido):not(.header--abierto)::before {
+    content: '';
+    position: absolute;
+    inset: 0 0 -40px;
+    background: linear-gradient(180deg, rgb(10 31 61 / 0.55), transparent);
+    pointer-events: none;
+    z-index: -1;
+  }
+  .header--solido {
+    background: var(--blanco);
+    border-color: var(--gris-linea);
+    box-shadow: 0 4px 20px rgb(10 31 61 / 0.08);
+  }
+
+  .header__barra {
     display: flex;
     align-items: center;
-    gap: var(--space-3);
-    min-height: 76px;
+    gap: 1.5rem;
+    min-height: var(--alto-header);
   }
-  .encabezado__logo {
-    display: inline-flex;
-    text-decoration: none;
-    margin-right: auto;
-  }
+  .header__logo { display: inline-flex; margin-right: auto; text-decoration: none; }
 
   .nav__lista {
     display: flex;
-    align-items: center;
-    gap: 0.25rem;
     list-style: none;
     margin: 0;
     padding: 0;
   }
-  .nav__lista a:not(.boton) {
-    position: relative;
-    display: block;
-    padding: 0.6rem 0.75rem;
-    color: var(--tinta);
+  .nav__item { position: relative; }
+  .nav__enlace {
+    display: flex;
+    align-items: center;
+    gap: 0.25rem;
+    padding: 0 0.85rem;
+    min-height: var(--alto-header);
+    color: var(--color-nav, var(--texto));
     font-weight: 600;
     text-decoration: none;
-    border-radius: 8px;
+    white-space: nowrap;
   }
-  .nav__lista a:not(.boton)::after {
-    content: '';
+  .nav__enlace :global(svg) { opacity: 0.6; transition: transform 0.25s var(--ease); }
+  .nav__enlace[aria-current] { color: var(--color-nav, var(--azul)); box-shadow: inset 0 -3px 0 var(--verde); }
+  .nav__item:hover .nav__enlace,
+  .nav__item:focus-within .nav__enlace { color: var(--color-nav, var(--azul)); }
+  .nav__item:hover .nav__enlace :global(svg),
+  .nav__item:focus-within .nav__enlace :global(svg) { transform: rotate(180deg); }
+
+  .nav__panel {
     position: absolute;
-    left: 0.75rem;
-    right: 0.75rem;
-    bottom: 0.3rem;
-    height: 2px;
-    background: var(--verde);
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform 0.3s var(--ease);
+    top: 100%;
+    left: 0;
+    min-width: 290px;
+    padding: 0.75rem;
+    background: var(--blanco);
+    border-top: 3px solid var(--verde);
+    box-shadow: var(--sombra);
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.2s var(--ease), transform 0.2s var(--ease), visibility 0.2s;
   }
-  .nav__lista a:not(.boton):hover::after,
-  .nav__lista a[aria-current='page']::after {
-    transform: scaleX(1);
+  .nav__item:hover .nav__panel,
+  .nav__item:focus-within .nav__panel {
+    visibility: visible;
+    opacity: 1;
+    transform: none;
   }
-  .nav__lista a[aria-current='page'] { color: var(--azul); }
+  .nav__panel ul { list-style: none; margin: 0; padding: 0; }
+  .nav__panel a {
+    display: block;
+    padding: 0.55rem 0.75rem;
+    color: var(--texto);
+    text-decoration: none;
+    font-size: 0.975rem;
+    border-radius: 4px;
+  }
+  .nav__panel a:hover { background: var(--gris-fondo); color: var(--azul); }
+  .nav__panel-principal { font-weight: 700; color: var(--azul) !important; border-bottom: 1px solid var(--gris-linea); border-radius: 0 !important; margin-bottom: 0.3rem; }
 
-  .encabezado__acciones {
-    display: flex;
-    gap: 0.6rem;
-  }
-  .encabezado__acciones .boton {
-    min-height: 44px;
-    padding: 0.55rem 1.1rem;
-  }
-  .nav__acciones-movil { display: none; }
+  .header__acciones { display: flex; gap: 0.6rem; }
+  .header__acciones .boton { min-height: 44px; padding: 0.6rem 1.2rem; }
 
+  .nav__movil { display: none; }
   .menu-boton {
     display: none;
     place-items: center;
     width: 48px;
     height: 48px;
     border: 0;
-    border-radius: 50%;
-    background: var(--azul);
-    color: var(--blanco);
+    background: transparent;
+    color: var(--color-nav, var(--azul));
     cursor: pointer;
   }
   .menu-boton__cerrar { display: none; }
 
-  @media (max-width: 1080px) {
-    .encabezado__acciones { display: none; }
+  @media (max-width: 1240px) {
+    .nav__enlace { padding: 0 0.6rem; }
+    .header__acciones .boton--azul { display: none; }
   }
 
-  @media (max-width: 900px) {
+  @media (max-width: 1060px) {
+    .header__acciones { display: none; }
+    .nav__lista { display: none; }
     .menu-boton { display: grid; }
     .nav {
       position: fixed;
-      inset: 0;
-      top: var(--alto-encabezado, 76px);
-      background: var(--papel);
-      padding: var(--space-3) 1rem var(--space-5);
+      inset: var(--alto-header) 0 0;
+      background: var(--blanco);
       overflow-y: auto;
+      padding: 1rem 1.25rem 3rem;
       visibility: hidden;
       opacity: 0;
-      transform: translateY(-8px);
-      transition: opacity 0.25s var(--ease), transform 0.25s var(--ease), visibility 0.25s;
+      transition: opacity 0.25s var(--ease), visibility 0.25s;
     }
-    .encabezado.abierto .nav {
-      visibility: visible;
-      opacity: 1;
-      transform: none;
+    .header--abierto .nav { visibility: visible; opacity: 1; }
+    .header--abierto { background: var(--blanco); }
+    .header--abierto .menu-boton__abrir { display: none; }
+    .header--abierto .menu-boton__cerrar { display: block; }
+    .nav__movil { display: block; }
+    .nav__movil details { border-bottom: 1px solid var(--gris-linea); }
+    .nav__movil summary {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      min-height: 60px;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--azul);
+      list-style: none;
+      cursor: pointer;
     }
-    .encabezado.abierto .menu-boton__abrir { display: none; }
-    .encabezado.abierto .menu-boton__cerrar { display: block; }
-    .nav__lista {
-      flex-direction: column;
-      align-items: stretch;
-      gap: 0;
+    .nav__movil summary::-webkit-details-marker { display: none; }
+    .nav__movil summary :global(svg) { transition: transform 0.25s var(--ease); }
+    .nav__movil details[open] summary :global(svg) { transform: rotate(180deg); }
+    .nav__movil ul { list-style: none; margin: 0 0 1rem; padding: 0; }
+    .nav__movil li a {
+      display: block;
+      padding: 0.7rem 0.5rem;
+      color: var(--texto);
+      text-decoration: none;
     }
-    .nav__lista a:not(.boton) {
-      font-family: var(--font-serif);
-      font-size: 1.6rem;
-      padding: 0.85rem 0;
-      border-bottom: 1px solid var(--linea);
-      border-radius: 0;
-    }
-    .nav__lista a:not(.boton)::after { display: none; }
-    .nav__acciones-movil {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.75rem;
-      margin-top: var(--space-4);
-    }
+    .nav__movil-acciones { display: grid; gap: 0.75rem; margin-top: 1.5rem; }
   }
 </style>

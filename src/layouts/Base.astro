@@ -9,9 +9,11 @@ interface Props {
   titulo: string;
   descripcion: string;
   imagen?: string;
+  /** La página empieza con una portada a sangre: el encabezado va transparente encima. */
+  portada?: boolean;
 }
 
-const { titulo, descripcion, imagen } = Astro.props;
+const { titulo, descripcion, imagen, portada = false } = Astro.props;
 const tituloCompleto = titulo === 'Inicio' ? 'UWC México · Educación para unir a las personas' : `${titulo} · UWC México`;
 const canonical = new URL(Astro.url.pathname, Astro.site);
 const ogImagen = imagen ? new URL(imagen, Astro.site) : undefined;
@@ -42,7 +44,7 @@ const organizacion = {
     <meta name="description" content={descripcion} />
     <link rel="canonical" href={canonical} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
-    <meta name="theme-color" content="#0b2545" />
+    <meta name="theme-color" content="#004a97" />
 
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="es_MX" />
@@ -58,7 +60,7 @@ const organizacion = {
   </head>
   <body>
     <a class="saltar" href="#contenido">Saltar al contenido</a>
-    <Encabezado />
+    <Encabezado transparente={portada} />
     <main id="contenido">
       <slot />
     </main>

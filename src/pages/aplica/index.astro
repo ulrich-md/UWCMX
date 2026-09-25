@@ -1,0 +1,212 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import PortadaPagina from '../../components/PortadaPagina.astro';
+import LineaTiempo from '../../components/LineaTiempo.astro';
+import TarjetaAviso from '../../components/TarjetaAviso.astro';
+import TarjetasSeccion from '../../components/TarjetasSeccion.astro';
+import Icono from '../../components/Icono.astro';
+import sitio from '../../data/sitio.json';
+import preguntas from '../../data/preguntas.json';
+import { foto } from '../../lib/fotos';
+
+const { estado, generacion, enlaceRegistro } = sitio.convocatoria;
+const avisos = (await getCollection('avisos'))
+  .filter((a) => a.data.generacion !== 'Comunidad')
+  .sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf())
+  .slice(0, 3);
+
+const mensaje = {
+  abierta: { titulo: `La convocatoria ${generacion} está abierta`, texto: 'Revisa los requisitos y regístrate antes de la fecha límite.' },
+  'en-proceso': { titulo: `El proceso ${generacion} está en curso`, texto: 'El registro ya cerró. La próxima convocatoria abre entre abril y mayo.' },
+  cerrada: { titulo: 'La convocatoria está cerrada', texto: 'Abre cada año entre abril y mayo. Síguenos en redes para enterarte.' },
+}[estado as 'abierta' | 'en-proceso' | 'cerrada'];
+---
+
+<Base
+  titulo="Aplica"
+  portada
+  descripcion="Requisitos, etapas, becas y preguntas frecuentes del proceso de selección de UWC México para estudiar en un Colegio del Mundo Unido."
+>
+  <PortadaPagina
+    titulo="Aplica a un Colegio del Mundo Unido"
+    entrada="Cada año seleccionamos a jóvenes mexicanos para estudiar dos años en uno de los 18 colegios UWC, con una beca según lo que su familia puede aportar."
+    imagen={foto('seccion-mexicanos-bandera.jpg')}
+    alt="Becarios mexicanos con trajes típicos y una gran bandera de México en su colegio UWC"
+    migas={[{ texto: 'Aplica', href: '/aplica/' }]}
+    alta
+  >
+    <div class="botones">
+      {
+        estado === 'abierta' ? (
+          <a href={enlaceRegistro} class="boton boton--blanco">Regístrate <Icono nombre="flecha" tam={18} /></a>
+        ) : (
+          <a href="/avisos/" class="boton boton--blanco">Avisos del proceso <Icono nombre="flecha" tam={18} /></a>
+        )
+      }
+      <a href="#requisitos" class="boton boton--contorno-blanco">¿Puedo aplicar?</a>
+    </div>
+  </PortadaPagina>
+
+  <!-- Estado + avisos -->
+  <section class="estado" aria-labelledby="t-estado">
+    <div class="contenedor estado__caja">
+      <div>
+        <h2 id="t-estado">{mensaje.titulo}</h2>
+        <p>{mensaje.texto}</p>
+        <a href="/avisos/" class="enlace">Todos los avisos <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <ul class="estado__avisos">
+        {avisos.map((a) => <li><TarjetaAviso aviso={a} compacta /></li>)}
+      </ul>
+    </div>
+  </section>
+
+  <!-- Requisitos -->
+  <section id="requisitos" class="seccion">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Requisitos para la generación {generacion}</h2>
+        <p class="texto-grande">Debes cumplir todos; no se hacen excepciones. Hablar inglés <strong>no</strong> es requisito.</p>
+      </div>
+      <ol class="requisitos">
+        {
+          sitio.requisitos.map((r, i) => (
+            <li class="revelar" style={`--retraso:${i * 90}ms`}>
+              <span class="requisitos__num">{i + 1}</span>
+              <h3>{r.titulo}</h3>
+              <p>{r.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="botones">
+        <a href="/aplica/perfil-del-candidato/" class="boton boton--contorno">Qué buscamos en un candidato</a>
+        <a href="/aplica/dos-vias/" class="boton boton--contorno">Otras vías para ir a un UWC</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Etapas -->
+  <section class="seccion seccion--azul">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>El proceso, paso a paso</h2>
+        <p class="texto-grande">Dura de seis a ocho meses. Los resultados de cada etapa se publican en la sección de avisos.</p>
+      </div>
+      <LineaTiempo claro />
+      <div class="botones centro">
+        <a href="/aplica/proceso-de-seleccion/" class="boton boton--blanco">Detalle de cada etapa <Icono nombre="flecha" tam={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Becas -->
+  <section class="seccion">
+    <div class="contenedor becas">
+      <div>
+        <h2>El dinero no debe ser una barrera</h2>
+        <p class="texto-grande">
+          Te seleccionamos solo por tu mérito. La situación económica de tu familia se revisa hasta el final, y únicamente para definir
+          cuánto puede aportar.
+        </p>
+      </div>
+      <dl class="becas__lista">
+        <div><dt>La beca cubre</dt><dd>Colegiatura, alojamiento, alimentación, libros y algunos costos menores durante los dos años.</dd></div>
+        <div><dt>No cubre</dt><dd>El transporte de México al colegio y los gastos personales. Algunos colegios piden seguro médico o un depósito reembolsable.</dd></div>
+        <div><dt>La familia aporta</dt><dd>Según sus posibilidades, al menos lo que hoy invierte en la educación de su hija o hijo.</dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- Toda la información -->
+  <section class="seccion seccion--gris">
+    <div class="contenedor">
+      <div class="encabezado">
+        <h2>Toda la información para aspirantes y familias</h2>
+      </div>
+      <TarjetasSeccion seccion="aplica" />
+    </div>
+  </section>
+
+  <!-- Preguntas -->
+  <section class="seccion">
+    <div class="contenedor preguntas">
+      <div>
+        <h2>Preguntas frecuentes</h2>
+        <p class="texto-grande">Lo que más nos preguntan aspirantes y familias.</p>
+        <a href="/aplica/preguntas-frecuentes/" class="boton boton--azul">Ver todas las preguntas <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <div class="acordeon">
+        {
+          preguntas.slice(0, 6).map((p) => (
+            <details>
+              <summary>
+                {p.pregunta}
+                <Icono nombre="abajo" tam={20} />
+              </summary>
+              <p>{p.respuesta}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .estado { position: relative; z-index: 2; margin-top: -3rem; }
+  .estado__caja {
+    display: grid;
+    gap: 1.5rem;
+    padding: 1.75rem;
+    background: var(--blanco);
+    border-top: 4px solid var(--verde);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra);
+  }
+  @media (min-width: 1000px) { .estado__caja { grid-template-columns: 280px 1fr; gap: 2rem; align-items: center; } }
+  .estado h2 { font-size: 1.5rem; }
+  .estado p { color: var(--texto-suave); }
+  .estado__avisos {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: minmax(280px, 1fr);
+    gap: 1rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 0.25rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+  }
+  .estado__avisos li { scroll-snap-align: start; }
+  .estado__avisos :global(.aviso) { border: 1px solid var(--gris-linea); box-shadow: none; }
+
+  .encabezado { max-width: 760px; margin-bottom: 3rem; }
+  .centro { justify-content: center; margin-top: 3rem; }
+
+  .requisitos {
+    display: grid;
+    gap: 2rem;
+    list-style: none;
+    margin: 0 0 3rem;
+    padding: 0;
+  }
+  @media (min-width: 700px) { .requisitos { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .requisitos { grid-template-columns: repeat(4, 1fr); } }
+  .requisitos li { padding-top: 1.25rem; border-top: 3px solid var(--azul); }
+  .requisitos__num { display: block; font-size: 3rem; font-weight: 700; line-height: 1; color: var(--verde); margin-bottom: 0.75rem; }
+  .requisitos h3 { color: var(--azul); }
+  .requisitos p { color: var(--texto-suave); margin: 0; }
+
+  .becas { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) { .becas { grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; } }
+  .becas__lista { margin: 0; display: grid; gap: 0; }
+  .becas__lista div { padding: 1.25rem 0; border-bottom: 1px solid var(--gris-linea); }
+  .becas__lista div:first-child { border-top: 1px solid var(--gris-linea); }
+  .becas__lista dt { font-weight: 700; font-size: 1.15rem; color: var(--azul); margin-bottom: 0.3rem; }
+  .becas__lista dd { margin: 0; color: var(--texto-suave); }
+
+  .preguntas { display: grid; gap: 2.5rem; }
+  @media (min-width: 960px) { .preguntas { grid-template-columns: 0.8fr 1.2fr; gap: 5rem; align-items: start; } }
+</style>

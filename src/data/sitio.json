@@ -36,12 +36,29 @@
     }
   ],
   "cifras": [
-    { "valor": "1977", "etiqueta": "año en que se fundó UWC México" },
-    { "valor": "444", "etiqueta": "jóvenes se registraron a la convocatoria 2027–2029" },
-    { "valor": "18", "etiqueta": "colegios UWC en cuatro continentes" },
-    { "valor": "80%+", "etiqueta": "de los estudiantes UWC reciben apoyo financiero" }
+    {
+      "valor": "1977",
+      "etiqueta": "año en que se fundó UWC México"
+    },
+    {
+      "valor": "444",
+      "etiqueta": "jóvenes se registraron a la convocatoria 2027–2029"
+    },
+    {
+      "valor": "18",
+      "etiqueta": "colegios UWC en cuatro continentes"
+    },
+    {
+      "valor": "80%+",
+      "etiqueta": "de los estudiantes UWC reciben apoyo financiero"
+    }
   ],
-  "afiliacion": { "anioAnterior": 2025, "afiliados": 114, "meta": 130, "anioMeta": 2026 },
+  "afiliacion": {
+    "anioAnterior": 2025,
+    "afiliados": 114,
+    "meta": 130,
+    "anioMeta": 2026
+  },
   "contacto": {
     "correo": "oficina@uwcmexico.org",
     "quejas": "quejasysugerencias@uwcmexico.org",
@@ -59,5 +76,23 @@
     "paypal": "https://uwcmexico.org/donar-con-paypal/",
     "factura": "https://uwcmexico.org/como-donar/",
     "everyorg": "https://www.every.org/uwcint"
-  }
+  },
+  "requisitos": [
+    {
+      "titulo": "Edad",
+      "texto": "Haber nacido entre el 1 de enero de 2009 y el 31 de diciembre de 2011."
+    },
+    {
+      "titulo": "Grado escolar",
+      "texto": "Cursar tercero de secundaria o primero de preparatoria en el ciclo escolar 2026–2027."
+    },
+    {
+      "titulo": "Promedio",
+      "texto": "Mínimo 8.5 en cada uno de los dos años previos, o en el certificado de secundaria y el primer semestre de preparatoria."
+    },
+    {
+      "titulo": "Documentos",
+      "texto": "Acta de nacimiento, boletas oficiales de la SEP, una foto reciente con fondo blanco y un correo personal."
+    }
+  ]
 }

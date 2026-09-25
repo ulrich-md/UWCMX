@@ -1,0 +1,80 @@
+---
+import Base from '../../layouts/Base.astro';
+import PortadaPagina from '../../components/PortadaPagina.astro';
+import Icono from '../../components/Icono.astro';
+import preguntas from '../../data/preguntas.json';
+import sitio from '../../data/sitio.json';
+import { foto } from '../../lib/fotos';
+
+type Pregunta = { pregunta: string; respuesta: string; tema?: string };
+const lista = preguntas as Pregunta[];
+const temas = [...new Set(lista.map((p) => p.tema ?? 'General'))];
+const slug = (t: string) => t.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]+/g, '-');
+
+const esquema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: lista.map((p) => ({ '@type': 'Question', name: p.pregunta, acceptedAnswer: { '@type': 'Answer', text: p.respuesta } })),
+};
+---
+
+<Base titulo="Preguntas frecuentes" portada descripcion="Respuestas a las preguntas más comunes sobre UWC y el proceso de selección de UWC México: requisitos, becas, costos, idioma y más.">
+  <PortadaPagina
+    titulo="Preguntas frecuentes"
+    entrada="Todo lo que aspirantes y familias suelen preguntarnos sobre UWC, el proceso de selección y las becas."
+    imagen={foto('galeria-castillo-atlantic.jpg')}
+    migas={[{ texto: 'Aplica', href: '/aplica/' }]}
+  />
+
+  <div class="contenedor faq">
+    <nav class="faq__temas" aria-label="Temas">
+      <ul>
+        {temas.map((t) => <li><a href={`#${slug(t)}`}>{t}</a></li>)}
+      </ul>
+    </nav>
+
+    <div>
+      {
+        temas.map((t) => (
+          <section id={slug(t)} class="faq__grupo">
+            <h2>{t}</h2>
+            <div class="acordeon">
+              {lista
+                .filter((p) => (p.tema ?? 'General') === t)
+                .map((p) => (
+                  <details>
+                    <summary>
+                      {p.pregunta}
+                      <Icono nombre="abajo" tam={20} />
+                    </summary>
+                    <p>{p.respuesta}</p>
+                  </details>
+                ))}
+            </div>
+          </section>
+        ))
+      }
+      <div class="nota">
+        ¿No encontraste tu respuesta? Escríbenos a <a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a>
+        ({sitio.contacto.horario.toLowerCase()}).
+      </div>
+    </div>
+  </div>
+
+  <script is:inline type="application/ld+json" set:html={JSON.stringify(esquema)} />
+</Base>
+
+<style>
+  .faq { display: grid; gap: 2rem; padding-block: 3.5rem 5rem; }
+  @media (min-width: 1000px) { .faq { grid-template-columns: 240px minmax(0, 860px); gap: 4.5rem; padding-block: 4.5rem 6rem; } }
+  .faq__temas ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  @media (min-width: 1000px) {
+    .faq__temas { position: sticky; top: calc(var(--alto-header) + 1.5rem); align-self: start; }
+    .faq__temas ul { flex-direction: column; border-left: 3px solid var(--gris-linea); gap: 0; }
+    .faq__temas a { border-left: 3px solid transparent; margin-left: -3px; }
+  }
+  .faq__temas a { display: block; padding: 0.5rem 1rem; font-weight: 600; text-decoration: none; color: var(--texto); }
+  .faq__temas a:hover { color: var(--azul); border-left-color: var(--verde); }
+  .faq__grupo { margin-bottom: 3.5rem; }
+  .faq__grupo h2 { font-size: 1.8rem; }
+</style>

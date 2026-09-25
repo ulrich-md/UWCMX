@@ -1,47 +1,73 @@
 ---
+import { Image } from 'astro:assets';
 import type { CollectionEntry } from 'astro:content';
-import Icono from './Icono.astro';
+import { banner } from '../lib/fotos';
 
 interface Props {
   aviso: CollectionEntry<'avisos'>;
+  compacta?: boolean;
 }
-const { aviso } = Astro.props;
+const { aviso, compacta = false } = Astro.props;
+const img = banner(aviso.data.imagen);
 const fecha = aviso.data.fecha.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
 ---
 
-<a href={`/avisos/${aviso.id}/`} class="tarjeta aviso">
-  <p class="aviso__meta">
-    <Icono nombre="calendario" tam={16} />
-    <time datetime={aviso.data.fecha.toISOString().slice(0, 10)}>{fecha}</time>
-  </p>
-  {aviso.data.etapa && <p class="aviso__etapa">{aviso.data.etapa}</p>}
-  <h3>{aviso.data.titulo}</h3>
-  <p>{aviso.data.resumen}</p>
-  <span class="enlace-flecha aviso__leer">Leer aviso <Icono nombre="flecha" tam={18} /></span>
+<a href={`/avisos/${aviso.id}/`} class:list={['aviso', { 'aviso--compacta': compacta }]}>
+  <div class="aviso__img">
+    {
+      img ? (
+        <Image src={img} alt="" widths={[400, 640]} sizes={compacta ? '320px' : '(min-width: 1000px) 400px, 92vw'} />
+      ) : (
+        <div class="aviso__sin-img" aria-hidden="true">
+          <span>{aviso.data.etapa ?? 'Aviso'}</span>
+        </div>
+      )
+    }
+  </div>
+  <div class="aviso__texto">
+    <p class="aviso__meta">
+      <time datetime={aviso.data.fecha.toISOString().slice(0, 10)}>{fecha}</time>
+      {aviso.data.etapa && !compacta && <span> · {aviso.data.etapa}</span>}
+    </p>
+    <h3>{aviso.data.titulo}</h3>
+    {!compacta && <p class="aviso__resumen">{aviso.data.resumen}</p>}
+  </div>
 </a>
 
 <style>
-  .aviso { gap: 0.6rem; }
-  .aviso__meta {
+  .aviso {
     display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    font-size: var(--text-sm);
-    color: var(--tinta-suave);
+    flex-direction: column;
+    height: 100%;
+    background: var(--blanco);
+    color: var(--texto);
+    text-decoration: none;
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgb(10 31 61 / 0.1);
+    transition: box-shadow 0.3s var(--ease), transform 0.3s var(--ease);
   }
-  .aviso__etapa {
-    align-self: flex-start;
-    padding: 0.2rem 0.7rem;
-    border-radius: 999px;
-    background: var(--azul-claro);
-    color: var(--azul) !important;
-    font-size: 0.8125rem;
+  .aviso:hover { color: var(--texto); box-shadow: var(--sombra); transform: translateY(-3px); }
+  .aviso__img { aspect-ratio: 2 / 1; overflow: hidden; background: var(--gris-fondo); }
+  .aviso__img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+  .aviso:hover .aviso__img img { transform: scale(1.04); }
+  .aviso__sin-img {
+    display: grid;
+    place-items: center;
+    height: 100%;
+    background: var(--degradado);
+    color: var(--blanco);
     font-weight: 700;
+    font-size: 1.1rem;
+    padding: 1rem;
+    text-align: center;
   }
-  .aviso h3 { font-size: 1.25rem; }
-  .aviso__leer {
-    margin-top: auto;
-    padding-top: var(--space-1);
-    color: var(--azul);
-  }
+  .aviso__texto { padding: 1.1rem 1.25rem 1.3rem; }
+  .aviso__meta { margin: 0 0 0.35rem; font-size: 0.875rem; font-weight: 600; color: var(--verde-texto); }
+  .aviso h3 { font-size: 1.15rem; line-height: 1.3; margin: 0 0 0.4rem; color: var(--azul); }
+  .aviso__resumen { margin: 0; font-size: 0.975rem; color: var(--texto-suave); }
+
+  .aviso--compacta .aviso__texto { padding: 0.8rem 1rem 1rem; }
+  .aviso--compacta h3 { font-size: 1rem; margin: 0; }
+  .aviso--compacta .aviso__meta { font-size: 0.8rem; margin-bottom: 0.2rem; }
 </style>

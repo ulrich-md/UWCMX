@@ -1,0 +1,101 @@
+---
+import { Image } from 'astro:assets';
+import Icono from './Icono.astro';
+import colegios from '../data/colegios.json';
+import { foto, existeFoto } from '../lib/fotos';
+---
+
+<div class="carrusel" data-carrusel>
+  <ul class="carrusel__pista" data-pista tabindex="0" aria-label="Los 18 Colegios del Mundo Unido">
+    {
+      colegios.map((c) => {
+        const archivo = `colegio-${c.slug}.jpg`;
+        const hay = existeFoto(archivo);
+        return (
+          <li class="colegio">
+            {hay ? (
+              <Image src={foto(archivo)} alt={`Campus de ${c.nombre}`} widths={[360, 560]} sizes="(min-width: 1000px) 320px, 75vw" />
+            ) : (
+              <div class="colegio__sin-foto" aria-hidden="true" />
+            )}
+            <div class="colegio__texto">
+              <span class="colegio__pais">
+                <Icono nombre="ubicacion" tam={14} />
+                {c.pais}
+              </span>
+              <h3>{c.nombre}</h3>
+              <span class="colegio__anio">Desde {c.anio}</span>
+            </div>
+          </li>
+        );
+      })
+    }
+  </ul>
+  <div class="carrusel__controles">
+    <button type="button" data-anterior aria-label="Colegios anteriores"><Icono nombre="izquierda" tam={22} /></button>
+    <button type="button" data-siguiente aria-label="Más colegios"><Icono nombre="derecha" tam={22} /></button>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll<HTMLElement>('[data-carrusel]').forEach((c) => {
+    const pista = c.querySelector<HTMLElement>('[data-pista]');
+    if (!pista) return;
+    const paso = () => pista.clientWidth * 0.8;
+    c.querySelector('[data-anterior]')?.addEventListener('click', () => pista.scrollBy({ left: -paso(), behavior: 'smooth' }));
+    c.querySelector('[data-siguiente]')?.addEventListener('click', () => pista.scrollBy({ left: paso(), behavior: 'smooth' }));
+  });
+</script>
+
+<style>
+  .carrusel { position: relative; }
+  .carrusel__pista {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: min(75vw, 320px);
+    gap: 1.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0 0 1.5rem;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: thin;
+    scrollbar-color: var(--verde) transparent;
+  }
+  .colegio {
+    position: relative;
+    aspect-ratio: 3 / 4;
+    border-radius: var(--radio);
+    overflow: hidden;
+    scroll-snap-align: start;
+    background: var(--degradado);
+    color: var(--blanco);
+  }
+  .colegio img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.7s var(--ease); }
+  .colegio:hover img { transform: scale(1.05); }
+  .colegio__sin-foto { width: 100%; height: 100%; background: var(--degradado); }
+  .colegio::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, transparent 40%, rgb(10 31 61 / 0.85));
+  }
+  .colegio__texto { position: absolute; left: 1.25rem; right: 1.25rem; bottom: 1.25rem; z-index: 1; }
+  .colegio h3 { font-size: 1.35rem; margin: 0.2rem 0; }
+  .colegio__pais { display: inline-flex; align-items: center; gap: 0.3rem; font-size: 0.85rem; font-weight: 600; color: #9fe3d8; }
+  .colegio__anio { font-size: 0.875rem; color: rgb(255 255 255 / 0.8); }
+  .carrusel__controles { display: flex; justify-content: flex-end; gap: 0.6rem; }
+  .carrusel__controles button {
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    border: 2px solid var(--azul);
+    background: var(--blanco);
+    color: var(--azul);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .carrusel__controles button:hover { background: var(--azul); color: var(--blanco); }
+</style>

@@ -12,10 +12,26 @@ const avisos = defineCollection({
     generacion: z.string(),
     etapa: z.string().optional(),
     resumen: z.string(),
-    enlace: z
-      .object({ texto: z.string(), url: z.string().url() })
-      .optional(),
+    // Nombre de archivo dentro de src/assets/avisos/ (banner del aviso).
+    imagen: z.string().optional(),
+    enlace: z.object({ texto: z.string(), url: z.string().url() }).optional(),
+    urlAnterior: z.string().optional(),
   }),
 });
 
-export const collections = { avisos };
+// Páginas de contenido: src/content/paginas/<seccion>/<slug>.md
+// Se publican en /<seccion>/<slug>/
+const paginas = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/paginas' }),
+  schema: z.object({
+    titulo: z.string(),
+    seccion: z.enum(['descubre', 'aplica', 'comunidad', 'apoya', 'nosotros']),
+    orden: z.number().default(50),
+    resumen: z.string(),
+    // Nombre de archivo dentro de src/assets/fotos/ para la cabecera.
+    imagen: z.string().optional(),
+    urlAnterior: z.string().optional(),
+  }),
+});
+
+export const collections = { avisos, paginas };

@@ -1,0 +1,542 @@
+[
+  {
+    "archivo": "graduados.jpg",
+    "alt": "Tres graduados de UWC México se abrazan sonrientes con sus bandas de graduación",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 959,
+    "alto": 539,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Graduados-1.jpg",
+    "notas": "En uso como hero de inicio; solo 959 px de ancho, se verá suave a pantalla completa. Sugerido reemplazar el hero por hero-graduacion-robert-bosch.jpg."
+  },
+  {
+    "archivo": "pasaportes.jpg",
+    "alt": "Manos de estudiantes de muchos países sostienen sus pasaportes formando un círculo",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 2048,
+    "alto": 1361,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Pasaportes.jpeg",
+    "notas": "Metáfora visual fuerte de diversidad; 2048 px."
+  },
+  {
+    "archivo": "banderas.jpg",
+    "alt": "Estudiantes posan con decenas de banderas frente a un edificio de piedra durante un festival UWC",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 945,
+    "alto": 500,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/02/uwc-festival.jpg",
+    "notas": "Solo 945 px de ancho."
+  },
+  {
+    "archivo": "becarios.jpg",
+    "alt": "Generación de becarios de UWC México con ropa formal posan juntos en un salón",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 1499,
+    "alto": 789,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Becarios.jpg",
+    "notas": "Foto grupal formal de becarios mexicanos."
+  },
+  {
+    "archivo": "campamento.jpg",
+    "alt": "Becarios y voluntarios de UWC México posan en el pasto durante el campamento de 2015",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 1080,
+    "alto": 838,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Campamentp-2015.jpg",
+    "notas": "Auténtica; cielo blanco y plano."
+  },
+  {
+    "archivo": "actividades.jpg",
+    "alt": "Grupo numeroso de candidatos y voluntarios posa en las gradas durante las actividades grupales",
+    "uso": "seccion",
+    "calidad": 2,
+    "ancho": 600,
+    "alto": 400,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2020/04/Actividades-e1588270142314.jpg",
+    "notas": "Solo 600x400: usar pequeña."
+  },
+  {
+    "archivo": "mauricio.jpg",
+    "alt": "Retrato de Mauricio Calderón Castro, graduado de UWC Mostar",
+    "uso": "retrato",
+    "calidad": 3,
+    "ancho": 400,
+    "alto": 400,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2016/11/Mauricio-calderón-400x400.jpeg",
+    "notas": "Retrato de testimonio, 400x400."
+  },
+  {
+    "archivo": "hero-graduacion-robert-bosch.jpg",
+    "alt": "Graduados latinoamericanos de UWC Robert Bosch College sonríen y muestran sus certificados de graduación",
+    "uso": "hero",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1333,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/IMG_0807.jpg",
+    "notas": "Candidato #1 a hero. Muy emotivo, becarios latinoamericanos (varios mexicanos). Imagen llena de caras: usar degradado oscuro fuerte para el texto. Confirmar con UWC Robert Bosch/autor el permiso de uso y el consentimiento de las personas."
+  },
+  {
+    "archivo": "hero-amistad-uwc.jpg",
+    "alt": "Cuatro estudiantes de distintos países, una con blusa bordada mexicana, se abrazan y ríen en un festival cultural UWC",
+    "uso": "hero",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1394,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/02/UWC-MEXICO-3.jpg",
+    "notas": "Candidato #2 a hero. Diversidad y alegría; blusa mexicana. Poco espacio calmo: colocar texto abajo a la izquierda con degradado. Probablemente foto de UWC International (subida como \"United World Colleges México\"); confirmar créditos."
+  },
+  {
+    "archivo": "hero-banderas-cielo.jpg",
+    "alt": "Decenas de estudiantes de UWC posan sobre el pasto con banderas de sus países bajo un cielo azul despejado",
+    "uso": "hero",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1334,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/02/UWC-MEXICO.jpg",
+    "notas": "Candidato #3 a hero. El mejor para texto superpuesto: mitad superior es cielo azul limpio. Colegio no identificado; confirmar origen/créditos."
+  },
+  {
+    "archivo": "hero-adriatico.jpg",
+    "alt": "Dos estudiantes con los brazos abiertos frente al castillo de Duino y el mar Adriático",
+    "uso": "hero",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 1080,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2020/02/2.-UWC-ADRIATIC-1.jpg",
+    "notas": "Alternativa de hero/sección: cielo claro a la izquierda para texto. Confirmar permiso con UWC Adriatic."
+  },
+  {
+    "archivo": "seccion-mexicanos-bandera.jpg",
+    "alt": "Estudiantes mexicanos con trajes típicos sostienen una gran bandera de México frente a su colegio UWC",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 1600,
+    "alto": 1200,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2022/11/imagenAlumnosBandera.jpeg",
+    "notas": "Becarios mexicanos (parece UWC Maastricht, 2022). Foto de celular con algo de sobre-nitidez; parte superior (edificio) sirve para texto."
+  },
+  {
+    "archivo": "seccion-trajes-tipicos.jpg",
+    "alt": "Estudiantes con trajes típicos mexicanos, sombreros de charro y banderas en un desfile internacional",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 1060,
+    "alto": 723,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/NfXTQ_Kw.png",
+    "notas": "Muy colorida y mexicana. 1060 px de ancho: no usar a pantalla completa en escritorio."
+  },
+  {
+    "archivo": "seccion-banderas-latinoamerica.jpg",
+    "alt": "Grupo de estudiantes latinoamericanos posan en el pasto con banderas de Costa Rica, Honduras, Venezuela y más",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 1600,
+    "alto": 1200,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/RBC-Banderas.jpeg",
+    "notas": "Robert Bosch College (RBC). Buena para secciones de becas/comunidad."
+  },
+  {
+    "archivo": "seccion-trajes-rbc.jpg",
+    "alt": "Tres estudiantes mexicanos con trajes típicos, uno con sombrero de charro, en UWC Robert Bosch College",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 1024,
+    "alto": 682,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/RBC-2.jpeg",
+    "notas": "Retrato grupal cálido; 1024 px."
+  },
+  {
+    "archivo": "seccion-mexicanos-colegio.jpg",
+    "alt": "Grupo de estudiantes sonrientes con la bandera de México en el atrio de un colegio UWC",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 960,
+    "alto": 720,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/1NeqvlVw.jpeg",
+    "notas": "960 px; foto de celular. Usar en tarjeta, no a pantalla completa."
+  },
+  {
+    "archivo": "seccion-comunidad-voluntarios.jpg",
+    "alt": "Voluntarios y exalumnos de UWC México posan juntos en un jardín",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 2000,
+    "alto": 1500,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/IMG_7226.jpg",
+    "notas": "Equipo/comunidad de UWC México. Composición de foto grupal (poco dinamismo) pero auténtica."
+  },
+  {
+    "archivo": "seccion-proceso-seleccion.jpg",
+    "alt": "Candidatos en una actividad grupal al aire libre durante el proceso de selección de UWC México",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 960,
+    "alto": 720,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Proceso-2.jpg",
+    "notas": "Actividades grupales del proceso de selección. 960 px."
+  },
+  {
+    "archivo": "seccion-cuestionario.jpg",
+    "alt": "Candidatos trabajando en un salón de clases durante una etapa del proceso de selección",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 2000,
+    "alto": 1500,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/A-2.jpg",
+    "notas": "Salón algo desordenado, luz plana; útil para páginas de Aplica."
+  },
+  {
+    "archivo": "seccion-banderas-escenario.jpg",
+    "alt": "Estudiantes ondean banderas de México, España y otros países sobre un escenario durante un evento cultural",
+    "uso": "seccion",
+    "calidad": 3,
+    "ancho": 1024,
+    "alto": 768,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/44932987_2132574940126137_5102170364507586560_o.jpg",
+    "notas": "Foto de Facebook; energía alta, calidad media (1024 px)."
+  },
+  {
+    "archivo": "seccion-banderas-rojas.jpg",
+    "alt": "Estudiantes ondean banderas de muchos países en un escenario con fondo oscuro",
+    "uso": "seccion",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1334,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/02/UWC-MEXICO-1.jpg",
+    "notas": "Dramática y colorida; el fondo negro superior admite texto. Confirmar créditos (UWC International)."
+  },
+  {
+    "archivo": "galeria-mahindra-valle.jpg",
+    "alt": "Estudiantes caminan por una ladera verde entre la neblina de las montañas",
+    "uso": "galeria",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 806,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/slide-ourcampus-overview-001.jpg",
+    "notas": "Muy buena para parallax (calmada). Probablemente de UWC Mahindra (muwci.net); confirmar origen."
+  },
+  {
+    "archivo": "galeria-mahindra-huerto.jpg",
+    "alt": "Estudiantes plantan en la tierra durante una actividad de servicio comunitario",
+    "uso": "galeria",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 806,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/slide-initiatives-001.jpg",
+    "notas": "Probablemente UWC Mahindra (muwci.net); confirmar origen."
+  },
+  {
+    "archivo": "galeria-cuarto-residencia.jpg",
+    "alt": "Estudiantes conversan en una habitación de residencia decorada con fotos y luces",
+    "uso": "galeria",
+    "calidad": 3,
+    "ancho": 825,
+    "alto": 578,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/story-wadahouse-pic.jpg",
+    "notas": "Probablemente una \"wada\" de UWC Mahindra; 825 px."
+  },
+  {
+    "archivo": "galeria-baile-open-day.jpg",
+    "alt": "Estudiantes bailan en una presentación cultural frente al público",
+    "uso": "galeria",
+    "calidad": 3,
+    "ancho": 1824,
+    "alto": 2736,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/12/2016-Open-Day-1.jpg",
+    "notas": "Vertical; algo movida."
+  },
+  {
+    "archivo": "galeria-castillo-atlantic.jpg",
+    "alt": "Castillo de St Donat’s de UWC Atlantic visto desde el pasto con margaritas",
+    "uso": "galeria",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1175,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/02/UWC-MEXICO-2.jpg",
+    "notas": "Alternativa para Atlantic / fondo de sección; cielo amplio para texto."
+  },
+  {
+    "archivo": "galeria-publico-bn.jpg",
+    "alt": "Estudiantes de muchas nacionalidades ríen entre el público, en blanco y negro",
+    "uso": "galeria",
+    "calidad": 3,
+    "ancho": 1024,
+    "alto": 685,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/04/quienes-somos.jpg",
+    "notas": "Blanco y negro; origen no confirmado (posible UWC International)."
+  },
+  {
+    "archivo": "galeria-congreso-uwc.jpg",
+    "alt": "Jóvenes en el escenario de un congreso UWC, en blanco y negro",
+    "uso": "galeria",
+    "calidad": 2,
+    "ancho": 1200,
+    "alto": 800,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/05/UWC-2M4A8958.jpg",
+    "notas": "Escenario con logo UWC al fondo; calidad media."
+  },
+  {
+    "archivo": "galeria-bandera-uwc-mar.jpg",
+    "alt": "Grupo de jóvenes sostiene una bandera de UWC frente al mar, en blanco y negro",
+    "uso": "galeria",
+    "calidad": 3,
+    "ancho": 1200,
+    "alto": 800,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/05/UWC-2M4A8977.jpg",
+    "notas": "Viñeta marcada; buena para sección de comunidad."
+  },
+  {
+    "archivo": "retrato-hugo-contreras.jpg",
+    "alt": "Retrato de Hugo Contreras sonriendo al aire libre",
+    "uso": "retrato",
+    "calidad": 4,
+    "ancho": 915,
+    "alto": 853,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/05/HugoContreras.jpeg",
+    "notas": "Retrato de la página de organización."
+  },
+  {
+    "archivo": "retrato-priscila-r.jpg",
+    "alt": "Retrato de Priscila, graduada de UWC, sonriendo frente a flores",
+    "uso": "retrato",
+    "calidad": 4,
+    "ancho": 960,
+    "alto": 1280,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/03/PriscilaR_foto.jpeg",
+    "notas": "Serie #ConoceALosGraduados 2021. Confirmar permiso de uso."
+  },
+  {
+    "archivo": "retrato-grecia-de-la-o.jpg",
+    "alt": "Retrato de Grecia de la O, graduada de UWC, sonriendo junto a cactus",
+    "uso": "retrato",
+    "calidad": 4,
+    "ancho": 828,
+    "alto": 1093,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/06/GreciaDelaO.jpeg",
+    "notas": "Serie #ConoceALosGraduados."
+  },
+  {
+    "archivo": "retrato-ivan-flores.jpg",
+    "alt": "Retrato de Iván Flores, graduado de UWC, sonriendo al aire libre",
+    "uso": "retrato",
+    "calidad": 4,
+    "ancho": 948,
+    "alto": 948,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/06/IvanFlores.jpeg",
+    "notas": "Serie #ConoceALosGraduados."
+  },
+  {
+    "archivo": "retrato-rafael-a.jpg",
+    "alt": "Retrato en blanco y negro de Rafael, graduado de UWC, riendo",
+    "uso": "retrato",
+    "calidad": 4,
+    "ancho": 960,
+    "alto": 1280,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/04/RafaelA.jpeg",
+    "notas": "Serie #ConoceALosGraduados."
+  },
+  {
+    "archivo": "retrato-mariana-c.jpg",
+    "alt": "Retrato en blanco y negro de Mariana, graduada de UWC",
+    "uso": "retrato",
+    "calidad": 3,
+    "ancho": 1280,
+    "alto": 720,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/06/MarianaC.jpeg",
+    "notas": "Serie #ConoceALosGraduados; formato horizontal."
+  },
+  {
+    "archivo": "retrato-emilio-j.jpg",
+    "alt": "Emilio, graduado de UWC, con mochila de viaje en su residencia",
+    "uso": "retrato",
+    "calidad": 3,
+    "ancho": 1195,
+    "alto": 1280,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2021/03/EmilioJ.jpeg",
+    "notas": "Serie #ConoceALosGraduados; foto casual."
+  },
+  {
+    "archivo": "colegio-atlantic.jpg",
+    "alt": "Estudiantes caminan frente al castillo medieval de UWC Atlantic en Gales",
+    "uso": "colegio",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1333,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2024/09/UWC-Atlantic-United-Kingdom.jpg",
+    "notas": "Crédito en metadatos: \"Pic Gareth Iwan Jones\" (Atlantic College). Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-pearson.jpg",
+    "alt": "Estudiantes de Pearson College UWC forman un mosaico de banderas junto al mar en Canadá",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 1080,
+    "fuente": "https://www.pearsoncollege.ca/wp-content/uploads/2025/09/PCUWC-home-page-slider-community-and-flags.jpg",
+    "notas": "Fuente externa: sitio oficial de Pearson College UWC. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-uwcsea.jpg",
+    "alt": "Dos estudiantes de UWC South East Asia ríen durante una asamblea en Singapur",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 1280,
+    "fuente": "https://resources.finalsite.net/images/f_auto,q_auto/v1593657381/uwcseaedusg/gtkdk2b3e1g4kcwrmjrh/1314-Dover-PSE-SSGrade12leaversdayassembly-008-1920x1280.jpg",
+    "notas": "Fuente externa: sitio oficial de UWCSEA. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-waterford.jpg",
+    "alt": "Edificios blancos de Waterford Kamhlaba UWC entre la vegetación de las colinas de Esuatini",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 1280,
+    "alto": 853,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Waterford-1.jpg",
+    "notas": "Foto del sitio anterior (igual que campus-waterford.jpg). 1280 px."
+  },
+  {
+    "archivo": "colegio-adriatic.jpg",
+    "alt": "Estudiantes con los brazos abiertos frente al castillo de Duino, sede de UWC Adriatic",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 1080,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2020/02/2.-UWC-ADRIATIC-1.jpg",
+    "notas": "Misma foto que hero-adriatico.jpg (encuadre completo)."
+  },
+  {
+    "archivo": "colegio-usa.jpg",
+    "alt": "Estudiantes de UWC USA posan con banderas de sus países frente al castillo de Montezuma, Nuevo México",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1333,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2020/02/9.-UWC-USA-1.jpg",
+    "notas": "Del sitio anterior. Confirmar permiso con UWC USA."
+  },
+  {
+    "archivo": "colegio-li-po-chun.jpg",
+    "alt": "Vista aérea de estudiantes de Li Po Chun UWC con banderas en el patio del colegio en Hong Kong",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1125,
+    "fuente": "https://static.wixstatic.com/media/17d4cf_f9076518887c4d72870578a946de3c6b~mv2.jpg",
+    "notas": "Fuente externa: sitio oficial de LPCUWC. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-red-cross-nordic.jpg",
+    "alt": "Estudiantes de UWC Red Cross Nordic desfilan con banderas, la de México al frente, en Noruega",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 1000,
+    "alto": 667,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/RCN-Banderas.jpeg",
+    "notas": "Del sitio anterior. 1000 px. Bandera mexicana en primer plano."
+  },
+  {
+    "archivo": "colegio-mahindra.jpg",
+    "alt": "Edificios de piedra de UWC Mahindra College en las colinas de Pune, India",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 1600,
+    "alto": 570,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Mahindra.jpg",
+    "notas": "Del sitio anterior; panorámica 1600x570. Alternativa: galeria-mahindra-valle.jpg."
+  },
+  {
+    "archivo": "colegio-costa-rica.jpg",
+    "alt": "Estudiantes de UWC Costa Rica posan con banderas de sus países en el jardín tropical del colegio",
+    "uso": "colegio",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1200,
+    "fuente": "https://uwccostarica.org/wp-content/uploads/2026/03/qqqwdqw.jpg",
+    "notas": "Fuente externa: sitio oficial de UWC Costa Rica. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-mostar.jpg",
+    "alt": "Graduados de UWC Mostar lanzan sus birretes frente al edificio histórico del Gimnasio de Mostar",
+    "uso": "colegio",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1316,
+    "fuente": "https://uwcmostar.ba/wp-content/uploads/2026/05/Graduation-Ceremony1-scaled.jpg",
+    "notas": "Fuente externa: sitio oficial de UWC Mostar. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-maastricht.jpg",
+    "alt": "Estudiantes de UWC Maastricht con trajes de sus países levantan los brazos en la celebración del Día UWC",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 2000,
+    "alto": 1334,
+    "fuente": "https://www.uwcmaastricht.nl/wp-content/uploads/2021/01/UWC-Day-LR-29-1-scaled.jpg",
+    "notas": "Fuente externa: sitio oficial de UWC Maastricht. Incluye alumnos de primaria. Alternativa: seccion-mexicanos-bandera.jpg (parece también Maastricht)."
+  },
+  {
+    "archivo": "colegio-robert-bosch.jpg",
+    "alt": "Edificios modernos y antiguos de UWC Robert Bosch College en la Selva Negra, Alemania",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 1364,
+    "alto": 767,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Robert-Bosch-1.jpg",
+    "notas": "Del sitio anterior. Sin personas."
+  },
+  {
+    "archivo": "colegio-dilijan.jpg",
+    "alt": "Campus de UWC Dilijan con sus edificios de ladrillo y vegetación en las montañas de Armenia",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 1920,
+    "alto": 816,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/10/Dilijan-2.jpg",
+    "notas": "Igual que campus-dilijan.jpg."
+  },
+  {
+    "archivo": "colegio-changshu.jpg",
+    "alt": "Edificio principal de UWC Changshu China con su pórtico y jardín de pinos",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 1600,
+    "alto": 570,
+    "fuente": "https://uwcmexico.org/wp-content/uploads/2018/04/china.jpg",
+    "notas": "Del sitio anterior (1600x570). Sin personas; el sitio oficial no respondió (error de proxy)."
+  },
+  {
+    "archivo": "colegio-thailand.jpg",
+    "alt": "Jardín y edificios con techos rojos del campus de UWC Thailand en Phuket",
+    "uso": "colegio",
+    "calidad": 4,
+    "ancho": 2000,
+    "alto": 1337,
+    "fuente": "https://resources.finalsite.net/images/t_image_size_6/v1676905241/uwcthailandacth/zaivtdue2qf9rq5jzryz/Campus-DSC_7038.jpg",
+    "notas": "Fuente externa: sitio oficial de UWC Thailand. Sin personas. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-isak.jpg",
+    "alt": "Estudiantes de UWC ISAK Japan posan sonrientes durante una visita de invierno",
+    "uso": "colegio",
+    "calidad": 3,
+    "ancho": 929,
+    "alto": 600,
+    "fuente": "https://uwcisak.jp/wpdata/wp-content/uploads/2023/08/uwc-isak-ainu-visit-929x600-min.jpeg",
+    "notas": "Fuente externa: sitio oficial de UWC ISAK Japan. Solo 929 px. Confirmar permiso."
+  },
+  {
+    "archivo": "colegio-east-africa.jpg",
+    "alt": "Área de artes escénicas del campus Arusha de UWC East Africa, con techos triangulares y murales",
+    "uso": "colegio",
+    "calidad": 2,
+    "ancho": 1920,
+    "alto": 480,
+    "fuente": "https://www.uwcea.org/wp-content/uploads/2022/01/Aru_Perf_Area.jpg",
+    "notas": "Fuente externa: sitio oficial UWC East Africa. Banda muy panorámica (1920x480), tono cálido; conviene pedir una mejor foto al colegio."
+  }
+]
