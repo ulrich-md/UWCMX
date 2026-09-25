@@ -1,38 +1,142 @@
 [
   {
-    "pregunta": "¿Necesito hablar inglés para aplicar?",
-    "respuesta": "No. El inglés no es requisito para participar en el proceso de selección. En los colegios toda la vida académica y social es en inglés, así que te recomendamos empezar a mejorarlo desde ahora."
+    "pregunta": "¿Qué distingue a los Colegios del Mundo Unido?",
+    "respuesta": "Su ethos: el conjunto de rasgos y formas de comportamiento que forman su identidad. Los distingue, sobre todo, la diversidad de su alumnado en nacionalidad, cultura, origen étnico, religión y nivel socioeconómico. Esa diversidad es el propósito que da vida y misión a los colegios.",
+    "tema": "Sobre UWC"
   },
   {
-    "pregunta": "¿Cuánto cuesta participar?",
-    "respuesta": "Pedimos un donativo de 250 pesos por aspirante antes del examen. Si no puedes cubrirlo, escribe a oficina@uwcmexico.org explicando brevemente tu situación."
+    "pregunta": "¿Cuáles son las ventajas concretas de estudiar en un Colegio del Mundo Unido?",
+    "respuesta": "Además de una preparación académica de gran nivel, es una experiencia personal retadora y profundamente transformadora. Las y los estudiantes conviven en una comunidad diversa y unida, con retos personales y académicos constantes. Además, quienes destacan en sus estudios reciben con frecuencia becas universitarias atractivas en distintos países.",
+    "tema": "Sobre UWC"
   },
   {
-    "pregunta": "¿La situación económica de mi familia influye en la selección?",
-    "respuesta": "No. Seleccionamos únicamente por mérito y potencial. La información financiera se revisa solo al final, con las familias de las personas finalistas, para definir la aportación de cada familia."
+    "pregunta": "¿UWC es una organización laica, religiosa o con alguna otra afiliación?",
+    "respuesta": "United World Colleges es una organización laica, sin fines de lucro y sin afiliación religiosa ni política. Se estableció formalmente en Gran Bretaña en 1960 y abrió su primer colegio dos años después, en Gales. UWC México es una asociación civil sin fines de lucro, fundada en 1977, que representa al movimiento UWC en nuestro país.",
+    "tema": "Sobre UWC"
   },
   {
-    "pregunta": "¿Qué cubre la beca?",
-    "respuesta": "Colegiatura, alojamiento, alimentación, libros y algunos costos menores durante los dos años. No incluye el transporte de México al colegio ni los gastos personales. Algunos colegios piden seguro médico o un depósito reembolsable."
+    "pregunta": "¿Qué plan de estudios se imparte en los colegios?",
+    "respuesta": "El Programa del Diploma del Bachillerato Internacional (IB). Dura dos años obligatorios, incluso para quien ya haya cursado dos años de preparatoria en México en cualquier modalidad.",
+    "tema": "Sobre UWC"
   },
   {
-    "pregunta": "¿Los estudios son válidos en México?",
-    "respuesta": "Sí. El Diploma del Bachillerato Internacional es reconocido y revalidado por la SEP, la UNAM y las demás universidades del país."
+    "pregunta": "¿Los estudios de los Colegios del Mundo Unido son reconocidos en México?",
+    "respuesta": "Sí. El Diploma del Bachillerato Internacional es reconocido y revalidado por la Secretaría de Educación Pública, por la UNAM y por las demás universidades del país. Incluso varias escuelas mexicanas, públicas y privadas, lo imparten.",
+    "tema": "Sobre UWC"
   },
   {
-    "pregunta": "¿Puedo aplicar directamente a un colegio?",
-    "respuesta": "Si vives en México y necesitas apoyo económico, la vía es UWC México. Si tu familia puede pagar la colegiatura completa, existe el Programa de Selección Global (GSP) de UWC International. Solo puedes usar una vía por año: participar en ambas descalifica de las dos."
+    "pregunta": "¿En qué idioma se estudia en los colegios?",
+    "respuesta": "En inglés. No importa si el colegio está en Alemania, Armenia, Bosnia y Herzegovina o China: toda la vida académica y social del colegio transcurre en inglés.",
+    "tema": "Sobre UWC"
+  },
+  {
+    "pregunta": "¿Puedo solicitar mi ingreso directamente a un Colegio del Mundo Unido?",
+    "respuesta": "No. En un porcentaje muy alto, las y los estudiantes de los colegios son seleccionados en sus países de origen: el comité nacional de cada país (en nuestro caso, UWC México) presenta a los colegios las candidaturas de quienes obtuvieron las mejores evaluaciones en su proceso de selección. También existe el Programa de Selección Global (GSP) de UWC Internacional, pensado para quienes pueden pagar la colegiatura completa y quieren solicitar un colegio específico. Solo puedes usar una vía por año: participar al mismo tiempo en el proceso de UWC México y en el GSP descalifica de inmediato de ambos.",
+    "tema": "Sobre UWC"
+  },
+  {
+    "pregunta": "¿En qué consiste la oportunidad que ofrece UWC México?",
+    "respuesta": "Para una persona mexicana que vive en México, el proceso de selección de UWC México es la única vía para acceder a un Colegio del Mundo Unido con apoyo económico según la necesidad de su familia.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Cómo es el proceso de selección?",
+    "respuesta": "Dura de seis a ocho meses. La convocatoria abre entre abril y mayo; después vienen el examen EXANI-I del Ceneval (agosto), un cuestionario en línea y un proyecto de labor social (septiembre a noviembre), las actividades grupales (noviembre) y las entrevistas finales (diciembre). En febrero, en la Ceremonia de Asignación, las y los seleccionados conocen el colegio al que asistirán. Consulta los detalles en la sección Proceso de selección y los requisitos en la convocatoria vigente.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Hay que pagar algo para participar en el proceso de selección?",
+    "respuesta": "Antes del examen solicitamos un donativo por derecho de examen; su monto se indica cada año en la convocatoria y en los avisos del proceso (en la convocatoria 2027–2029 fue de 300 pesos). Si no puedes cubrirlo, escribe a oficina@uwcmexico.org explicando brevemente tus razones: contamos con un número limitado de exenciones.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Por qué se presenta el EXANI-I del Ceneval?",
+    "respuesta": "Porque es un buen parámetro del nivel académico de las y los aspirantes.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Cuándo recibo la calificación de mi examen?",
+    "respuesta": "Los resultados individuales del examen forman parte del proceso de selección hasta que este concluye. Además, UWC México funciona gracias a voluntarias y voluntarios que durante el proceso se dedican a desarrollarlo. Por ambas razones, los resultados se entregan a quien los solicite al término del proceso, entre abril y mayo.",
+    "tema": "Proceso de selección"
   },
   {
     "pregunta": "¿Cómo me entero de los resultados de cada etapa?",
-    "respuesta": "Publicamos todo en la sección de avisos de este sitio. Es tu responsabilidad revisarla: quien pierde una fecha o etapa queda fuera del proceso."
+    "respuesta": "Por medio de la sección de avisos de nuestro sitio web. Salvo en la última etapa, no hacemos llamadas ni enviamos correos a las y los participantes: es responsabilidad de cada quien revisar lo que se publica. Quien pierda alguna fecha o etapa del proceso queda descalificado automáticamente.",
+    "tema": "Proceso de selección"
   },
   {
-    "pregunta": "Soy mexicano pero vivo fuera de México. ¿Puedo participar?",
-    "respuesta": "Primero consulta al comité nacional del país donde vives en uwc.org. Si no aceptan tu solicitud, puedes participar con UWC México, tomando en cuenta que algunas etapas pueden ser presenciales en la Ciudad de México."
+    "pregunta": "No cumplo con alguno de los requisitos. ¿Puedo tener una excepción?",
+    "respuesta": "No. Lo lamentamos mucho, pero si no cumples todos los requisitos no puedes participar en el proceso. Te pedimos que no llenes el formulario de inscripción: revisarlo nos toma tiempo y de cualquier forma no podrías participar.",
+    "tema": "Proceso de selección"
   },
   {
-    "pregunta": "¿Cómo se asigna el colegio a cada persona seleccionada?",
-    "respuesta": "Tomamos en cuenta tus preferencias, los lugares que cada colegio ofrece a México ese año y el perfil que solicita cada colegio. La decisión final es de UWC México."
+    "pregunta": "Cumplo con el promedio de secundaria, pero mi promedio de preparatoria es menor. ¿Importa?",
+    "respuesta": "Sí. Tu promedio debe ser de al menos 8.5 en el semestre de preparatoria que cursas. Si resultas seleccionada o seleccionado, debes mantener un promedio mínimo de 8.5 al terminar el año de preparatoria en curso.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Importa si no hablo inglés?",
+    "respuesta": "No. Hablar inglés no es requisito para inscribirte ni para participar en el proceso de selección. Aun así, te recomendamos esforzarte por mejorarlo desde ahora: quienes más aprovechan su estancia en un colegio son quienes se adaptan más pronto a su nivel académico y a la vida social, por lo que mejorar el inglés es fundamental para quien resulte seleccionado. UWC México cuenta con el apoyo de The Anglo para la preparación en inglés de sus becarios.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Cómo se asignan los colegios a las y los seleccionados?",
+    "respuesta": "Se consideran varios factores: las preferencias de cada candidata o candidato; qué colegios nos ofrecieron lugares, cuántos y en qué términos (no todos ofrecen lugares cada año); las características que piden los colegios (por ejemplo, a veces solicitan un perfil específico), y el perfil del colegio y del estudiante. En cualquier caso, la asignación que hace UWC México es final e inapelable.",
+    "tema": "Proceso de selección"
+  },
+  {
+    "pregunta": "¿Cómo financia UWC México los lugares en los colegios?",
+    "respuesta": "De varias maneras. Cada colegio ofrece a UWC México cierto número de lugares al año, normalmente uno o dos, con un porcentaje de beca que varía de colegio a colegio. Como donataria autorizada desde 1981, UWC México recauda fondos de sus graduados, de empresas y fundaciones y de amigos de UWC, a quienes emite recibos deducibles de impuestos. Además, las familias de las y los seleccionados aportan al Fondo General de Becas un monto definido según sus posibilidades económicas.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "¿La situación económica de mi familia influye en la selección?",
+    "respuesta": "No. El proceso es completamente «ciego» a la situación económica. Los factores económicos solo se toman en cuenta al final, para definir cuánto aportará al Fondo General de Becas la familia de cada joven seleccionado.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "¿La aportación de las familias de los becarios es voluntaria u obligatoria?",
+    "respuesta": "Es obligatoria y se determina según la capacidad de cada familia. UWC México, la familia de la persona seleccionada y el colegio firman un acuerdo sobre el monto que aporta cada parte. Consulta más en la sección Aportaciones familiares.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "Si obtengo un lugar con beca, ¿qué cubre?",
+    "respuesta": "Una vez definida la aportación familiar y, en su caso, el complemento de UWC México, el colegio cubre la colegiatura, la alimentación, el alojamiento, los libros y algunos otros costos menores. No se incluyen el transporte al colegio ni los gastos personales. Algunos colegios piden contratar un seguro de gastos médicos mayores, y muchos solicitan un depósito reembolsable para cubrir posibles daños.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "Si no obtengo un lugar con beca, ¿puedo ir a un colegio? ¿Cuánto cuesta?",
+    "respuesta": "UWC México tiene una Política de Colegiaturas Completas para quienes, habiendo participado en el proceso, quedaron cerca de ser becarios. El costo anual promedio de un Colegio del Mundo Unido es de alrededor de 40,000 dólares estadounidenses; cada uno de los 18 colegios tiene sus propios costos, en distintas monedas. Si tu familia puede pagar la colegiatura completa, también puedes aplicar por el Programa de Selección Global (GSP), pero recuerda que solo puedes usar una vía por año.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "Si quiero pagar la colegiatura completa pero no tengo los recursos, ¿UWC México otorga préstamos?",
+    "respuesta": "No. UWC México no otorga créditos para financiar estos estudios. Existen instituciones financieras especializadas en préstamos educativos para el nivel preparatoria que pueden ser una opción.",
+    "tema": "Becas y costos"
+  },
+  {
+    "pregunta": "¿Puedo participar en el proceso de UWC México si ya me aceptaron en un Colegio del Mundo Unido?",
+    "respuesta": "No. Las reglas de UWC establecen que solo se puede solicitar ingreso a los colegios por una vía en un mismo año: a través de un comité nacional como UWC México, del Programa de Selección Global (GSP) o de un colegio, cuando este imparte años previos al Bachillerato Internacional.",
+    "tema": "Casos especiales"
+  },
+  {
+    "pregunta": "Soy mexicano pero no vivo en México. ¿Dónde presento mi solicitud?",
+    "respuesta": "Primero contacta al comité nacional del país donde vives y pregunta si acepta solicitudes de personas que no son ciudadanas; encuentra sus datos en uwc.org. Si no puedes participar en su proceso, puedes participar en el de UWC México, tomando en cuenta que algunas etapas pueden ser presenciales en la Ciudad de México. Si puedes pagar la colegiatura completa, también puedes aplicar por el Programa de Selección Global (GSP).",
+    "tema": "Casos especiales"
+  },
+  {
+    "pregunta": "Soy extranjero y vivo en México. ¿Puedo participar en el proceso de UWC México?",
+    "respuesta": "Sí, pero nuestros estatutos establecen que los recursos que recaudamos son para apoyar a jóvenes mexicanos. Si llegas a ser finalista y tu familia no puede cubrir la colegiatura completa, te apoyaremos con cartas de recomendación para el comité nacional de tu país y para el colegio al que quieras asistir, pero no podremos apoyarte con recursos económicos. Si puedes pagar la colegiatura completa, también puedes aplicar por el Programa de Selección Global (GSP).",
+    "tema": "Casos especiales"
+  },
+  {
+    "pregunta": "¿Qué compromisos asumo si voy a un UWC?",
+    "respuesta": "Están en la Carta compromiso, que describe tanto los compromisos que UWC México asume con sus becarios como los que esperamos que ellos asuman consigo mismos, con UWC México y con nuestro país.",
+    "tema": "Casos especiales"
+  },
+  {
+    "pregunta": "¿A quién recurro si tengo otras preguntas?",
+    "respuesta": "Escribe a oficina@uwcmexico.org. Apreciamos que sean las y los propios interesados quienes nos escriban. No ofrecemos atención telefónica ni presencial.",
+    "tema": "Casos especiales"
   }
 ]
