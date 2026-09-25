@@ -51,7 +51,6 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
     </svg>
     <div class="contenedor hero__texto">
       <a href="/avisos/" class="hero__estado">
-        <span class="hero__punto" aria-hidden="true"></span>
         Proceso {generacionActual}{nombreEtapa && ` · Etapa ${etapa}: ${nombreEtapa}`}
         <Icono nombre="flecha" tam={16} />
       </a>
@@ -267,24 +266,14 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
     align-items: center;
     gap: 0.55rem;
     margin-bottom: 1.5rem;
-    padding: 0.45rem 0.95rem;
-    border-radius: 999px;
-    background: rgb(255 255 255 / 0.12);
-    border: 1px solid rgb(255 255 255 / 0.25);
+    padding: 0.2rem 0 0.2rem 0.85rem;
+    border-left: 3px solid #ffb400;
     color: var(--blanco);
-    font-size: 0.925rem;
+    font-size: 0.975rem;
     font-weight: 600;
     text-decoration: none;
-    backdrop-filter: blur(6px);
-    transition: background-color 0.2s;
   }
-  .hero__estado:hover { background: rgb(255 255 255 / 0.22); color: var(--blanco); }
-  .hero__punto { width: 9px; height: 9px; border-radius: 50%; background: #ffb400; animation: latido-hero 2s infinite; }
-  @keyframes latido-hero {
-    0% { box-shadow: 0 0 0 0 rgb(255 180 0 / 0.7); }
-    70% { box-shadow: 0 0 0 9px rgb(255 180 0 / 0); }
-    100% { box-shadow: 0 0 0 0 rgb(255 180 0 / 0); }
-  }
+  .hero__estado:hover { color: var(--blanco); text-decoration: underline; }
   .hero__datos {
     display: flex;
     flex-wrap: wrap;
