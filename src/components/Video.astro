@@ -1,0 +1,118 @@
+---
+// Video incrustado "ligero": muestra una miniatura y solo carga el reproductor
+// de YouTube o Facebook cuando la persona hace clic. Así la página sigue rápida.
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import Icono from './Icono.astro';
+
+interface Props {
+  tipo: 'youtube' | 'facebook';
+  id: string;
+  titulo: string;
+  descripcion?: string;
+  /** Miniatura propia (obligatoria para Facebook, opcional para YouTube). */
+  miniatura?: ImageMetadata;
+  grande?: boolean;
+}
+
+const { tipo, id, titulo, descripcion, miniatura, grande = false } = Astro.props;
+
+const enlace =
+  tipo === 'youtube' ? `https://www.youtube.com/watch?v=${id}` : `https://www.facebook.com/UWCMexico/videos/${id}/`;
+const incrustar =
+  tipo === 'youtube'
+    ? `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`
+    : `https://www.facebook.com/plugins/video.php?href=${encodeURIComponent(enlace)}&show_text=false&autoplay=true`;
+const miniaturaYoutube = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
+---
+
+<figure class:list={['video', { 'video--grande': grande }]}>
+  <a href={enlace} class="video__marco" data-video={incrustar} data-titulo={titulo} aria-label={`Reproducir video: ${titulo}`}>
+    {
+      miniatura ? (
+        <Image src={miniatura} alt="" widths={[480, 800]} sizes={grande ? '(min-width: 1000px) 760px, 92vw' : '(min-width: 1000px) 380px, 92vw'} />
+      ) : tipo === 'youtube' ? (
+        <img src={miniaturaYoutube} alt="" width="480" height="360" loading="lazy" decoding="async" />
+      ) : (
+        <span class="video__sin-miniatura" aria-hidden="true">
+          <img src="/uwc.svg" alt="" width="120" height="27" />
+        </span>
+      )
+    }
+    <span class="video__play" aria-hidden="true"><Icono nombre="play" tam={grande ? 34 : 26} /></span>
+    <span class="video__fuente">{tipo === 'youtube' ? 'YouTube' : 'Facebook'}</span>
+  </a>
+  <figcaption>
+    <strong>{titulo}</strong>
+    {descripcion && <span>{descripcion}</span>}
+  </figcaption>
+</figure>
+
+<script>
+  document.querySelectorAll<HTMLAnchorElement>('[data-video]').forEach((enlace) => {
+    enlace.addEventListener('click', (e) => {
+      e.preventDefault();
+      const iframe = document.createElement('iframe');
+      iframe.src = enlace.dataset.video!;
+      iframe.title = enlace.dataset.titulo ?? 'Video';
+      iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share';
+      iframe.allowFullscreen = true;
+      const marco = document.createElement('div');
+      marco.className = 'video__marco video__marco--activo';
+      marco.appendChild(iframe);
+      enlace.replaceWith(marco);
+      iframe.focus();
+    });
+  });
+</script>
+
+<style>
+  .video { margin: 0; display: flex; flex-direction: column; gap: 0.9rem; }
+  .video :global(.video__marco) {
+    position: relative;
+    display: block;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--radio);
+    background: var(--azul-noche);
+    box-shadow: var(--sombra);
+  }
+  .video__marco img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease), opacity 0.3s; opacity: 0.88; }
+  .video__marco:hover img { transform: scale(1.04); opacity: 1; }
+  .video :global(.video__marco--activo iframe) { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .video__sin-miniatura { display: block; height: 100%; background: var(--degradado); }
+  .video__sin-miniatura img { position: absolute; top: 0.9rem; left: 0.9rem; width: 96px; height: auto; filter: brightness(0) invert(1); opacity: 0.9; transform: none !important; }
+  .video__play {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    margin: -34px 0 0 -34px;
+    border-radius: 50%;
+    background: var(--naranja);
+    color: var(--blanco);
+    box-shadow: 0 8px 24px rgb(0 0 0 / 0.35);
+    transition: transform 0.25s var(--ease), background-color 0.25s;
+  }
+  .video--grande .video__play { width: 88px; height: 88px; margin: -44px 0 0 -44px; }
+  .video__play :global(svg) { margin-left: 4px; fill: currentColor; }
+  .video__marco:hover .video__play { transform: scale(1.1); background: var(--naranja-hover); }
+  .video__fuente {
+    position: absolute;
+    left: 0.75rem;
+    bottom: 0.75rem;
+    padding: 0.2rem 0.6rem;
+    border-radius: 3px;
+    background: rgb(0 0 0 / 0.6);
+    color: var(--blanco);
+    font-size: 0.8rem;
+    font-weight: 600;
+  }
+  .video figcaption { display: grid; gap: 0.2rem; }
+  .video figcaption strong { font-size: 1.15rem; }
+  .video--grande figcaption strong { font-size: 1.4rem; }
+  .video figcaption span { font-size: 0.975rem; opacity: 0.8; }
+</style>

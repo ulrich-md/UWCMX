@@ -1,0 +1,37 @@
+[
+  {
+    "tipo": "youtube",
+    "id": "eaezzd2ZinQ",
+    "titulo": "¿Qué es UWC?",
+    "descripcion": "Una introducción animada a los Colegios del Mundo Unido (en inglés).",
+    "categoria": "UWC"
+  },
+  {
+    "tipo": "youtube",
+    "id": "NoCH7W5ksqc",
+    "titulo": "Video de la convocatoria",
+    "descripcion": "Así es la experiencia UWC, contada por UWC México.",
+    "categoria": "Convocatoria"
+  },
+  {
+    "tipo": "youtube",
+    "id": "bwTu19u6s0I",
+    "titulo": "Roberto Herrera",
+    "descripcion": "Testimonio de un becario de UWC México.",
+    "categoria": "Testimonio"
+  },
+  {
+    "tipo": "facebook",
+    "id": "925694278507677",
+    "titulo": "Fernanda Ortiz",
+    "descripcion": "Testimonio de una becaria de UWC México.",
+    "categoria": "Testimonio"
+  },
+  {
+    "tipo": "youtube",
+    "id": "4tc9UqgSQYc",
+    "titulo": "Testimonio de madre y padre",
+    "descripcion": "Una familia cuenta cómo vivió la experiencia UWC de su hija.",
+    "categoria": "Familias"
+  }
+]

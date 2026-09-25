@@ -7,6 +7,11 @@ import Icono from '../../components/Icono.astro';
 import testimonios from '../../data/testimonios.json';
 import sitio from '../../data/sitio.json';
 import { foto } from '../../lib/fotos';
+import Video from '../../components/Video.astro';
+import videos from '../../data/videos.json';
+
+type V = { tipo: 'youtube' | 'facebook'; id: string; titulo: string; descripcion: string; categoria: string };
+const testimoniosVideo = (videos as V[]).filter((v) => v.categoria !== 'UWC');
 ---
 
 <Base titulo="Comunidad" portada descripcion="La comunidad de graduados, becarios y afiliados de UWC México: historias, generaciones y red de graduados.">
@@ -36,6 +41,15 @@ import { foto } from '../../lib/fotos';
         }
       </div>
       <p class="comparte">¿Eres graduado? Comparte tu historia en <a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a>.</p>
+    </div>
+  </section>
+
+  <section class="seccion seccion--gris">
+    <div class="contenedor">
+      <div class="encabezado"><h2>Testimonios en video</h2></div>
+      <div class="videos">
+        {testimoniosVideo.map((v) => <Video {...v} />)}
+      </div>
     </div>
   </section>
 
@@ -69,6 +83,7 @@ import { foto } from '../../lib/fotos';
   .citas figcaption { display: grid; margin-top: auto; }
   .citas figcaption strong { color: var(--azul); }
   .citas figcaption span { font-size: 0.95rem; color: var(--texto-suave); }
+  .videos { display: grid; gap: 2rem; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); }
   .comparte { margin-top: 3rem; color: var(--texto-suave); }
   .franja { padding-block: clamp(5rem, 4rem + 5vw, 9rem); }
   .franja::before { background: linear-gradient(100deg, rgb(0 74 151 / 0.92), rgb(0 74 151 / 0.6) 60%, rgb(0 148 130 / 0.35)); }

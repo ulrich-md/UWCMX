@@ -1,0 +1,77 @@
+---
+// Redes sociales incrustadas: perfil de Instagram, página de Facebook y canal de YouTube.
+// Los iframes usan loading="lazy": no se descargan hasta que la persona llega a esta sección.
+import Icono from './Icono.astro';
+import Video from './Video.astro';
+import sitio from '../data/sitio.json';
+
+const facebookPlugin =
+  'https://www.facebook.com/plugins/page.php?href=' +
+  encodeURIComponent(sitio.redes.facebook) +
+  '&tabs=timeline&width=500&height=560&small_header=false&adapt_container_width=true&hide_cover=false&show_facepile=false';
+---
+
+<section class="seccion redes" aria-labelledby="t-redes">
+  <div class="contenedor">
+    <div class="redes__encabezado">
+      <h2 id="t-redes">Síguenos</h2>
+      <p class="texto-grande">Publicamos los avisos del proceso, historias de becarios y todo lo que pasa en la comunidad UWC México.</p>
+      <ul class="redes__enlaces">
+        <li><a href={sitio.redes.instagram} class="boton boton--contorno"><Icono nombre="instagram" tam={18} />@uwcmexico</a></li>
+        <li><a href={sitio.redes.facebook} class="boton boton--contorno"><Icono nombre="facebook" tam={18} />UWC México</a></li>
+        <li><a href={sitio.redes.youtube} class="boton boton--contorno"><Icono nombre="youtube" tam={18} />YouTube</a></li>
+      </ul>
+    </div>
+
+    <div class="redes__grid">
+      <div class="red">
+        <h3><Icono nombre="instagram" tam={20} />Instagram</h3>
+        <iframe
+          src="https://www.instagram.com/uwcmexico/embed/"
+          title="Publicaciones recientes de UWC México en Instagram"
+          loading="lazy"
+          scrolling="no"
+          class="red__iframe red__iframe--instagram"></iframe>
+      </div>
+      <div class="red">
+        <h3><Icono nombre="facebook" tam={20} />Facebook</h3>
+        <iframe
+          src={facebookPlugin}
+          title="Publicaciones recientes de UWC México en Facebook"
+          loading="lazy"
+          scrolling="no"
+          allow="encrypted-media; picture-in-picture; web-share"
+          class="red__iframe red__iframe--facebook"></iframe>
+      </div>
+      <div class="red">
+        <h3><Icono nombre="youtube" tam={20} />YouTube</h3>
+        <Video
+          tipo="youtube"
+          id="NoCH7W5ksqc"
+          titulo="Video de la convocatoria"
+          descripcion="Testimonios de becarios, familias y más en nuestro canal."
+        />
+        <a href={sitio.redes.youtube} class="boton boton--azul red__suscribir"><Icono nombre="youtube" tam={18} />Ver el canal</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .redes__encabezado { max-width: 760px; margin-bottom: 2.5rem; }
+  .redes__enlaces { display: flex; flex-wrap: wrap; gap: 0.75rem; list-style: none; margin: 1.5rem 0 0; padding: 0; }
+  .redes__grid { display: grid; gap: 2rem; }
+  @media (min-width: 760px) { .redes__grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .redes__grid { grid-template-columns: repeat(3, 1fr); } }
+  .red { display: flex; flex-direction: column; min-width: 0; }
+  .red h3 { display: flex; align-items: center; gap: 0.5rem; font-size: 1.2rem; color: var(--azul); margin-bottom: 1rem; }
+  .red__iframe {
+    width: 100%;
+    border: 1px solid var(--gris-linea);
+    border-radius: var(--radio);
+    background: var(--gris-fondo);
+  }
+  .red__iframe--instagram { height: 560px; }
+  .red__iframe--facebook { height: 560px; }
+  .red__suscribir { align-self: flex-start; margin-top: 1.5rem; }
+</style>

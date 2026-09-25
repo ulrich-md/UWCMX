@@ -6,11 +6,14 @@ import Icono from '../components/Icono.astro';
 import LineaTiempo from '../components/LineaTiempo.astro';
 import TarjetaAviso from '../components/TarjetaAviso.astro';
 import CarruselColegios from '../components/CarruselColegios.astro';
+import Video from '../components/Video.astro';
+import RedesSociales from '../components/RedesSociales.astro';
+import videos from '../data/videos.json';
 import sitio from '../data/sitio.json';
 import testimonios from '../data/testimonios.json';
 import { foto } from '../lib/fotos';
 
-const fotoHero = foto('hero-banderas-cielo.jpg');
+const fotoHero = foto('hero-inicio.jpg');
 
 const avisos = (await getCollection('avisos'))
   .filter((a) => a.data.generacion !== 'Comunidad')
@@ -21,6 +24,7 @@ const etapa = sitio.convocatoria.etapaActual;
 const nombreEtapa = sitio.etapas[etapa - 1]?.nombre;
 
 const testimonio = testimonios[0];
+const [videoPrincipal, ...otrosVideos] = videos as { tipo: 'youtube' | 'facebook'; id: string; titulo: string; descripcion: string }[];
 const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
 ---
 
@@ -34,7 +38,7 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
     <div class="fondo-foto__img">
       <Image
         src={fotoHero}
-        alt="Estudiantes UWC de decenas de países con las banderas de sus naciones bajo un cielo azul"
+        alt="Estudiantes de UWC Costa Rica de decenas de países con las banderas de sus naciones, entre ellas la de México"
         widths={[640, 1024, 1600, 2000]}
         sizes="100vw"
         loading="eager"
@@ -145,6 +149,24 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
     </div>
   </section>
 
+  <!-- ============ VIDEOS ============ -->
+  <section class="videos seccion" aria-labelledby="t-videos">
+    <div class="contenedor">
+      <div class="videos__encabezado">
+        <h2 id="t-videos">Conoce UWC en video</h2>
+        <p class="texto-grande">Becarios, familias y graduados cuentan cómo cambió su vida.</p>
+      </div>
+      <div class="videos__grid">
+        <div class="videos__principal">
+          <Video {...videoPrincipal} grande />
+        </div>
+        <div class="videos__lista">
+          {otrosVideos.map((v) => <Video {...v} />)}
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ TESTIMONIO (fondo con foto) ============ -->
   <section class="testimonio fondo-foto parallax" aria-label="Testimonio de un graduado">
     <div class="fondo-foto__img">
@@ -188,6 +210,8 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
       </div>
     </div>
   </section>
+
+  <RedesSociales />
 </Base>
 
 <style>
@@ -287,6 +311,16 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
 
   /* ---------- Colegios ---------- */
   .colegios__encabezado { max-width: 720px; margin-bottom: 2.5rem; }
+
+  /* ---------- Videos ---------- */
+  .videos { background: var(--azul-noche); color: var(--blanco); }
+  .videos h2 { color: var(--blanco); }
+  .videos .texto-grande { color: rgb(255 255 255 / 0.85); }
+  .videos__encabezado { max-width: 720px; margin-bottom: 2.5rem; }
+  .videos__grid { display: grid; gap: 2.5rem; }
+  @media (min-width: 1000px) { .videos__grid { grid-template-columns: 1.5fr 1fr; align-items: start; } }
+  .videos__lista { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
+  @media (min-width: 1000px) { .videos__lista { grid-template-columns: 1fr 1fr; } }
 
   /* ---------- Testimonio ---------- */
   .testimonio { padding-block: clamp(5rem, 4rem + 6vw, 10rem); text-align: center; }

@@ -1,5 +1,15 @@
 [
   {
+    "archivo": "hero-inicio.jpg",
+    "alt": "Estudiantes de UWC Costa Rica de decenas de países sostienen las banderas de sus naciones, entre ellas la de México, en el campus",
+    "uso": "hero",
+    "calidad": 5,
+    "ancho": 2000,
+    "alto": 1500,
+    "fuente": "Proporcionada por un estudiante de UWC Costa Rica",
+    "notas": "Confirmar permiso de uso con UWC Costa Rica"
+  },
+  {
     "archivo": "graduados.jpg",
     "alt": "Tres graduados de UWC México se abrazan sonrientes con sus bandas de graduación",
     "uso": "seccion",

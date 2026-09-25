@@ -6,6 +6,7 @@ import TarjetasSeccion from '../../components/TarjetasSeccion.astro';
 import CarruselColegios from '../../components/CarruselColegios.astro';
 import Icono from '../../components/Icono.astro';
 import { foto } from '../../lib/fotos';
+import Video from '../../components/Video.astro';
 
 const valores = [
   { titulo: 'Un movimiento global', texto: '18 colegios en cuatro continentes, cada uno con su carácter, dedicados a convertir la energía de los jóvenes en empatía y acción.' },
@@ -30,6 +31,16 @@ const valores = [
         “Hacer de la educación una fuerza para unir a las personas, las naciones y las culturas por la paz y un futuro sostenible.”
       </p>
       <p class="mision__autor">Misión de UWC</p>
+    </div>
+  </section>
+
+  <section class="seccion">
+    <div class="contenedor video-uwc">
+      <div>
+        <h2>¿Qué es UWC?</h2>
+        <p class="texto-grande">Cómo nació el movimiento, qué se vive en un colegio y por qué la diversidad está en el centro de todo.</p>
+      </div>
+      <Video tipo="youtube" id="eaezzd2ZinQ" titulo="What is UWC?" descripcion="Video de Pearson College UWC (en inglés)." grande />
     </div>
   </section>
 
@@ -95,6 +106,8 @@ const valores = [
     margin-bottom: 1rem;
   }
   .mision__autor { font-weight: 700; color: var(--verde-texto); letter-spacing: 0.04em; }
+  .video-uwc { display: grid; gap: 2.5rem; align-items: center; }
+  @media (min-width: 960px) { .video-uwc { grid-template-columns: 0.8fr 1.2fr; gap: 4rem; } }
   .valores { display: grid; gap: 3rem; }
   @media (min-width: 960px) { .valores { grid-template-columns: 0.9fr 1.1fr; gap: 5rem; } }
   .valores ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 2rem; }
