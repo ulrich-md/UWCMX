@@ -65,26 +65,5 @@ const organizacion = {
       <slot />
     </main>
     <Pie />
-
-    <script>
-      // Aparición suave de secciones al hacer scroll (se desactiva con "reducir movimiento").
-      const elementos = document.querySelectorAll('.revelar');
-      if ('IntersectionObserver' in window) {
-        const obs = new IntersectionObserver(
-          (entradas) => {
-            for (const e of entradas) {
-              if (e.isIntersecting) {
-                e.target.classList.add('visible');
-                obs.unobserve(e.target);
-              }
-            }
-          },
-          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
-        );
-        elementos.forEach((el) => obs.observe(el));
-      } else {
-        elementos.forEach((el) => el.classList.add('visible'));
-      }
-    </script>
   </body>
 </html>

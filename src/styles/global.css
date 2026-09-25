@@ -100,7 +100,7 @@ a:hover { color: var(--verde-texto); }
   min-height: 50px;
   padding: 0.8rem 1.6rem;
   border: 2px solid transparent;
-  border-radius: var(--radio);
+  border-radius: 12px;
   font: inherit;
   font-weight: 700;
   font-size: 1rem;
@@ -172,15 +172,15 @@ a:hover { color: var(--verde-texto); }
     .parallax img {
       position: absolute;
       left: 0;
-      top: -15%;
-      height: 130%;
+      top: -8%;
+      height: 116%;
       animation: parallax linear both;
       animation-timeline: view();
       animation-range: cover 0% cover 100%;
     }
     @keyframes parallax {
-      from { transform: translateY(-11%); }
-      to { transform: translateY(11%); }
+      from { transform: translateY(-6%); }
+      to { transform: translateY(6%); }
     }
   }
 }
@@ -277,18 +277,9 @@ a:hover { color: var(--verde-texto); }
 }
 .saltar:focus { top: 1rem; }
 
-/* ---------- Aparición al hacer scroll ---------- */
-
-.js .revelar {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.8s var(--ease), transform 0.8s var(--ease);
-  transition-delay: var(--retraso, 0ms);
-}
-.js .revelar.visible { opacity: 1; transform: none; }
+/* Sin animaciones de aparición: el contenido se ve de inmediato al hacer scroll. */
 
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after { animation: none !important; transition-duration: 0.01ms !important; }
-  .js .revelar { opacity: 1; transform: none; }
 }
