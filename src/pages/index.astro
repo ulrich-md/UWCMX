@@ -10,6 +10,7 @@ import Video from '../components/Video.astro';
 import RedesSociales from '../components/RedesSociales.astro';
 import videos from '../data/videos.json';
 import sitio from '../data/sitio.json';
+import testimonios from '../data/testimonios.json';
 import { foto } from '../lib/fotos';
 
 const fotoHero = foto('hero-inicio.jpg');
@@ -22,6 +23,7 @@ const generacionActual = sitio.convocatoria.generacion;
 const etapa = sitio.convocatoria.etapaActual;
 const nombreEtapa = sitio.etapas[etapa - 1]?.nombre;
 
+const testimonio = testimonios[0];
 const [videoPrincipal, ...otrosVideos] = videos as { tipo: 'youtube' | 'facebook'; id: string; titulo: string; descripcion: string }[];
 const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
 ---
@@ -43,7 +45,16 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
         fetchpriority="high"
       />
     </div>
+    <svg class="hero__aros" viewBox="0 0 600 400" aria-hidden="true" focusable="false">
+      <circle cx="200" cy="200" r="170" />
+      <circle cx="400" cy="200" r="170" />
+    </svg>
     <div class="contenedor hero__texto">
+      <a href="/avisos/" class="hero__estado">
+        <span class="hero__punto" aria-hidden="true"></span>
+        Proceso {generacionActual}{nombreEtapa && ` · Etapa ${etapa}: ${nombreEtapa}`}
+        <Icono nombre="flecha" tam={16} />
+      </a>
       <h1>Tu aventura educativa por el mundo empieza aquí</h1>
       <p class="hero__entrada">
         Estudia el Bachillerato Internacional en uno de los 18 Colegios del Mundo Unido. Te seleccionamos por tu mérito, no por tu
@@ -53,6 +64,12 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
         <a href="/aplica/" class="boton boton--blanco">Cómo aplicar</a>
         <a href="/descubre/" class="boton boton--blanco">Descubre UWC</a>
       </div>
+      <ul class="hero__datos">
+        <li><strong>18</strong> colegios</li>
+        <li><strong>4</strong> continentes</li>
+        <li><strong>150+</strong> países</li>
+        <li><strong>Desde 1977</strong> en México</li>
+      </ul>
     </div>
   </section>
 
@@ -98,21 +115,14 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
           aportar, para que el dinero nunca sea la razón por la que alguien no vaya.
         </p>
       </div>
-      <ul class="cifras">
-        {
-          sitio.cifras.map((c) => (
-            <li>
-              <strong>{c.valor}</strong>
-              <span>{c.etiqueta}</span>
-            </li>
-          ))
-        }
-      </ul>
     </div>
   </section>
 
-  <!-- ============ PROCESO ============ -->
-  <section class="proceso seccion--azul" aria-labelledby="t-proceso">
+  <!-- ============ PROCESO (fondo con foto) ============ -->
+  <section class="proceso fondo-foto parallax" aria-labelledby="t-proceso">
+    <div class="fondo-foto__img">
+      <Image src={foto('pasaportes.jpg')} alt="" widths={[800, 1400, 2000]} sizes="100vw" />
+    </div>
     <div class="contenedor">
       <div class="proceso__encabezado">
         <div>
@@ -124,6 +134,22 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
         </div>
       </div>
       <LineaTiempo claro />
+    </div>
+  </section>
+
+  <!-- ============ CIFRAS ============ -->
+  <section class="cifras seccion--gris" aria-label="UWC en cifras">
+    <div class="contenedor">
+      <ul class="cifras__lista">
+        {
+          sitio.cifras.map((c) => (
+            <li>
+              <strong>{c.valor}</strong>
+              <span>{c.etiqueta}</span>
+            </li>
+          ))
+        }
+      </ul>
     </div>
   </section>
 
@@ -153,6 +179,25 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
           {otrosVideos.map((v) => <Video {...v} />)}
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIO (fondo con foto) ============ -->
+  <section class="testimonio fondo-foto parallax" aria-label="Testimonio de un graduado">
+    <div class="fondo-foto__img">
+      <Image src={foto('hero-amistad-uwc.jpg')} alt="" widths={[800, 1400]} sizes="100vw" />
+    </div>
+    <div class="contenedor">
+      <figure>
+        <blockquote>
+          <p>“{testimonio.cita}”</p>
+        </blockquote>
+        <figcaption>
+          <strong>{testimonio.nombre}</strong>
+          <span>{testimonio.colegio}</span>
+        </figcaption>
+      </figure>
+      <a href="/comunidad/" class="enlace enlace--blanco">Más historias de nuestra comunidad <Icono nombre="flecha" tam={18} /></a>
     </div>
   </section>
 
@@ -207,6 +252,52 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
   }
   .hero__foto img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 50%; }
   .hero__texto { position: relative; z-index: 1; }
+  .hero__aros {
+    position: absolute;
+    left: -8%;
+    bottom: -18%;
+    width: min(62vw, 820px);
+    fill: none;
+    stroke: rgb(255 255 255 / 0.07);
+    stroke-width: 26;
+    pointer-events: none;
+  }
+  .hero__estado {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.55rem;
+    margin-bottom: 1.5rem;
+    padding: 0.45rem 0.95rem;
+    border-radius: 999px;
+    background: rgb(255 255 255 / 0.12);
+    border: 1px solid rgb(255 255 255 / 0.25);
+    color: var(--blanco);
+    font-size: 0.925rem;
+    font-weight: 600;
+    text-decoration: none;
+    backdrop-filter: blur(6px);
+    transition: background-color 0.2s;
+  }
+  .hero__estado:hover { background: rgb(255 255 255 / 0.22); color: var(--blanco); }
+  .hero__punto { width: 9px; height: 9px; border-radius: 50%; background: #ffb400; animation: latido-hero 2s infinite; }
+  @keyframes latido-hero {
+    0% { box-shadow: 0 0 0 0 rgb(255 180 0 / 0.7); }
+    70% { box-shadow: 0 0 0 9px rgb(255 180 0 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(255 180 0 / 0); }
+  }
+  .hero__datos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem 1.75rem;
+    list-style: none;
+    margin: 2.25rem 0 0;
+    padding: 1.25rem 0 0;
+    border-top: 1px solid rgb(255 255 255 / 0.22);
+    max-width: 30rem;
+    color: rgb(255 255 255 / 0.85);
+    font-size: 0.975rem;
+  }
+  .hero__datos strong { display: block; font-size: 1.5rem; line-height: 1.1; color: var(--blanco); }
   .hero h1 { max-width: 11ch; margin-bottom: 0.45em; color: var(--blanco); }
   .hero__entrada { max-width: 34ch; font-size: clamp(1.1rem, 1rem + 0.5vw, 1.35rem); line-height: 1.5; color: rgb(255 255 255 / 0.92); margin-bottom: 2rem; }
   .hero .boton--blanco { border-color: var(--azul); }
@@ -224,6 +315,9 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
       mask-image: linear-gradient(180deg, #000 60%, transparent 100%);
     }
     .hero__texto { margin-top: -2.5rem; }
+    .hero__aros { display: none; }
+    .hero__datos { gap: 0.75rem 1.25rem; margin-top: 1.75rem; }
+    .hero__datos strong { font-size: 1.25rem; }
     .hero h1 { max-width: 14ch; }
     .hero .botones { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
     .hero .boton { padding-inline: 0.75rem; }
@@ -289,6 +383,7 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
 
   /* ---------- Proceso ---------- */
   .proceso { padding-block: clamp(4.5rem, 3rem + 5vw, 8rem); }
+  .proceso::before { background: linear-gradient(180deg, rgb(0 58 120 / 0.9), rgb(10 31 61 / 0.92)); }
   .proceso__encabezado {
     display: flex;
     flex-wrap: wrap;
@@ -299,11 +394,12 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
   }
   .proceso__encabezado p { margin: 0; font-size: 1.2rem; color: rgb(255 255 255 / 0.85); }
 
-  /* ---------- Cifras (dentro de "Qué es") ---------- */
-  .cifras { grid-column: 1 / -1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 1.5rem; list-style: none; margin: 1rem 0 0; padding: 2rem 0 0; border-top: 1px solid var(--gris-linea); }
-  @media (min-width: 900px) { .cifras { grid-template-columns: repeat(4, 1fr); } }
-  .cifras strong { display: block; font-size: clamp(2.2rem, 1.8rem + 1.6vw, 3.2rem); line-height: 1; color: var(--azul); margin-bottom: 0.4rem; }
-  .cifras span { color: var(--texto-suave); font-size: 0.975rem; }
+  /* ---------- Cifras ---------- */
+  .cifras { padding-block: 4.5rem; }
+  .cifras__lista { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2.5rem 1.5rem; list-style: none; margin: 0; padding: 0; text-align: center; }
+  @media (min-width: 900px) { .cifras__lista { grid-template-columns: repeat(4, 1fr); } }
+  .cifras strong { display: block; font-size: clamp(2.6rem, 2rem + 2.5vw, 4rem); line-height: 1; color: var(--azul); margin-bottom: 0.6rem; }
+  .cifras span { color: var(--texto-suave); }
 
   /* ---------- Colegios ---------- */
   .colegios__encabezado { max-width: 720px; margin-bottom: 2.5rem; }
@@ -317,6 +413,22 @@ const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
   @media (min-width: 1000px) { .videos__grid { grid-template-columns: 1.5fr 1fr; align-items: start; } }
   .videos__lista { display: grid; gap: 1.75rem; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
   @media (min-width: 1000px) { .videos__lista { grid-template-columns: 1fr 1fr; } }
+
+  /* ---------- Testimonio ---------- */
+  .testimonio { padding-block: clamp(5rem, 4rem + 6vw, 10rem); text-align: center; }
+  .testimonio::before { background: rgb(10 31 61 / 0.72); }
+  .testimonio figure { max-width: 900px; margin: 0 auto 2rem; }
+  .testimonio blockquote { margin: 0; }
+  .testimonio blockquote p {
+    font-family: var(--font-cita);
+    font-style: italic;
+    font-size: clamp(1.4rem, 1.1rem + 1.4vw, 2.3rem);
+    line-height: 1.35;
+  }
+  .testimonio figcaption { display: grid; gap: 0.2rem; }
+  .testimonio figcaption span { color: rgb(255 255 255 / 0.8); }
+  .enlace--blanco { color: var(--blanco); }
+  .enlace--blanco:hover { color: #9fe3d8; }
 
   /* ---------- Donar ---------- */
   .donar { display: grid; background: var(--gris-fondo); }
