@@ -1,0 +1,194 @@
+---
+import Logo from './Logo.astro';
+import Icono from './Icono.astro';
+import sitio from '../data/sitio.json';
+
+const columnas = [
+  {
+    titulo: 'Aplica',
+    enlaces: [
+      { texto: 'Cómo aplicar', href: '/aplica/' },
+      { texto: 'Requisitos', href: '/aplica/#requisitos' },
+      { texto: 'Proceso de selección', href: '/aplica/#proceso' },
+      { texto: 'Becas y aportaciones', href: '/aplica/#costos' },
+      { texto: 'Avisos del proceso', href: '/avisos/' },
+    ],
+  },
+  {
+    titulo: 'Apoya',
+    enlaces: [
+      { texto: 'Dona', href: '/apoya/#donar' },
+      { texto: 'Afíliate', href: '/apoya/#afiliate' },
+      { texto: 'Dona desde EE. UU.', href: '/apoya/#extranjero' },
+      { texto: 'Transparencia', href: '/nosotros/#transparencia' },
+    ],
+  },
+  {
+    titulo: 'UWC México',
+    enlaces: [
+      { texto: 'Descubre UWC', href: '/descubre/' },
+      { texto: 'Nosotros', href: '/nosotros/' },
+      { texto: 'Comunidad', href: '/comunidad/' },
+      { texto: 'Contacto', href: '/nosotros/#contacto' },
+    ],
+  },
+];
+---
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie__arriba">
+      <div class="pie__marca">
+        <a href="/" class="pie__logo"><Logo claro /></a>
+        <p>
+          Asociación Mexicana pro Colegios del Mundo Unido, A.C. Desde 1977 seleccionamos a jóvenes mexicanos por su mérito
+          y potencial para estudiar en un Colegio del Mundo Unido.
+        </p>
+        <ul class="pie__redes" aria-label="Redes sociales">
+          <li><a href={sitio.redes.instagram} aria-label="Instagram"><Icono nombre="instagram" tam={22} /></a></li>
+          <li><a href={sitio.redes.facebook} aria-label="Facebook"><Icono nombre="facebook" tam={22} /></a></li>
+          <li><a href={sitio.redes.youtube} aria-label="YouTube"><Icono nombre="youtube" tam={22} /></a></li>
+        </ul>
+      </div>
+
+      {
+        columnas.map((col) => (
+          <nav class="pie__columna" aria-label={col.titulo}>
+            <h2>{col.titulo}</h2>
+            <ul>
+              {col.enlaces.map((e) => (
+                <li>
+                  <a href={e.href}>{e.texto}</a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+        ))
+      }
+
+      <div class="pie__columna">
+        <h2>Contacto</h2>
+        <ul class="pie__contacto">
+          <li><Icono nombre="correo" tam={18} /><a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a></li>
+          <li><Icono nombre="reloj" tam={18} /><span>{sitio.contacto.horario}</span></li>
+          <li><Icono nombre="ubicacion" tam={18} /><span>{sitio.contacto.direccion}</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="pie__abajo">
+      <p>© {new Date().getFullYear()} UWC México · Donataria autorizada</p>
+      <ul>
+        <li><a href="/nosotros/#transparencia">Aviso de privacidad</a></li>
+        <li><a href="/nosotros/#transparencia">Protección de participantes</a></li>
+        <li><a href="https://www.uwc.org/" rel="noopener">UWC International</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<style>
+  .pie {
+    position: relative;
+    overflow: hidden;
+    background: var(--azul-profundo);
+    color: rgb(255 255 255 / 0.78);
+    padding-block: var(--space-6) var(--space-3);
+    font-size: var(--text-sm);
+  }
+  .pie::before {
+    content: '';
+    position: absolute;
+    width: 560px;
+    height: 560px;
+    right: -180px;
+    top: -260px;
+    border-radius: 50%;
+    border: 70px solid rgb(0 148 130 / 0.12);
+    pointer-events: none;
+  }
+  .pie a {
+    color: var(--blanco);
+    text-decoration: none;
+  }
+  .pie a:hover {
+    color: var(--sol);
+    text-decoration: underline;
+  }
+  .pie__arriba {
+    position: relative;
+    display: grid;
+    gap: var(--space-5) var(--space-4);
+    grid-template-columns: 1fr;
+  }
+  @media (min-width: 720px) {
+    .pie__arriba { grid-template-columns: repeat(2, 1fr); }
+    .pie__marca { grid-column: 1 / -1; }
+  }
+  @media (min-width: 1100px) {
+    .pie__arriba { grid-template-columns: 1.6fr repeat(4, 1fr); }
+    .pie__marca { grid-column: auto; }
+  }
+  .pie__logo { display: inline-flex; margin-bottom: var(--space-3); }
+  .pie__marca p { max-width: 38ch; }
+  .pie h2 {
+    font-family: var(--font-sans);
+    font-size: 0.8125rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: #7fd6c9;
+    margin-bottom: var(--space-2);
+  }
+  .pie ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  .pie__redes {
+    display: flex !important;
+    gap: 0.6rem !important;
+    margin-top: var(--space-3) !important;
+  }
+  .pie__redes a {
+    display: grid;
+    place-items: center;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    border: 1px solid rgb(255 255 255 / 0.25);
+    transition: background-color 0.2s var(--ease), border-color 0.2s var(--ease);
+  }
+  .pie__redes a:hover {
+    background: var(--verde);
+    border-color: var(--verde);
+    color: var(--blanco);
+  }
+  .pie__contacto li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+  .pie__contacto svg {
+    flex-shrink: 0;
+    margin-top: 3px;
+    color: #7fd6c9;
+  }
+  .pie__abajo {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: var(--space-2);
+    margin-top: var(--space-6);
+    padding-top: var(--space-3);
+    border-top: 1px solid rgb(255 255 255 / 0.14);
+  }
+  .pie__abajo p { margin: 0; }
+  .pie__abajo ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+  }
+</style>

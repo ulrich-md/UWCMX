@@ -1,0 +1,60 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+import CabeceraPagina from '../../components/CabeceraPagina.astro';
+import TarjetaAviso from '../../components/TarjetaAviso.astro';
+
+const avisos = (await getCollection('avisos')).sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf());
+
+// Agrupar por generación para que cada proceso quede archivado por separado.
+const porGeneracion = Object.entries(
+  avisos.reduce<Record<string, typeof avisos>>((acc, a) => {
+    (acc[a.data.generacion] ??= []).push(a);
+    return acc;
+  }, {}),
+).sort(([a], [b]) => b.localeCompare(a));
+---
+
+<Base titulo="Avisos del proceso" descripcion="Avisos oficiales del proceso de selección de UWC México: resultados, fechas e indicaciones de cada etapa.">
+  <CabeceraPagina
+    antetitulo="Avisos del proceso"
+    titulo="Todo lo que publicamos, en un solo lugar"
+    entrada="Aquí publicamos los resultados, las fechas y las indicaciones de cada etapa del proceso de selección. Revísalos con frecuencia: no enviamos avisos individuales hasta la etapa final."
+  />
+
+  {
+    porGeneracion.map(([generacion, lista]) => (
+      <section class="seccion seccion--blanca generacion" aria-labelledby={`g-${generacion}`}>
+        <div class="contenedor">
+          <h2 id={`g-${generacion}`} class="generacion__titulo">
+            Generación {generacion}
+            <span>{lista.length} avisos</span>
+          </h2>
+          <div class="grid grid--3">
+            {lista.map((a) => <TarjetaAviso aviso={a} />)}
+          </div>
+        </div>
+      </section>
+    ))
+  }
+</Base>
+
+<style>
+  .generacion { padding-top: var(--space-5); }
+  .generacion__titulo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 0.5rem 1rem;
+    font-size: var(--text-xl);
+    padding-bottom: var(--space-2);
+    margin-bottom: var(--space-4);
+    border-bottom: 1px solid var(--linea);
+  }
+  .generacion__titulo span {
+    font-family: var(--font-sans);
+    font-size: var(--text-sm);
+    font-weight: 600;
+    color: var(--tinta-suave);
+  }
+</style>

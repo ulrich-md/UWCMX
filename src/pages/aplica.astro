@@ -1,0 +1,408 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import LineaTiempo from '../components/LineaTiempo.astro';
+import Icono from '../components/Icono.astro';
+import sitio from '../data/sitio.json';
+import preguntas from '../data/preguntas.json';
+
+import fotoCampus from '../assets/fotos/campus-atlantic.jpg';
+import fotoActividades from '../assets/fotos/actividades.jpg';
+
+const { estado, generacion, enlaceRegistro } = sitio.convocatoria;
+
+const requisitos = [
+  { titulo: 'Edad', texto: 'Haber nacido entre el 1 de enero de 2009 y el 31 de diciembre de 2011.' },
+  { titulo: 'Grado escolar', texto: 'Cursar tercero de secundaria o primero de preparatoria en el ciclo escolar 2026–2027.' },
+  { titulo: 'Promedio', texto: 'Mínimo 8.5 en cada uno de los dos años previos (o en el certificado de secundaria y el primer semestre de preparatoria).' },
+  { titulo: 'Nacionalidad', texto: 'Ser mexicano. Si eres extranjero y vives en México puedes participar, pero la beca solo puede otorgarse a jóvenes mexicanos.' },
+];
+
+const perfil = [
+  'Alto desempeño académico',
+  'Curiosidad intelectual y ganas de aprender',
+  'Habilidad para comunicarte y convivir',
+  'Resiliencia, responsabilidad e integridad',
+  'Capacidad de autoevaluación',
+  'Trabajo en equipo y liderazgo',
+  'Motivación genuina por ir a un UWC',
+];
+---
+
+<Base
+  titulo="Aplica"
+  descripcion="Requisitos, etapas, becas y preguntas frecuentes del proceso de selección de UWC México para estudiar en un Colegio del Mundo Unido."
+>
+  <CabeceraPagina
+    antetitulo={`Proceso de selección ${generacion}`}
+    titulo="Aplica a un Colegio del Mundo Unido"
+    entrada="Cada año seleccionamos a jóvenes mexicanos para estudiar dos años en uno de los 18 colegios UWC. Te elegimos por tu mérito y tu potencial. Si te seleccionan, recibes una beca según lo que tu familia puede aportar."
+    imagen={fotoCampus}
+    alt="Estudiantes caminando frente al castillo de UWC Atlantic, en Gales"
+  >
+    <div class="estado" data-estado={estado}>
+      <Icono nombre={estado === 'abierta' ? 'calendario' : 'reloj'} tam={22} />
+      <div>
+        {
+          estado === 'abierta' && (
+            <>
+              <strong>La convocatoria está abierta.</strong>
+              <span>El registro cierra el 12 de julio a las 23:59 h.</span>
+            </>
+          )
+        }
+        {
+          estado === 'en-proceso' && (
+            <>
+              <strong>El registro {generacion} ya cerró.</strong>
+              <span>El proceso sigue en curso. La próxima convocatoria abre entre abril y mayo.</span>
+            </>
+          )
+        }
+        {
+          estado === 'cerrada' && (
+            <>
+              <strong>La convocatoria está cerrada.</strong>
+              <span>Abre cada año entre abril y mayo.</span>
+            </>
+          )
+        }
+      </div>
+    </div>
+    <div class="botones">
+      {
+        estado === 'abierta' ? (
+          <a href={enlaceRegistro} class="boton boton--primario">Regístrate <Icono nombre="flecha" tam={18} /></a>
+        ) : (
+          <a href="/avisos/" class="boton boton--primario">Ver avisos del proceso <Icono nombre="flecha" tam={18} /></a>
+        )
+      }
+      <a href="#requisitos" class="boton boton--contorno">¿Puedo aplicar?</a>
+    </div>
+  </CabeceraPagina>
+
+  <nav class="indice" aria-label="En esta página">
+    <div class="contenedor">
+      <ul>
+        <li><a href="#requisitos">Requisitos</a></li>
+        <li><a href="#perfil">Qué buscamos</a></li>
+        <li><a href="#proceso">Etapas</a></li>
+        <li><a href="#costos">Becas y costos</a></li>
+        <li><a href="#familias">Para familias</a></li>
+        <li><a href="#rutas">Otras vías</a></li>
+        <li><a href="#preguntas">Preguntas</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Requisitos -->
+  <section id="requisitos" class="seccion seccion--blanca">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">¿Puedo aplicar?</p>
+        <h2>Requisitos para la generación {generacion}</h2>
+        <p class="entrada">Debes cumplir todos. No se hacen excepciones, así que revísalos con calma antes de registrarte.</p>
+      </div>
+      <ol class="requisitos">
+        {
+          requisitos.map((r, i) => (
+            <li class="tarjeta revelar" style={`--retraso:${i * 80}ms`}>
+              <span class="requisitos__num">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{r.titulo}</h3>
+              <p>{r.texto}</p>
+            </li>
+          ))
+        }
+      </ol>
+      <div class="nota">
+        <strong>Documentos que vas a necesitar:</strong> acta de nacimiento, boletas oficiales de la SEP, una foto reciente con fondo
+        blanco y un correo personal. Todo en PDF de máximo 1 MB. El registro toma unos 30 minutos desde una computadora.
+      </div>
+    </div>
+  </section>
+
+  <!-- Perfil -->
+  <section id="perfil" class="seccion">
+    <div class="contenedor perfil">
+      <div class="perfil__foto revelar">
+        <Image src={fotoActividades} alt="Grupo de aspirantes de UWC México en las actividades grupales del proceso de selección" widths={[480, 600]} sizes="(min-width: 1000px) 480px, 92vw" />
+      </div>
+      <div>
+        <p class="antetitulo">Qué buscamos</p>
+        <h2>Jóvenes que quieren cambiar su comunidad</h2>
+        <p class="entrada">
+          Sin importar tu género, creencias o situación económica. Buscamos mérito y potencial para desarrollar:
+        </p>
+        <ul class="lista-check">
+          {perfil.map((p) => <li><Icono nombre="check" tam={18} />{p}</li>)}
+        </ul>
+        <p>
+          Quienes van a un colegio adquieren un compromiso moral: volver a contribuir a México y a su comunidad con lo que
+          aprendieron.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proceso -->
+  <section id="proceso" class="seccion seccion--blanca">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">Etapas</p>
+        <h2>El proceso, paso a paso</h2>
+        <p class="entrada">Dura de seis a ocho meses. En cada etapa publicamos los resultados en la sección de avisos.</p>
+      </div>
+      <LineaTiempo />
+    </div>
+  </section>
+
+  <!-- Costos -->
+  <section id="costos" class="seccion">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">Becas y costos</p>
+        <h2>El dinero no debe ser una barrera</h2>
+        <p class="entrada">
+          Un año en un colegio UWC cuesta en promedio 40,000 dólares. Cada familia aporta según sus posibilidades y UWC México y el
+          colegio cubren el resto.
+        </p>
+      </div>
+      <div class="grid grid--3">
+        <div class="tarjeta revelar">
+          <span class="icono-circulo icono-circulo--verde"><Icono nombre="check" /></span>
+          <h3>Lo que cubre la beca</h3>
+          <p>Colegiatura, alojamiento, alimentación, libros y algunos costos menores durante los dos años.</p>
+        </div>
+        <div class="tarjeta revelar" style="--retraso:80ms">
+          <span class="icono-circulo icono-circulo--rosa"><Icono nombre="mundo" /></span>
+          <h3>Lo que no cubre</h3>
+          <p>El transporte de México al colegio, los gastos personales y, en algunos colegios, seguro médico o depósito reembolsable.</p>
+        </div>
+        <div class="tarjeta revelar" style="--retraso:160ms">
+          <span class="icono-circulo"><Icono nombre="personas" /></span>
+          <h3>Aportación familiar</h3>
+          <p>
+            Es obligatoria y se define con cada familia finalista. Se espera que sea al menos lo que ya invierten hoy en la educación
+            de su hija o hijo.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Familias -->
+  <section id="familias" class="seccion seccion--oscura">
+    <div class="contenedor familias">
+      <div>
+        <p class="antetitulo">Para mamás, papás y tutores</p>
+        <h2>Acompañar a tu hija o hijo en esta decisión</h2>
+        <p class="entrada">
+          Sabemos que mandar a tu hija o hijo a estudiar lejos genera muchas preguntas. Por eso las familias participan en todo el
+          proceso.
+        </p>
+      </div>
+      <ul class="familias__lista">
+        <li><Icono nombre="calendario" /><span>Juntas informativas antes del examen y durante las actividades grupales.</span></li>
+        <li><Icono nombre="documento" /><span>El formulario socioeconómico lo revisan graduados que no participan en la selección.</span></li>
+        <li><Icono nombre="escudo" /><span>Contamos con una política de protección de participantes y un correo para quejas.</span></li>
+        <li><Icono nombre="personas" /><span>Una comunidad de graduados y familias que ya vivieron la experiencia.</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Rutas -->
+  <section id="rutas" class="seccion seccion--blanca">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">Otras vías</p>
+        <h2>Dos maneras de llegar a un colegio UWC</h2>
+        <p class="entrada">Solo puedes usar una por año. Participar en ambas descalifica de las dos.</p>
+      </div>
+      <div class="grid grid--2">
+        <div class="tarjeta ruta ruta--destacada revelar">
+          <p class="ruta__etiqueta">Recomendada para la mayoría</p>
+          <h3>UWC México (comité nacional)</h3>
+          <p>Beca según la necesidad económica de tu familia. Proceso en español, de abril a diciembre.</p>
+          <a href="#requisitos" class="enlace-flecha">Revisa los requisitos <Icono nombre="flecha" tam={18} /></a>
+        </div>
+        <div class="tarjeta ruta revelar" style="--retraso:80ms">
+          <p class="ruta__etiqueta">Pago de colegiatura completa</p>
+          <h3>Programa de Selección Global (GSP)</h3>
+          <p>Para quien puede pagar la colegiatura completa y quiere aplicar a un colegio específico. Proceso en inglés.</p>
+          <a href="https://www.uwc.org/" class="enlace-flecha" rel="noopener">Más información en uwc.org <Icono nombre="externo" tam={16} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Preguntas -->
+  <section id="preguntas" class="seccion">
+    <div class="contenedor preguntas">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">Preguntas frecuentes</p>
+        <h2>Lo que más nos preguntan</h2>
+        <p class="entrada">¿No encuentras tu respuesta? Escríbenos a <a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a>.</p>
+      </div>
+      <div class="acordeon">
+        {
+          preguntas.map((p) => (
+            <details>
+              <summary>
+                {p.pregunta}
+                <Icono nombre="abajo" tam={20} />
+              </summary>
+              <p>{p.respuesta}</p>
+            </details>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .estado {
+    display: flex;
+    gap: 0.8rem;
+    align-items: flex-start;
+    max-width: 520px;
+    padding: 1rem 1.2rem;
+    margin-bottom: var(--space-3);
+    border-radius: var(--radio-sm);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-left: 4px solid var(--sol);
+  }
+  .estado[data-estado='abierta'] { border-left-color: var(--verde); }
+  .estado svg { flex-shrink: 0; color: var(--azul); margin-top: 2px; }
+  .estado div { display: grid; }
+  .estado span { color: var(--tinta-suave); font-size: var(--text-sm); }
+
+  .indice {
+    position: sticky;
+    top: 76px;
+    z-index: 20;
+    background: var(--blanco);
+    border-block: 1px solid var(--linea);
+  }
+  .indice ul {
+    display: flex;
+    gap: 0.25rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.4rem 0;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+  .indice a {
+    display: block;
+    padding: 0.55rem 0.9rem;
+    border-radius: 999px;
+    white-space: nowrap;
+    font-weight: 600;
+    font-size: var(--text-sm);
+    color: var(--tinta);
+    text-decoration: none;
+  }
+  .indice a:hover { background: var(--azul-claro); color: var(--azul); }
+
+  .requisitos {
+    list-style: none;
+    margin: 0 0 var(--space-3);
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  @media (min-width: 720px) { .requisitos { grid-template-columns: repeat(2, 1fr); } }
+  @media (min-width: 1100px) { .requisitos { grid-template-columns: repeat(4, 1fr); } }
+  .requisitos__num {
+    font-family: var(--font-serif);
+    font-size: 2.2rem;
+    font-weight: 700;
+    color: var(--verde);
+    line-height: 1;
+    margin-bottom: 0.5rem;
+  }
+
+  .perfil {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 1000px) { .perfil { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-6); } }
+  .perfil__foto { border-radius: 120px var(--radio) var(--radio) var(--radio); overflow: hidden; box-shadow: var(--sombra-alta); aspect-ratio: 4/3; }
+  .perfil__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .lista-check {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-3) 0;
+    display: grid;
+    gap: 0.6rem;
+  }
+  @media (min-width: 600px) { .lista-check { grid-template-columns: 1fr 1fr; } }
+  .lista-check li { display: flex; gap: 0.6rem; align-items: flex-start; font-weight: 600; }
+  .lista-check svg { flex-shrink: 0; margin-top: 3px; color: var(--verde-texto); }
+
+  .familias {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  @media (min-width: 1000px) { .familias { grid-template-columns: 1fr 1fr; gap: var(--space-6); } }
+  .familias__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .familias__lista li {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radio-sm);
+    background: rgb(255 255 255 / 0.06);
+    border: 1px solid rgb(255 255 255 / 0.12);
+  }
+  .familias__lista svg { flex-shrink: 0; color: var(--sol); margin-top: 2px; }
+
+  .ruta { gap: 0.6rem; }
+  .ruta__etiqueta {
+    font-size: 0.8125rem !important;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+  .ruta--destacada { border: 2px solid var(--azul); }
+  .ruta--destacada .ruta__etiqueta { color: var(--azul) !important; }
+  .ruta .enlace-flecha { margin-top: auto; padding-top: var(--space-2); }
+
+  .preguntas { max-width: 880px; }
+  .acordeon { display: grid; gap: 0.75rem; }
+  .acordeon details {
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
+    transition: box-shadow 0.25s var(--ease);
+  }
+  .acordeon details[open] { box-shadow: var(--sombra); }
+  .acordeon summary {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-2);
+    min-height: 56px;
+    padding: 1rem 1.25rem;
+    font-weight: 700;
+    font-size: 1.0625rem;
+    cursor: pointer;
+    list-style: none;
+  }
+  .acordeon summary::-webkit-details-marker { display: none; }
+  .acordeon summary svg { flex-shrink: 0; color: var(--azul); transition: transform 0.25s var(--ease); }
+  .acordeon details[open] summary svg { transform: rotate(180deg); }
+  .acordeon details p { padding: 0 1.25rem 1.25rem; margin: 0; color: var(--tinta-suave); }
+</style>

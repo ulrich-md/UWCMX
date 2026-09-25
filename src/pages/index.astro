@@ -1,0 +1,636 @@
+---
+import { Image } from 'astro:assets';
+import { getCollection } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+import LineaTiempo from '../components/LineaTiempo.astro';
+import TarjetaAviso from '../components/TarjetaAviso.astro';
+import sitio from '../data/sitio.json';
+
+import fotoHero from '../assets/fotos/graduados.jpg';
+import fotoPasaportes from '../assets/fotos/pasaportes.jpg';
+import fotoBanderas from '../assets/fotos/banderas.jpg';
+import fotoMauricio from '../assets/fotos/mauricio.jpg';
+
+const avisos = (await getCollection('avisos')).sort((a, b) => b.data.fecha.valueOf() - a.data.fecha.valueOf()).slice(0, 3);
+
+const perfiles = [
+  {
+    icono: 'birrete',
+    titulo: 'Soy estudiante',
+    texto: 'Descubre si puedes aplicar, qué se evalúa y cómo es cada etapa.',
+    href: '/aplica/',
+    color: '',
+  },
+  {
+    icono: 'personas',
+    titulo: 'Soy mamá, papá o tutor',
+    texto: 'Costos, becas, seguridad y cómo acompañar a tu hija o hijo.',
+    href: '/aplica/#familias',
+    color: 'verde',
+  },
+  {
+    icono: 'corazon',
+    titulo: 'Quiero donar',
+    texto: 'Tu donativo es deducible y se convierte en becas para jóvenes mexicanos.',
+    href: '/apoya/',
+    color: 'rosa',
+  },
+  {
+    icono: 'estrella',
+    titulo: 'Soy graduado UWC',
+    texto: 'Afíliate, actualiza tus datos y vuelve a ser parte de la selección.',
+    href: '/comunidad/',
+    color: 'verde',
+  },
+] as const;
+
+const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
+const avance = Math.min(100, Math.round((afiliados / meta) * 100));
+---
+
+<Base
+  titulo="Inicio"
+  descripcion="UWC México selecciona a jóvenes mexicanos por su mérito y potencial para estudiar el Bachillerato Internacional en uno de los 18 Colegios del Mundo Unido, con becas según la necesidad de cada familia."
+>
+  <!-- ============ HERO ============ -->
+  <section class="hero">
+    <div class="contenedor hero__grid">
+      <div class="hero__texto">
+        <p class="antetitulo">Colegios del Mundo Unido · desde 1977</p>
+        <h1>Dos años que te abren <em>el mundo</em>.</h1>
+        <p class="entrada">
+          Seleccionamos a jóvenes mexicanos por su mérito y su potencial —no por su situación económica— para que estudien el
+          Bachillerato Internacional en uno de los 18 Colegios del Mundo Unido, junto a estudiantes de más de 150 países.
+        </p>
+        <div class="botones">
+          <a href="/aplica/" class="boton boton--primario">Conoce cómo aplicar <Icono nombre="flecha" tam={18} /></a>
+          <a href="/apoya/#donar" class="boton boton--contorno">Dona una beca</a>
+        </div>
+      </div>
+
+      <div class="hero__visual">
+        <div class="hero__aros" aria-hidden="true"></div>
+        <div class="hero__foto">
+          <Image
+            src={fotoHero}
+            alt="Tres becarios de UWC México sonriendo y abrazados el día de su graduación"
+            widths={[480, 720, 960]}
+            sizes="(min-width: 1000px) 520px, 90vw"
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+        <div class="hero__dato">
+          <span class="hero__dato-num">444</span>
+          <span>jóvenes de todo México aplicaron a la convocatoria 2027–2029</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ ¿QUIÉN ERES? ============ -->
+  <section class="seccion seccion--blanca perfiles" aria-labelledby="t-perfiles">
+    <div class="contenedor">
+      <div class="encabezado-seccion encabezado-seccion--centro">
+        <p class="antetitulo">Empieza aquí</p>
+        <h2 id="t-perfiles">¿Qué te trae a UWC México?</h2>
+      </div>
+      <div class="grid grid--4">
+        {
+          perfiles.map((p, i) => (
+            <a href={p.href} class="tarjeta revelar" style={`--retraso:${i * 80}ms`}>
+              <span class:list={['icono-circulo', p.color && `icono-circulo--${p.color}`]}>
+                <Icono nombre={p.icono} tam={24} />
+              </span>
+              <h3>{p.titulo}</h3>
+              <p>{p.texto}</p>
+              <span class="enlace-flecha perfiles__ir">
+                Ir <Icono nombre="flecha" tam={18} />
+              </span>
+            </a>
+          ))
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ QUÉ ES UWC ============ -->
+  <section class="seccion que-es" aria-labelledby="t-que-es">
+    <div class="contenedor que-es__grid">
+      <div class="que-es__foto revelar">
+        <Image
+          src={fotoPasaportes}
+          alt="Manos de estudiantes sosteniendo pasaportes de muchos países distintos"
+          widths={[480, 800, 1100]}
+          sizes="(min-width: 1000px) 560px, 92vw"
+        />
+      </div>
+      <div class="que-es__texto">
+        <p class="antetitulo">Qué es UWC</p>
+        <h2 id="t-que-es">Educación para unir a personas, naciones y culturas.</h2>
+        <p class="entrada">
+          United World Colleges es un movimiento educativo global. Sus colegios reúnen a jóvenes de todos los orígenes para
+          vivir y estudiar juntos durante dos años, con la paz y un futuro sostenible como meta.
+        </p>
+        <ul class="valores">
+          <li class="revelar">
+            <span class="icono-circulo"><Icono nombre="mundo" /></span>
+            <div>
+              <h3>Diversidad intencional</h3>
+              <p>Compañeros de más de 150 países, religiones e idiomas. Cada día aprendes a ver el mundo desde otros ojos.</p>
+            </div>
+          </li>
+          <li class="revelar" style="--retraso:90ms">
+            <span class="icono-circulo icono-circulo--verde"><Icono nombre="libro" /></span>
+            <div>
+              <h3>Bachillerato Internacional</h3>
+              <p>El diploma IB, reconocido por las mejores universidades del mundo.</p>
+            </div>
+          </li>
+          <li class="revelar" style="--retraso:180ms">
+            <span class="icono-circulo icono-circulo--rosa"><Icono nombre="corazon" /></span>
+            <div>
+              <h3>Servicio y liderazgo</h3>
+              <p>El servicio a la comunidad vale tanto como las calificaciones.</p>
+            </div>
+          </li>
+        </ul>
+        <a href="/descubre/" class="enlace-flecha">Descubre la experiencia UWC <Icono nombre="flecha" tam={18} /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ CIFRAS ============ -->
+  <section class="seccion seccion--oscura cifras" aria-label="UWC México en cifras">
+    <div class="contenedor">
+      <ul class="cifras__lista">
+        {
+          sitio.cifras.map((c, i) => (
+            <li class="revelar" style={`--retraso:${i * 90}ms`}>
+              <span class="cifras__valor">{c.valor}</span>
+              <span class="cifras__etiqueta">{c.etiqueta}</span>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ PROCESO ============ -->
+  <section class="seccion seccion--blanca" aria-labelledby="t-proceso">
+    <div class="contenedor">
+      <div class="proceso__encabezado">
+        <div class="encabezado-seccion">
+          <p class="antetitulo">Proceso de selección {sitio.convocatoria.generacion}</p>
+          <h2 id="t-proceso">Cinco etapas, de abril a diciembre.</h2>
+          <p class="entrada">
+            Seleccionamos únicamente por mérito y potencial. La situación económica de tu familia se revisa hasta el final, solo
+            para definir la beca.
+          </p>
+        </div>
+        <a href="/avisos/" class="boton boton--contorno">Ver avisos del proceso <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <LineaTiempo />
+    </div>
+  </section>
+
+  <!-- ============ TESTIMONIO ============ -->
+  <section class="seccion testimonio" aria-label="Testimonio">
+    <div class="contenedor">
+      <figure class="testimonio__figura revelar">
+        <blockquote>
+          <p>
+            Uno de los mayores aprendizajes que tuve durante mis dos años en UWC fue aprender a observar el mundo desde una nueva
+            perspectiva. Hoy estudio urbanismo porque quiero que mi hogar, la Ciudad de México, se transforme en una ciudad
+            sustentable.
+          </p>
+        </blockquote>
+        <figcaption>
+          <Image src={fotoMauricio} alt="" width={72} height={72} class="testimonio__foto" />
+          <span>
+            <strong>Mauricio Calderón Castro</strong>
+            <span>UWC Mostar, Bosnia y Herzegovina · 2017–2019</span>
+          </span>
+        </figcaption>
+      </figure>
+    </div>
+  </section>
+
+  <!-- ============ DONAR ============ -->
+  <section class="seccion donar" aria-labelledby="t-donar">
+    <div class="contenedor donar__caja">
+      <div class="donar__foto">
+        <Image
+          src={fotoBanderas}
+          alt="Estudiantes de UWC de decenas de países sostienen las banderas de sus naciones"
+          widths={[480, 800]}
+          sizes="(min-width: 1000px) 480px, 92vw"
+        />
+      </div>
+      <div class="donar__texto">
+        <p class="antetitulo">Apoya</p>
+        <h2 id="t-donar">Cada beca empieza con alguien que cree en un joven.</h2>
+        <p>
+          Un año en un Colegio del Mundo Unido cuesta en promedio 40,000 dólares. Gracias a graduados, familias, empresas y
+          amigos, ningún joven seleccionado se queda fuera por dinero. Somos donataria autorizada: tu donativo es deducible.
+        </p>
+
+        <div class="progreso" role="group" aria-label="Campaña de afiliación">
+          <div class="progreso__cifras">
+            <span><strong>{afiliados}</strong> afiliados en {anioAnterior}</span>
+            <span>Meta {anioMeta}: <strong>{meta}</strong></span>
+          </div>
+          <div
+            class="progreso__barra"
+            role="progressbar"
+            aria-valuemin="0"
+            aria-valuemax={meta}
+            aria-valuenow={afiliados}
+            aria-label="Avance hacia la meta de afiliados"
+          >
+            <span style={`width:${avance}%`}></span>
+          </div>
+        </div>
+
+        <div class="botones">
+          <a href="/apoya/#donar" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona ahora</a>
+          <a href="/apoya/#afiliate" class="boton boton--contorno">Afíliate</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ AVISOS ============ -->
+  <section class="seccion seccion--blanca" aria-labelledby="t-avisos">
+    <div class="contenedor">
+      <div class="proceso__encabezado">
+        <div class="encabezado-seccion">
+          <p class="antetitulo">Avisos recientes</p>
+          <h2 id="t-avisos">Lo último del proceso de selección</h2>
+        </div>
+        <a href="/avisos/" class="enlace-flecha">Todos los avisos <Icono nombre="flecha" tam={18} /></a>
+      </div>
+      <div class="grid grid--3">
+        {avisos.map((a) => <TarjetaAviso aviso={a} />)}
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TRANSPARENCIA ============ -->
+  <section class="seccion transparencia" aria-labelledby="t-transp">
+    <div class="contenedor transparencia__grid">
+      <div>
+        <p class="antetitulo">Transparencia</p>
+        <h2 id="t-transp">Cuentas claras, desde hace casi 50 años.</h2>
+        <p class="entrada">
+          Somos voluntarios, en su mayoría graduados UWC. Publicamos nuestros estados financieros, informes anuales y políticas de
+          protección.
+        </p>
+      </div>
+      <ul class="transparencia__lista">
+        <li><Icono nombre="escudo" /><span>Donataria autorizada desde 1981</span></li>
+        <li><Icono nombre="documento" /><a href="/nosotros/#transparencia">Estados financieros e informe anual 2025</a></li>
+        <li><Icono nombre="personas" /><a href="/nosotros/#transparencia">Política de protección de participantes</a></li>
+        <li><Icono nombre="mundo" /><span>Comité nacional de UWC International</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ============ CTA FINAL ============ -->
+  <section class="cta-final">
+    <div class="contenedor cta-final__caja revelar">
+      <span class="icono-circulo"><Icono nombre="campana" tam={24} /></span>
+      <h2>¿Te interesa la próxima convocatoria?</h2>
+      <p>La convocatoria abre cada año entre abril y mayo. Síguenos para enterarte primero.</p>
+      <div class="botones">
+        <a href={sitio.redes.instagram} class="boton boton--claro"><Icono nombre="instagram" tam={18} />Síguenos en Instagram</a>
+        <a href="/aplica/#requisitos" class="boton boton--contorno">Revisa los requisitos</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  /* ---------- Hero ---------- */
+  .hero {
+    position: relative;
+    overflow: hidden;
+    padding-block: var(--space-5) var(--space-6);
+  }
+  .hero__grid {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 1000px) {
+    .hero { padding-block: var(--space-6) var(--space-7); }
+    .hero__grid { grid-template-columns: 1.1fr 0.9fr; gap: var(--space-6); }
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--azul);
+    position: relative;
+    white-space: nowrap;
+  }
+  .hero h1 em::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.06em;
+    height: 0.16em;
+    background: var(--sol);
+    opacity: 0.7;
+    z-index: -1;
+    border-radius: 4px;
+  }
+  .hero .entrada { margin-bottom: var(--space-4); }
+
+  .hero__visual {
+    position: relative;
+    justify-self: center;
+    width: min(100%, 520px);
+  }
+  .hero__foto {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 999px 999px var(--radio) var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra-alta);
+  }
+  .hero__foto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: 50% 40%;
+  }
+  .hero__aros {
+    position: absolute;
+    inset: -8% -14% auto auto;
+    width: 70%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 26px solid var(--verde);
+    opacity: 0.18;
+  }
+  .hero__aros::after {
+    content: '';
+    position: absolute;
+    inset: 22% auto auto -60%;
+    width: 100%;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 26px solid var(--azul);
+    opacity: 0.7;
+  }
+  .hero__dato {
+    position: absolute;
+    left: -6%;
+    bottom: 8%;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    max-width: 290px;
+    padding: 1rem 1.2rem;
+    background: var(--blanco);
+    border-radius: var(--radio);
+    box-shadow: var(--sombra-alta);
+    font-size: var(--text-sm);
+    line-height: 1.35;
+    color: var(--tinta-suave);
+  }
+  .hero__dato-num {
+    font-family: var(--font-serif);
+    font-size: 2.3rem;
+    font-weight: 700;
+    color: var(--rosa);
+    line-height: 1;
+  }
+  @media (max-width: 600px) {
+    .hero__dato { left: 4%; right: 4%; max-width: none; bottom: 5%; }
+  }
+
+  /* ---------- Perfiles ---------- */
+  .perfiles__ir {
+    margin-top: auto;
+    padding-top: var(--space-2);
+    color: var(--azul);
+  }
+
+  /* ---------- Qué es ---------- */
+  .que-es__grid {
+    display: grid;
+    gap: var(--space-5);
+    align-items: center;
+  }
+  @media (min-width: 1000px) {
+    .que-es__grid { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  }
+  .que-es__foto {
+    border-radius: var(--radio);
+    overflow: hidden;
+    box-shadow: var(--sombra-alta);
+    aspect-ratio: 5 / 4;
+  }
+  .que-es__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .valores {
+    list-style: none;
+    padding: 0;
+    margin: var(--space-4) 0;
+    display: grid;
+    gap: var(--space-3);
+  }
+  .valores li {
+    display: flex;
+    gap: var(--space-2);
+    align-items: flex-start;
+  }
+  .valores .icono-circulo { flex-shrink: 0; margin: 0; }
+  .valores h3 { font-size: 1.2rem; margin-bottom: 0.2rem; }
+  .valores p { margin: 0; color: var(--tinta-suave); }
+
+  /* ---------- Cifras ---------- */
+  .cifras { padding-block: var(--space-6); }
+  .cifras__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (min-width: 900px) {
+    .cifras__lista { grid-template-columns: repeat(4, 1fr); }
+    .cifras__lista li + li { border-left: 1px solid rgb(255 255 255 / 0.14); padding-left: var(--space-3); }
+  }
+  .cifras__valor {
+    display: block;
+    font-family: var(--font-serif);
+    font-size: clamp(2.6rem, 2rem + 2.5vw, 4rem);
+    font-weight: 700;
+    line-height: 1;
+    color: var(--sol);
+    margin-bottom: 0.5rem;
+  }
+  .cifras__etiqueta { color: rgb(255 255 255 / 0.82); }
+
+  /* ---------- Proceso ---------- */
+  .proceso__encabezado {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: var(--space-2) var(--space-4);
+    margin-bottom: var(--space-5);
+  }
+  .proceso__encabezado .encabezado-seccion { margin-bottom: 0; }
+
+  /* ---------- Testimonio ---------- */
+  .testimonio__figura {
+    position: relative;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .testimonio__figura::before {
+    content: '“';
+    display: block;
+    font-family: var(--font-serif);
+    font-size: 7rem;
+    line-height: 0.6;
+    color: var(--verde);
+    opacity: 0.5;
+  }
+  .testimonio blockquote { margin: 0; }
+  .testimonio blockquote p {
+    font-family: var(--font-serif);
+    font-size: clamp(1.35rem, 1.1rem + 1.1vw, 2rem);
+    line-height: 1.4;
+    color: var(--azul-profundo);
+  }
+  .testimonio figcaption {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    margin-top: var(--space-3);
+    text-align: left;
+  }
+  .testimonio figcaption > span { display: grid; }
+  .testimonio figcaption > span span { color: var(--tinta-suave); font-size: var(--text-sm); }
+  .testimonio__foto {
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--blanco);
+    box-shadow: var(--sombra);
+  }
+
+  /* ---------- Donar ---------- */
+  .donar { padding-top: 0; }
+  .donar__caja {
+    display: grid;
+    overflow: hidden;
+    background: var(--blanco);
+    border-radius: calc(var(--radio) * 1.5);
+    box-shadow: var(--sombra-alta);
+  }
+  @media (min-width: 1000px) {
+    .donar__caja { grid-template-columns: 0.85fr 1.15fr; }
+  }
+  .donar__foto { min-height: 260px; }
+  .donar__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .donar__texto { padding: var(--space-5) var(--space-4); }
+  @media (min-width: 1000px) {
+    .donar__texto { padding: var(--space-6) var(--space-5); }
+  }
+  .donar__texto > p { color: var(--tinta-suave); }
+  .donar .antetitulo { color: var(--rosa); }
+  .progreso {
+    margin: var(--space-4) 0;
+    padding: var(--space-3);
+    background: var(--papel);
+    border-radius: var(--radio-sm);
+  }
+  .progreso__cifras {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 0.5rem;
+    margin-bottom: 0.75rem;
+    font-size: var(--text-sm);
+  }
+  .progreso__cifras strong { font-size: 1.2rem; color: var(--azul-profundo); }
+  .progreso__barra {
+    height: 12px;
+    border-radius: 999px;
+    background: var(--rosa-claro);
+    overflow: hidden;
+  }
+  .progreso__barra span {
+    display: block;
+    height: 100%;
+    border-radius: inherit;
+    background: linear-gradient(90deg, var(--rosa), #e2458f);
+  }
+
+  /* ---------- Transparencia ---------- */
+  .transparencia__grid {
+    display: grid;
+    gap: var(--space-4);
+    align-items: center;
+  }
+  @media (min-width: 1000px) {
+    .transparencia__grid { grid-template-columns: 1fr 1fr; gap: var(--space-6); }
+  }
+  .transparencia__lista {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-2);
+  }
+  .transparencia__lista li {
+    display: flex;
+    align-items: center;
+    gap: var(--space-2);
+    padding: var(--space-2) var(--space-3);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio-sm);
+    font-weight: 600;
+  }
+  .transparencia__lista svg { color: var(--verde-texto); flex-shrink: 0; }
+
+  /* ---------- CTA final ---------- */
+  .cta-final { padding-bottom: var(--space-6); }
+  .cta-final__caja {
+    position: relative;
+    overflow: hidden;
+    display: grid;
+    justify-items: center;
+    text-align: center;
+    padding: var(--space-6) var(--space-3);
+    border-radius: calc(var(--radio) * 1.5);
+    background: linear-gradient(135deg, var(--azul) 0%, #00607f 55%, var(--verde) 100%);
+    color: var(--blanco);
+  }
+  .cta-final__caja::before,
+  .cta-final__caja::after {
+    content: '';
+    position: absolute;
+    width: 340px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    border: 40px solid rgb(255 255 255 / 0.08);
+  }
+  .cta-final__caja::before { left: -120px; top: -140px; }
+  .cta-final__caja::after { right: -100px; bottom: -160px; }
+  .cta-final__caja > * { position: relative; }
+  .cta-final__caja p { color: rgb(255 255 255 / 0.88); font-size: var(--text-lg); }
+  .cta-final__caja .icono-circulo { background: rgb(255 255 255 / 0.15); color: var(--blanco); }
+  .cta-final__caja .botones { justify-content: center; margin-top: var(--space-2); }
+  .cta-final__caja .boton--contorno { color: var(--blanco); }
+  .cta-final__caja .boton--contorno:hover { background: var(--blanco); color: var(--azul); border-color: var(--blanco); }
+</style>

@@ -1,0 +1,63 @@
+{
+  "convocatoria": {
+    "estado": "en-proceso",
+    "generacion": "2027–2029",
+    "etapaActual": 3,
+    "mensajeAbierta": "Convocatoria 2027–2029 abierta · el registro cierra el 12 de julio",
+    "mensajeEnProceso": "Proceso de selección 2027–2029 en curso · Etapa 3: cuestionario",
+    "mensajeCerrada": "La próxima convocatoria abre entre abril y mayo · te avisamos",
+    "enlaceRegistro": "https://uwcmexico.org/procesoseleccion/convocatoria-para-el-proceso-de-seleccion-2027-2029/"
+  },
+  "etapas": [
+    {
+      "nombre": "Inscripción",
+      "periodo": "Abril – julio",
+      "descripcion": "Te registras en línea con tu acta de nacimiento y tus boletas de la SEP. Revisamos que cumplas los requisitos."
+    },
+    {
+      "nombre": "Examen",
+      "periodo": "Agosto",
+      "descripcion": "Presentas el EXANI-I del Ceneval desde casa. Antes hay una sesión informativa para ti y tu familia."
+    },
+    {
+      "nombre": "Cuestionario",
+      "periodo": "Septiembre – octubre",
+      "descripcion": "Respondes un cuestionario en línea sobre tus intereses, valores y actividades, y participas en un proyecto de labor social."
+    },
+    {
+      "nombre": "Actividades grupales",
+      "periodo": "Noviembre",
+      "descripcion": "Entre 60 y 65 aspirantes conviven dos días en dinámicas y entrevistas en panel. Tu familia asiste a una junta informativa."
+    },
+    {
+      "nombre": "Entrevistas finales",
+      "periodo": "Diciembre",
+      "descripcion": "Entre 30 y 35 finalistas tienen una entrevista con 5 a 7 profesionales. Aquí se define el apoyo económico según cada familia."
+    }
+  ],
+  "cifras": [
+    { "valor": "1977", "etiqueta": "año en que se fundó UWC México" },
+    { "valor": "444", "etiqueta": "jóvenes se registraron a la convocatoria 2027–2029" },
+    { "valor": "18", "etiqueta": "colegios UWC en cuatro continentes" },
+    { "valor": "80%+", "etiqueta": "de los estudiantes UWC reciben apoyo financiero" }
+  ],
+  "afiliacion": { "anioAnterior": 2025, "afiliados": 114, "meta": 130, "anioMeta": 2026 },
+  "contacto": {
+    "correo": "oficina@uwcmexico.org",
+    "quejas": "quejasysugerencias@uwcmexico.org",
+    "presidencia": "presidencia@uwcmexico.org",
+    "tesoreria": "tesoreria@uwcmexico.org",
+    "horario": "Lunes a viernes, 10:00 a 13:00 h",
+    "direccion": "Coyoacán, Ciudad de México"
+  },
+  "redes": {
+    "instagram": "https://www.instagram.com/uwcmexico/",
+    "facebook": "https://www.facebook.com/UWCMexico/",
+    "youtube": "https://www.youtube.com/channel/UCA3AENlo5nNvOROdvpi0IDA"
+  },
+  "donar": {
+    "paypal": "https://uwcmexico.org/donar-con-paypal/",
+    "factura": "https://uwcmexico.org/como-donar/",
+    "everyorg": "https://www.every.org/uwcint"
+  }
+}

@@ -1,0 +1,123 @@
+---
+import sitio from '../data/sitio.json';
+import Icono from './Icono.astro';
+
+const { etapas } = sitio;
+const { estado, etapaActual } = sitio.convocatoria;
+const actual = estado === 'cerrada' ? 0 : estado === 'abierta' ? 1 : etapaActual;
+---
+
+<ol class="linea">
+  {
+    etapas.map((etapa, i) => {
+      const n = i + 1;
+      const clase = n < actual ? 'hecha' : n === actual ? 'actual' : 'pendiente';
+      return (
+        <li class:list={['paso', `paso--${clase}`, 'revelar']} style={`--retraso:${i * 90}ms`}>
+          <span class="paso__marca" aria-hidden="true">
+            {n < actual ? <Icono nombre="check" tam={18} /> : n}
+          </span>
+          <div class="paso__texto">
+            <p class="paso__periodo">
+              {etapa.periodo}
+              {n === actual && <span class="paso__ahora">Estamos aquí</span>}
+            </p>
+            <h3>{etapa.nombre}</h3>
+            <p>{etapa.descripcion}</p>
+          </div>
+        </li>
+      );
+    })
+  }
+</ol>
+
+<style>
+  .linea {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-3);
+    counter-reset: paso;
+  }
+  @media (min-width: 1000px) {
+    .linea {
+      grid-template-columns: repeat(5, 1fr);
+      gap: var(--space-2);
+      position: relative;
+    }
+    .linea::before {
+      content: '';
+      position: absolute;
+      top: 24px;
+      left: 24px;
+      right: 24px;
+      height: 2px;
+      background: var(--linea);
+    }
+  }
+  .paso {
+    position: relative;
+    display: flex;
+    gap: var(--space-2);
+  }
+  @media (min-width: 1000px) {
+    .paso { flex-direction: column; }
+  }
+  .paso__marca {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    font-family: var(--font-serif);
+    font-size: 1.25rem;
+    font-weight: 700;
+    background: var(--blanco);
+    color: var(--azul);
+    border: 2px solid var(--linea);
+  }
+  .paso--hecha .paso__marca {
+    background: var(--verde-texto);
+    border-color: var(--verde-texto);
+    color: var(--blanco);
+  }
+  .paso--actual .paso__marca {
+    background: var(--azul);
+    border-color: var(--azul);
+    color: var(--blanco);
+    box-shadow: 0 0 0 6px rgb(0 74 151 / 0.15);
+  }
+  .paso__periodo {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.5rem;
+    margin: 0 0 0.25rem;
+    font-size: 0.8125rem;
+    font-weight: 700;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--tinta-suave);
+  }
+  .paso__ahora {
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    background: var(--sol);
+    color: var(--azul-profundo);
+    letter-spacing: 0.04em;
+  }
+  .paso h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.35rem;
+  }
+  .paso__texto > p:last-child {
+    color: var(--tinta-suave);
+    font-size: var(--text-sm);
+    margin: 0;
+  }
+  .paso--pendiente h3 { color: var(--tinta); }
+</style>

@@ -1,0 +1,42 @@
+---
+interface Props {
+  claro?: boolean;
+}
+const { claro = false } = Astro.props;
+---
+
+<span class:list={['logo', { 'logo--claro': claro }]}>
+  <img src="/uwc.svg" alt="" width="136" height="31" />
+  <span class="logo__pais">México</span>
+  <span class="solo-lectores">UWC México, inicio</span>
+</span>
+
+<style>
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .logo img {
+    width: 136px;
+    height: auto;
+  }
+  .logo__pais {
+    font-family: var(--font-sans);
+    font-weight: 700;
+    font-size: 1.05rem;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--verde-texto);
+    padding-left: 0.6rem;
+    border-left: 2px solid var(--linea);
+    line-height: 1.1;
+  }
+  .logo--claro img {
+    filter: brightness(0) invert(1);
+  }
+  .logo--claro .logo__pais {
+    color: #7fd6c9;
+    border-color: rgb(255 255 255 / 0.25);
+  }
+</style>

@@ -1,0 +1,88 @@
+---
+import '@fontsource-variable/source-sans-3';
+import '@fontsource-variable/source-serif-4';
+import '../styles/global.css';
+import Encabezado from '../components/Encabezado.astro';
+import Pie from '../components/Pie.astro';
+
+interface Props {
+  titulo: string;
+  descripcion: string;
+  imagen?: string;
+}
+
+const { titulo, descripcion, imagen } = Astro.props;
+const tituloCompleto = titulo === 'Inicio' ? 'UWC México · Educación para unir a las personas' : `${titulo} · UWC México`;
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImagen = imagen ? new URL(imagen, Astro.site) : undefined;
+
+const organizacion = {
+  '@context': 'https://schema.org',
+  '@type': 'NGO',
+  name: 'UWC México',
+  legalName: 'Asociación Mexicana pro Colegios del Mundo Unido, A.C.',
+  url: 'https://uwcmexico.org/',
+  foundingDate: '1977-07-12',
+  email: 'oficina@uwcmexico.org',
+  parentOrganization: { '@type': 'Organization', name: 'UWC International', url: 'https://www.uwc.org/' },
+  sameAs: [
+    'https://www.instagram.com/uwcmexico/',
+    'https://www.facebook.com/UWCMexico/',
+    'https://www.youtube.com/channel/UCA3AENlo5nNvOROdvpi0IDA',
+  ],
+};
+---
+
+<!doctype html>
+<html lang="es-MX">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{tituloCompleto}</title>
+    <meta name="description" content={descripcion} />
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <meta name="theme-color" content="#0b2545" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="es_MX" />
+    <meta property="og:site_name" content="UWC México" />
+    <meta property="og:title" content={tituloCompleto} />
+    <meta property="og:description" content={descripcion} />
+    <meta property="og:url" content={canonical} />
+    {ogImagen && <meta property="og:image" content={ogImagen} />}
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(organizacion)} />
+    <script is:inline>document.documentElement.classList.add('js');</script>
+  </head>
+  <body>
+    <a class="saltar" href="#contenido">Saltar al contenido</a>
+    <Encabezado />
+    <main id="contenido">
+      <slot />
+    </main>
+    <Pie />
+
+    <script>
+      // Aparición suave de secciones al hacer scroll (se desactiva con "reducir movimiento").
+      const elementos = document.querySelectorAll('.revelar');
+      if ('IntersectionObserver' in window) {
+        const obs = new IntersectionObserver(
+          (entradas) => {
+            for (const e of entradas) {
+              if (e.isIntersecting) {
+                e.target.classList.add('visible');
+                obs.unobserve(e.target);
+              }
+            }
+          },
+          { rootMargin: '0px 0px -8% 0px', threshold: 0.05 },
+        );
+        elementos.forEach((el) => obs.observe(el));
+      } else {
+        elementos.forEach((el) => el.classList.add('visible'));
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,47 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import Icono from './Icono.astro';
+
+interface Props {
+  aviso: CollectionEntry<'avisos'>;
+}
+const { aviso } = Astro.props;
+const fecha = aviso.data.fecha.toLocaleDateString('es-MX', { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' });
+---
+
+<a href={`/avisos/${aviso.id}/`} class="tarjeta aviso">
+  <p class="aviso__meta">
+    <Icono nombre="calendario" tam={16} />
+    <time datetime={aviso.data.fecha.toISOString().slice(0, 10)}>{fecha}</time>
+  </p>
+  {aviso.data.etapa && <p class="aviso__etapa">{aviso.data.etapa}</p>}
+  <h3>{aviso.data.titulo}</h3>
+  <p>{aviso.data.resumen}</p>
+  <span class="enlace-flecha aviso__leer">Leer aviso <Icono nombre="flecha" tam={18} /></span>
+</a>
+
+<style>
+  .aviso { gap: 0.6rem; }
+  .aviso__meta {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-size: var(--text-sm);
+    color: var(--tinta-suave);
+  }
+  .aviso__etapa {
+    align-self: flex-start;
+    padding: 0.2rem 0.7rem;
+    border-radius: 999px;
+    background: var(--azul-claro);
+    color: var(--azul) !important;
+    font-size: 0.8125rem;
+    font-weight: 700;
+  }
+  .aviso h3 { font-size: 1.25rem; }
+  .aviso__leer {
+    margin-top: auto;
+    padding-top: var(--space-1);
+    color: var(--azul);
+  }
+</style>

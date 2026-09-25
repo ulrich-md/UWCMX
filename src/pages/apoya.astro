@@ -1,0 +1,244 @@
+---
+import { Image } from 'astro:assets';
+import Base from '../layouts/Base.astro';
+import CabeceraPagina from '../components/CabeceraPagina.astro';
+import Icono from '../components/Icono.astro';
+import sitio from '../data/sitio.json';
+
+import fotoBecarios from '../assets/fotos/becarios.jpg';
+import fotoCampamento from '../assets/fotos/campamento.jpg';
+
+const { afiliados, meta, anioAnterior, anioMeta } = sitio.afiliacion;
+const avance = Math.min(100, Math.round((afiliados / meta) * 100));
+
+const cuotas = [
+  { grupo: 'Graduados UWC México, egreso 2022–2025', monto: '$400 MXN' },
+  { grupo: 'Graduados UWC México, egreso 2018–2021', monto: '$850 MXN' },
+  { grupo: 'Graduados UWC México, egreso 2014–2017', monto: '$1,700 MXN' },
+  { grupo: 'Graduados UWC México, egreso 2011–2013', monto: '$2,600 MXN' },
+  { grupo: 'Graduados UWC México, egreso 2010 o antes', monto: '$3,500 MXN' },
+  { grupo: 'Madres y padres de graduados', monto: '$3,500 MXN' },
+  { grupo: 'Amigos de UWC México', monto: '$3,500 MXN' },
+  { grupo: 'Graduados UWC de otras nacionalidades', monto: '$150 USD' },
+];
+---
+
+<Base
+  titulo="Apoya"
+  descripcion="Dona a UWC México o afíliate: tu aportación es deducible de impuestos y se convierte en becas para jóvenes mexicanos en los Colegios del Mundo Unido."
+>
+  <CabeceraPagina
+    antetitulo="Apoya"
+    titulo="Tu donativo se convierte en una beca"
+    entrada="Ningún joven seleccionado debería quedarse fuera por dinero. Lo que recaudamos entre graduados, familias, empresas y amigos va directo al Fondo General de Becas de UWC México."
+    imagen={fotoBecarios}
+    alt="Becarios de UWC México en su ceremonia de despedida antes de partir a sus colegios"
+  >
+    <div class="botones">
+      <a href="#donar" class="boton boton--donar"><Icono nombre="corazon" tam={18} />Dona ahora</a>
+      <a href="#afiliate" class="boton boton--contorno">Afíliate</a>
+    </div>
+  </CabeceraPagina>
+
+  <!-- Impacto -->
+  <section class="seccion seccion--oscura impacto" aria-label="En qué se usa tu donativo">
+    <div class="contenedor impacto__grid">
+      <div>
+        <p class="antetitulo">Por qué donar</p>
+        <h2>Una inversión en quien va a transformar su comunidad</h2>
+      </div>
+      <ul class="impacto__lista">
+        <li class="revelar"><strong>40,000 USD</strong><span>cuesta en promedio un año en un colegio UWC</span></li>
+        <li class="revelar" style="--retraso:90ms"><strong>Voluntarios</strong><span>la Asociación la forman, en su mayoría, graduados que trabajan sin sueldo</span></li>
+        <li class="revelar" style="--retraso:180ms"><strong>Desde 1981</strong><span>somos donataria autorizada: tu recibo es deducible</span></li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Formas de donar -->
+  <section id="donar" class="seccion seccion--blanca">
+    <div class="contenedor">
+      <div class="encabezado-seccion">
+        <p class="antetitulo">Dona</p>
+        <h2>Elige cómo quieres apoyar</h2>
+        <p class="entrada">Todas las opciones emiten recibo deducible de impuestos.</p>
+      </div>
+      <div class="grid grid--2 formas">
+        <div class="tarjeta forma forma--principal revelar">
+          <span class="icono-circulo icono-circulo--rosa"><Icono nombre="corazon" /></span>
+          <h3>En línea con PayPal</h3>
+          <p>Rápido y seguro, desde cualquier país. Puedes usar tarjeta de crédito o débito aunque no tengas cuenta PayPal.</p>
+          <a href={sitio.donar.paypal} class="boton boton--donar">Donar con PayPal <Icono nombre="externo" tam={16} /></a>
+        </div>
+        <div class="tarjeta forma revelar" style="--retraso:80ms">
+          <span class="icono-circulo"><Icono nombre="edificio" /></span>
+          <h3>Transferencia bancaria</h3>
+          <dl class="banco">
+            <dt>Titular</dt><dd>Asociación Mexicana pro Colegios del Mundo Unido, A.C.</dd>
+            <dt>Banco</dt><dd>Banamex</dd>
+            <dt>CLABE (pesos)</dt><dd><code>002180700345273406</code></dd>
+            <dt>CLABE (dólares)</dt><dd><code>002180065096349023</code></dd>
+            <dt>SWIFT</dt><dd><code>BNMXMXMM</code></dd>
+          </dl>
+        </div>
+        <div class="tarjeta forma revelar">
+          <span class="icono-circulo icono-circulo--verde"><Icono nombre="documento" /></span>
+          <h3>¿Necesitas factura?</h3>
+          <p>Después de donar, envíanos tus datos fiscales y el comprobante para emitir tu recibo deducible (CFDI).</p>
+          <a href={`mailto:${sitio.contacto.tesoreria}`} class="enlace-flecha">{sitio.contacto.tesoreria} <Icono nombre="flecha" tam={18} /></a>
+        </div>
+        <div class="tarjeta forma revelar" style="--retraso:80ms">
+          <span class="icono-circulo icono-circulo--verde"><Icono nombre="personas" /></span>
+          <h3>Empresas y donativos en especie</h3>
+          <p>
+            También nos apoyan profesionales con servicios contables, fiscales, notariales y de oficina. Si tu empresa quiere
+            sumarse, escríbenos.
+          </p>
+          <a href={`mailto:${sitio.contacto.correo}`} class="enlace-flecha">Hablemos <Icono nombre="flecha" tam={18} /></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Desde el extranjero -->
+  <section id="extranjero" class="seccion">
+    <div class="contenedor extranjero">
+      <span class="icono-circulo"><Icono nombre="mundo" tam={24} /></span>
+      <div>
+        <h2>¿Vives en Estados Unidos?</h2>
+        <p>
+          Puedes hacer un donativo deducible en EE. UU. a través de UWC International. Indica en la nota privada
+          <strong>“NC México”</strong> para que se asigne a nosotros y envía tu comprobante a
+          <a href={`mailto:${sitio.contacto.tesoreria}`}>{sitio.contacto.tesoreria}</a>. Donativo mínimo: 10 USD.
+        </p>
+        <a href={sitio.donar.everyorg} class="boton boton--contorno" rel="noopener">Donar desde EE. UU. <Icono nombre="externo" tam={16} /></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Afíliate -->
+  <section id="afiliate" class="seccion seccion--blanca">
+    <div class="contenedor afiliate">
+      <div>
+        <p class="antetitulo">Afíliate</p>
+        <h2>Súmate a la Asociación</h2>
+        <p class="entrada">
+          Graduados, familias y amigos pueden ser miembros activos de UWC México con una cuota anual. Los miembros votan en la
+          Asamblea Anual y hacen posible que más jóvenes vivan la experiencia.
+        </p>
+
+        <div class="progreso">
+          <p class="progreso__titulo">Campaña de afiliación {anioMeta}</p>
+          <div class="progreso__cifras">
+            <span><strong>{afiliados}</strong> afiliados en {anioAnterior}</span>
+            <span>Meta: <strong>{meta}</strong></span>
+          </div>
+          <div class="progreso__barra" role="progressbar" aria-valuemin="0" aria-valuemax={meta} aria-valuenow={afiliados} aria-label="Avance hacia la meta de afiliados">
+            <span style={`width:${avance}%`}></span>
+          </div>
+        </div>
+
+        <div class="afiliate__foto">
+          <Image src={fotoCampamento} alt="Graduados y becarios de UWC México reunidos en un campamento" widths={[480, 720]} sizes="(min-width: 1000px) 480px, 92vw" />
+        </div>
+      </div>
+
+      <div class="cuotas">
+        <table>
+          <caption>Cuotas anuales mínimas {anioMeta}</caption>
+          <thead>
+            <tr><th scope="col">Categoría</th><th scope="col">Cuota</th></tr>
+          </thead>
+          <tbody>
+            {cuotas.map((c) => <tr><td>{c.grupo}</td><td>{c.monto}</td></tr>)}
+          </tbody>
+        </table>
+        <p class="cuotas__nota">
+          ¿No puedes cubrir la cuota mínima? Escríbenos a <a href={`mailto:${sitio.contacto.correo}`}>{sitio.contacto.correo}</a>
+          con el monto que puedes aportar. Las limitaciones económicas no deben ser obstáculo.
+        </p>
+        <a href="/comunidad/#afiliados" class="enlace-flecha">Ver la lista de afiliados <Icono nombre="flecha" tam={18} /></a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .impacto__grid { display: grid; gap: var(--space-4); align-items: center; }
+  @media (min-width: 1000px) { .impacto__grid { grid-template-columns: 0.9fr 1.1fr; gap: var(--space-6); } }
+  .impacto__lista { list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); }
+  @media (min-width: 720px) { .impacto__lista { grid-template-columns: repeat(3, 1fr); } }
+  .impacto__lista li { display: grid; gap: 0.4rem; }
+  .impacto__lista strong { font-family: var(--font-serif); font-size: 2rem; line-height: 1.1; color: var(--sol); }
+  .impacto__lista span { color: rgb(255 255 255 / 0.82); }
+
+  .forma { gap: 0.6rem; }
+  .forma .boton, .forma .enlace-flecha { margin-top: auto; align-self: flex-start; }
+  .forma .boton { margin-top: var(--space-2); }
+  .forma--principal { border: 2px solid var(--rosa); background: linear-gradient(180deg, var(--rosa-claro), var(--blanco) 60%); }
+  .banco {
+    display: grid;
+    grid-template-columns: auto 1fr;
+    gap: 0.35rem 1rem;
+    margin: 0.25rem 0 0;
+    font-size: var(--text-sm);
+  }
+  .banco dt { font-weight: 700; color: var(--tinta-suave); }
+  .banco dd { margin: 0; overflow-wrap: anywhere; }
+  .banco code {
+    font-family: ui-monospace, 'SFMono-Regular', Menlo, monospace;
+    font-size: 0.95em;
+    padding: 0.1rem 0.35rem;
+    background: var(--azul-claro);
+    border-radius: 4px;
+    color: var(--azul-profundo);
+  }
+
+  .extranjero {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    align-items: flex-start;
+    max-width: 900px;
+    padding: var(--space-4);
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+  }
+  .extranjero > div { flex: 1 1 320px; }
+  .extranjero h2 { font-size: var(--text-xl); }
+  .extranjero p { color: var(--tinta-suave); }
+
+  .afiliate { display: grid; gap: var(--space-5); }
+  @media (min-width: 1000px) { .afiliate { grid-template-columns: 1fr 1fr; gap: var(--space-6); } }
+  .afiliate__foto { border-radius: var(--radio); overflow: hidden; aspect-ratio: 16/10; box-shadow: var(--sombra); }
+  .afiliate__foto img { width: 100%; height: 100%; object-fit: cover; }
+  .progreso { margin: var(--space-3) 0 var(--space-4); padding: var(--space-3); background: var(--papel); border-radius: var(--radio-sm); }
+  .progreso__titulo { font-weight: 700; margin-bottom: 0.5rem; }
+  .progreso__cifras { display: flex; justify-content: space-between; gap: 0.5rem; flex-wrap: wrap; margin-bottom: 0.75rem; font-size: var(--text-sm); }
+  .progreso__cifras strong { font-size: 1.2rem; color: var(--azul-profundo); }
+  .progreso__barra { height: 12px; border-radius: 999px; background: var(--rosa-claro); overflow: hidden; }
+  .progreso__barra span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, var(--rosa), #e2458f); }
+
+  .cuotas table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--blanco);
+    border: 1px solid var(--linea);
+    border-radius: var(--radio);
+    overflow: hidden;
+    font-size: var(--text-sm);
+  }
+  .cuotas caption {
+    text-align: left;
+    font-family: var(--font-serif);
+    font-size: var(--text-xl);
+    font-weight: 600;
+    margin-bottom: var(--space-2);
+  }
+  .cuotas th, .cuotas td { padding: 0.85rem 1rem; text-align: left; border-bottom: 1px solid var(--linea); }
+  .cuotas th { background: var(--azul-claro); color: var(--azul-profundo); }
+  .cuotas td:last-child, .cuotas th:last-child { text-align: right; white-space: nowrap; font-weight: 700; }
+  .cuotas tr:last-child td { border-bottom: 0; }
+  .cuotas__nota { margin-top: var(--space-3); color: var(--tinta-suave); font-size: var(--text-sm); }
+</style>

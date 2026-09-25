@@ -1,0 +1,26 @@
+---
+import Base from '../layouts/Base.astro';
+import Icono from '../components/Icono.astro';
+---
+
+<Base titulo="Página no encontrada" descripcion="La página que buscas no existe o cambió de lugar.">
+  <section class="seccion">
+    <div class="contenedor no-encontrada">
+      <p class="antetitulo">Error 404</p>
+      <h1>Esta página se fue de intercambio.</h1>
+      <p class="entrada">Puede que haya cambiado de lugar con el nuevo sitio. Prueba con alguna de estas secciones:</p>
+      <div class="botones">
+        <a href="/" class="boton boton--primario">Ir al inicio <Icono nombre="flecha" tam={18} /></a>
+        <a href="/aplica/" class="boton boton--contorno">Aplica</a>
+        <a href="/avisos/" class="boton boton--contorno">Avisos</a>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .no-encontrada { text-align: center; display: grid; justify-items: center; padding-block: var(--space-6); }
+  .no-encontrada .antetitulo::before { display: none; }
+  .no-encontrada .entrada { margin-inline: auto; }
+  .no-encontrada .botones { justify-content: center; }
+</style>
