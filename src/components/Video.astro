@@ -27,7 +27,8 @@ const miniaturaYoutube = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
 ---
 
 <figure class:list={['video', { 'video--grande': grande }]}>
-  <a href={enlace} class="video__marco" data-video={incrustar} data-titulo={titulo} aria-label={`Reproducir video: ${titulo}`}>
+  <a href={enlace} class="video__marco" data-video={incrustar} data-titulo={titulo}>
+    <span class="solo-lectores">Reproducir video: {titulo}</span>
     {
       miniatura ? (
         <Image src={miniatura} alt="" widths={[480, 800]} sizes={grande ? '(min-width: 1000px) 760px, 92vw' : '(min-width: 1000px) 380px, 92vw'} />
@@ -40,7 +41,7 @@ const miniaturaYoutube = `https://i.ytimg.com/vi/${id}/hqdefault.jpg`;
       )
     }
     <span class="video__play" aria-hidden="true"><Icono nombre="play" tam={grande ? 34 : 26} /></span>
-    <span class="video__fuente">{tipo === 'youtube' ? 'YouTube' : 'Facebook'}</span>
+    <span class="video__fuente" aria-hidden="true">{tipo === 'youtube' ? 'YouTube' : 'Facebook'}</span>
   </a>
   <figcaption>
     <strong>{titulo}</strong>
